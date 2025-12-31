@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Stream Manager | Content Orchestration Platform</title>
+    
+    <!-- Typography: Inter (UI) & JetBrains Mono (Data/Code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons: Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    mono: ['JetBrains Mono', 'monospace'],
+                },
+                extend: {
+                    colors: {
+                        ssm: {
+                            bg: '#0B0F19',      // Deep Space
+                            surface: '#151B2B', // Lighter Surface
+                            border: '#2D3748',  // Border
+                            accent: '#38BDF8',  // Cyan (System Core)
+                            kinetics: '#818CF8', // Indigo
+                            post: '#C084FC',    // Purple
+                            talk: '#FB923C',    // Orange
+                            asset: '#34D399',   // Emerald
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Schematic Grid Background */
+        .bg-schematic {
+            background-color: #0B0F19;
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(45, 55, 72, 0.3) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(45, 55, 72, 0.3) 1px, transparent 1px);
+        }
+        
+        /* Glow Effects */
+        .glow-text { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
+        .glow-border { box-shadow: 0 0 15px rgba(56, 189, 248, 0.15); }
+        .glow-box { box-shadow: 0 0 30px rgba(56, 189, 248, 0.05); }
+        
+        /* Utility */
+        .text-balance { text-wrap: balance; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0B0F19; }
+        ::-webkit-scrollbar-thumb { background: #2D3748; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38BDF8; }
+    </style>
+</head>
+<body class="bg-ssm-bg text-slate-300 antialiased font-sans selection:bg-ssm-accent selection:text-ssm-bg">
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full bg-ssm-bg/90 backdrop-blur-md border-b border-ssm-border z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 border border-ssm-accent flex items-center justify-center rounded-sm bg-ssm-accent/10">
+                    <i data-lucide="cpu" class="w-5 h-5 text-ssm-accent"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-mono font-bold tracking-tight text-white leading-none">SSM_OS</span>
+                    <span class="text-[10px] text-ssm-accent font-mono leading-none mt-0.5">V2.0 ONLINE</span>
+                </div>
+            </div>
+            <div class="hidden md:flex gap-8 text-xs font-mono text-slate-400">
+                <a href="#platform" class="hover:text-white transition-colors">Platform</a>
+                <a href="#modules" class="hover:text-white transition-colors">Modules</a>
+                <a href="#logic" class="hover:text-white transition-colors">Logic</a>
+            </div>
+            <a href="#" class="font-mono text-xs border border-slate-600 px-4 py-2 rounded hover:border-ssm-accent hover:text-ssm-accent hover:bg-ssm-accent/5 transition-all">
+                Access System
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-20 px-6 bg-schematic border-b border-ssm-border relative overflow-hidden">
+        <!-- Decoration: Ambient Glow -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-ssm-accent/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            
+            <!-- Status Indicator -->
+            <div class="inline-flex items-center gap-2 border border-ssm-border bg-ssm-surface/80 backdrop-blur px-3 py-1 rounded-full mb-8">
+                <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">System Architecture</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-4xl md:text-6xl font-medium text-white mb-6 text-balance tracking-tight">
+                Turn fragmented content into a <br>
+                <span class="text-ssm-accent glow-text">compounding engine.</span>
+            </h1>
+            
+            <!-- Subhead -->
+            <p class="text-lg md:text-xl text-slate-400 mb-6 max-w-2xl mx-auto leading-relaxed">
+                Social Stream Manager is the orchestration layer that sits above your tools. 
+                We coordinate how content is <span class="text-white">created, distributed, transformed, and monetized.</span>
+            </p>
+
+            <!-- Hero Anchor -->
+            <p class="text-sm md:text-base text-slate-500 mb-10 max-w-2xl mx-auto font-mono">
+                Start with automated social posting. Expand into newsletters, blogs, and sellable assets — without rebuilding your workflow.
+            </p>
+
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-6">
+                
+                <!-- Primary CTA Group -->
+                <div class="flex flex-col items-center w-full sm:w-auto">
+                    <button class="w-full sm:w-auto bg-ssm-accent text-ssm-bg px-8 py-3.5 rounded font-mono text-sm font-bold hover:bg-white transition-all shadow-lg shadow-ssm-accent/20 flex items-center justify-center gap-2">
+                        <i data-lucide="power" class="w-4 h-4"></i>
+                        Explore Kinetics
+                    </button>
+                    <!-- IMPROVEMENT 1: UNMISTAKABLE ACTION -->
+                    <span class="text-[10px] font-mono text-slate-500 mt-2 tracking-tight">Auto-generate and post social content</span>
+                </div>
+
+                <!-- Secondary CTA -->
+                <button class="w-full sm:w-auto border border-slate-600 text-slate-300 px-8 py-3.5 rounded font-mono text-sm hover:border-white hover:text-white transition-all flex items-center justify-center gap-2 bg-ssm-surface/50 sm:mb-[22px]"> 
+                    <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                    View All Tools
+                </button>
+            </div>
+            
+            <!-- IMPROVEMENT 4: LOW-RISK REASSURANCE -->
+            <div class="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-12 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                <span class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-ssm-accent"></i> Cancel anytime</span>
+                <span class="hidden md:inline text-slate-700">|</span>
+                <span class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-ssm-accent"></i> No forced bundles</span>
+                <span class="hidden md:inline text-slate-700">|</span>
+                <span class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-ssm-accent"></i> Start with one tool</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPROVEMENT 2: CONCRETE EXAMPLE (Visual Strip) -->
+    <section class="bg-ssm-bg border-b border-ssm-border py-8">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-ssm-surface/50 border border-ssm-border rounded-lg p-6 flex flex-col md:flex-row items-center gap-6 md:gap-0">
+                
+                <!-- Input -->
+                <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="font-mono text-[10px] text-slate-500 uppercase mb-2">System Input</div>
+                    <div class="flex items-center gap-3 bg-ssm-bg border border-ssm-border px-4 py-2 rounded text-sm text-white">
+                        <i data-lucide="linkedin" class="w-4 h-4 text-blue-400"></i>
+                        1 LinkedIn Post
+                    </div>
+                </div>
+
+                <!-- Process -->
+                <div class="flex flex-col items-center px-8">
+                    <div class="text-[10px] font-mono text-ssm-accent uppercase mb-1">Processing</div>
+                    <div class="h-px w-24 bg-ssm-accent/30 relative">
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-ssm-accent rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- Output -->
+                <div class="flex-1 flex flex-col items-center md:items-end text-center md:text-right">
+                    <div class="font-mono text-[10px] text-slate-500 uppercase mb-2">Automated Output</div>
+                    <div class="flex gap-2">
+                        <div class="bg-ssm-bg border border-ssm-border px-3 py-2 rounded text-xs text-slate-300">
+                            5 Social Posts
+                        </div>
+                        <div class="bg-ssm-bg border border-ssm-border px-3 py-2 rounded text-xs text-slate-300">
+                            1 Newsletter
+                        </div>
+                        <div class="bg-ssm-bg border border-ssm-border px-3 py-2 rounded text-xs text-slate-300">
+                            1 Blog Draft
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- THE PROBLEM (Visualization) -->
+    <section id="platform" class="py-24 border-b border-ssm-border bg-ssm-bg relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Text -->
+                <div>
+                    <h2 class="text-xs font-mono text-ssm-accent uppercase tracking-widest mb-4">// The Friction</h2>
+                    <h3 class="text-3xl font-medium text-white mb-6">Most content is posted and forgotten.</h3>
+                    <div class="space-y-4 text-slate-400 leading-relaxed">
+                        <p>
+                            Today's workflow is broken: Write a post, hit publish, move on. 
+                            The effort evaporates instantly.
+                        </p>
+                        <p>
+                            SSM is not a scheduler. It is the <strong>operating system</strong> that ensures every piece of content captures signal, transforms into new formats, and eventually compounds into revenue.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-ssm-border grid grid-cols-2 gap-4">
+                        <div>
+                            <div class="text-2xl font-mono text-white mb-1">0%</div>
+                            <div class="text-xs font-mono text-slate-500 uppercase">Compounding without System</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-mono text-white mb-1">4x</div>
+                            <div class="text-xs font-mono text-slate-500 uppercase">Asset Lifespan with SSM</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Visual: Chaos vs Order -->
+                <div class="relative">
+                    <!-- Background Glow -->
+                    <div class="absolute inset-0 bg-ssm-accent/5 blur-3xl rounded-full"></div>
+                    
+                    <!-- The Console -->
+                    <div class="bg-ssm-surface border border-ssm-border rounded-lg p-1 overflow-hidden relative z-10 glow-box">
+                        <div class="bg-ssm-bg rounded border border-ssm-border p-6">
+                            
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-8 pb-4 border-b border-ssm-border">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                    <span class="font-mono text-xs text-slate-300">CORE_LOGIC</span>
+                                </div>
+                                <span class="font-mono text-[10px] text-slate-600">ID: 882-Alpha</span>
+                            </div>
+                            
+                            <!-- Visual Logic -->
+                            <div class="space-y-6">
+                                <!-- Input -->
+                                <div class="flex items-center gap-4 opacity-50 grayscale">
+                                    <div class="w-8 h-8 rounded border border-slate-600 flex items-center justify-center">
+                                        <i data-lucide="file-text" class="w-4 h-4 text-slate-500"></i>
+                                    </div>
+                                    <div class="text-xs font-mono text-slate-500">Isolated Post</div>
+                                    <div class="flex-1 border-b border-dashed border-slate-700"></div>
+                                    <div class="text-xs font-mono text-slate-600">Decay</div>
+                                </div>
+
+                                <!-- SSM Transformation -->
+                                <div class="relative pl-4 border-l-2 border-ssm-accent">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-8 h-8 rounded bg-ssm-accent/10 border border-ssm-accent flex items-center justify-center">
+                                            <i data-lucide="cpu" class="w-4 h-4 text-ssm-accent"></i>
+                                        </div>
+                                        <div class="text-xs font-mono text-white">SSM Ingestion</div>
+                                        <div class="flex-1 h-px bg-ssm-accent/30"></div>
+                                    </div>
+
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <div class="bg-ssm-surface border border-ssm-post/30 rounded p-2 text-center">
+                                            <div class="text-[10px] font-mono text-ssm-post mb-1">SIGNAL</div>
+                                            <div class="h-1 bg-ssm-post/20 rounded overflow-hidden"><div class="w-3/4 h-full bg-ssm-post"></div></div>
+                                        </div>
+                                        <div class="bg-ssm-surface border border-ssm-talk/30 rounded p-2 text-center">
+                                            <div class="text-[10px] font-mono text-ssm-talk mb-1">EXPAND</div>
+                                            <div class="h-1 bg-ssm-talk/20 rounded overflow-hidden"><div class="w-1/2 h-full bg-ssm-talk"></div></div>
+                                        </div>
+                                        <div class="bg-ssm-surface border border-ssm-asset/30 rounded p-2 text-center">
+                                            <div class="text-[10px] font-mono text-ssm-asset mb-1">ASSET</div>
+                                            <div class="h-1 bg-ssm-asset/20 rounded overflow-hidden"><div class="w-full h-full bg-ssm-asset"></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE ARCHITECTURE (The Ecosystem) -->
+    <section id="logic" class="py-20 bg-ssm-bg relative overflow-hidden">
+        <!-- Grid overlay -->
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-medium text-white mb-2">The Architecture</h2>
+                <p class="text-slate-500 font-mono text-sm">Data flow: Creation &rarr; Signal &rarr; Expansion &rarr; Revenue</p>
+                <!-- IMPROVEMENT 3: REDUCED INTIMIDATION -->
+                <p class="text-ssm-accent font-mono text-xs mt-3 bg-ssm-accent/5 inline-block px-3 py-1 rounded">
+                    Most users start with a single module. The system connects automatically as you add more.
+                </p>
+            </div>
+
+            <!-- Flow Chart -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Node 1 -->
+                <div class="relative group">
+                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-kinetics/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-kinetics transition-colors shadow-lg shadow-black/50">
+                        <i data-lucide="zap" class="w-8 h-8 text-ssm-kinetics mb-3"></i>
+                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">Kinetics</span>
+                    </div>
+                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-kinetics opacity-0 group-hover:opacity-100 transition-opacity">
+                        INPUT
+                    </div>
+                </div>
+
+                <!-- Connector -->
+                <div class="h-12 w-px md:w-24 md:h-px bg-slate-800 relative flex items-center justify-center">
+                    <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                </div>
+
+                <!-- Node 2 -->
+                <div class="relative group">
+                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-post/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-post transition-colors shadow-lg shadow-black/50">
+                        <i data-lucide="layers" class="w-8 h-8 text-ssm-post mb-3"></i>
+                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">PostStack</span>
+                    </div>
+                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-post opacity-0 group-hover:opacity-100 transition-opacity">
+                        SIGNAL
+                    </div>
+                </div>
+
+                <!-- Connector -->
+                <div class="h-12 w-px md:w-24 md:h-px bg-slate-800 relative flex items-center justify-center">
+                    <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                </div>
+
+                <!-- Node 3 -->
+                <div class="relative group">
+                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-talk/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-talk transition-colors shadow-lg shadow-black/50">
+                        <i data-lucide="mic" class="w-8 h-8 text-ssm-talk mb-3"></i>
+                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">TalkStack</span>
+                    </div>
+                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-talk opacity-0 group-hover:opacity-100 transition-opacity">
+                        BRIDGE
+                    </div>
+                </div>
+
+                <!-- Connector -->
+                <div class="h-12 w-px md:w-24 md:h-px bg-slate-800 relative flex items-center justify-center">
+                    <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                </div>
+
+                <!-- Node 4 -->
+                <div class="relative group">
+                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-asset/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-asset transition-colors shadow-lg shadow-black/50">
+                        <i data-lucide="banknote" class="w-8 h-8 text-ssm-asset mb-3"></i>
+                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">QuickAsset</span>
+                    </div>
+                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-asset opacity-0 group-hover:opacity-100 transition-opacity">
+                        VALUE
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- THE MODULES (Detailed Grid) -->
+    <section id="modules" class="py-24 bg-ssm-surface border-y border-ssm-border relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <h2 class="text-3xl font-medium text-white mb-4">Modular by Design</h2>
+                    <p class="text-slate-400 max-w-xl">
+                        Every tool is fully functional on its own. They can operate independently or together, depending on your workflow. There is no requirement to purchase a bundle.
+                    </p>
+                </div>
+                <div class="text-right hidden md:block">
+                    <div class="font-mono text-xs text-slate-500">MODULE_STATUS:</div>
+                    <div class="font-mono text-sm text-emerald-500">STANDALONE READY</div>
+                </div>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1: Kinetics -->
+                <div class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-kinetics transition-all group relative overflow-hidden flex flex-col">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-kinetics opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-10 h-10 bg-ssm-kinetics/10 rounded flex items-center justify-center border border-ssm-kinetics/20">
+                            <i data-lucide="pen-tool" class="w-5 h-5 text-ssm-kinetics"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-kinetics transition-colors"></i>
+                    </div>
+                    <h3 class="font-mono font-bold text-white mb-2">Content Kinetics</h3>
+                    <p class="text-[10px] font-mono text-ssm-kinetics mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Execution Engine</p>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
+                        Automated generation and posting. Keeps you visible without the daily manual grind.
+                    </p>
+                    <a href="#" class="text-xs font-mono text-white hover:text-ssm-kinetics transition-colors flex items-center gap-2 mt-auto">
+                        View Product <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                    </a>
+                </div>
+
+                <!-- Card 2: PostStack -->
+                <div class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-post transition-all group relative overflow-hidden flex flex-col">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-post opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-10 h-10 bg-ssm-post/10 rounded flex items-center justify-center border border-ssm-post/20">
+                            <i data-lucide="filter" class="w-5 h-5 text-ssm-post"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-post transition-colors"></i>
+                    </div>
+                    <h3 class="font-mono font-bold text-white mb-2">PostStack</h3>
+                    <p class="text-[10px] font-mono text-ssm-post mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Signal Capture</p>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
+                        Aggregates feeds, identifies what resonates, and transforms fleeting posts into structured newsletters.
+                    </p>
+                    <a href="#" class="text-xs font-mono text-white hover:text-ssm-post transition-colors flex items-center gap-2 mt-auto">
+                        View Product <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                    </a>
+                </div>
+
+                <!-- Card 3: TalkStack -->
+                <div class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-talk transition-all group relative overflow-hidden flex flex-col">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-talk opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-10 h-10 bg-ssm-talk/10 rounded flex items-center justify-center border border-ssm-talk/20">
+                            <i data-lucide="expand" class="w-5 h-5 text-ssm-talk"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-talk transition-colors"></i>
+                    </div>
+                    <h3 class="font-mono font-bold text-white mb-2">TalkStack</h3>
+                    <p class="text-[10px] font-mono text-ssm-talk mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Format Bridge</p>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
+                        Ingests video and audio. Outputs coherent, structured long-form text. No hallucinated fluff.
+                    </p>
+                    <a href="#" class="text-xs font-mono text-white hover:text-ssm-talk transition-colors flex items-center gap-2 mt-auto">
+                        View Product <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                    </a>
+                </div>
+
+                <!-- Card 4: QuickAsset -->
+                <div class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-asset transition-all group relative overflow-hidden flex flex-col">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-asset opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-10 h-10 bg-ssm-asset/10 rounded flex items-center justify-center border border-ssm-asset/20">
+                            <i data-lucide="dollar-sign" class="w-5 h-5 text-ssm-asset"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-asset transition-colors"></i>
+                    </div>
+                    <h3 class="font-mono font-bold text-white mb-2">QuickAsset</h3>
+                    <p class="text-[10px] font-mono text-ssm-asset mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Monetization</p>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
+                        Packages high-signal content into sellable assets (PDFs, templates). Frictionless commerce.
+                    </p>
+                    <a href="#" class="text-xs font-mono text-white hover:text-ssm-asset transition-colors flex items-center gap-2 mt-auto">
+                        View Product <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PHILOSOPHY / AI -->
+    <section class="py-24 bg-ssm-bg border-b border-ssm-border">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="inline-block border border-slate-700 rounded-full px-4 py-1 mb-6">
+                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">System Philosophy</span>
+            </div>
+            
+            <h2 class="text-3xl font-medium text-white mb-8">AI as infrastructure, not a gimmick.</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="p-6 border-l border-slate-800">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-slate-500 mb-4"></i>
+                    <h4 class="font-mono text-sm text-white mb-2">Responsible Generation</h4>
+                    <p class="text-sm text-slate-500">We don't flood the zone with garbage. We use AI to maintain your voice at scale.</p>
+                </div>
+                <div class="p-6 border-l border-slate-800">
+                    <i data-lucide="radar" class="w-6 h-6 text-slate-500 mb-4"></i>
+                    <h4 class="font-mono text-sm text-white mb-2">Signal Detection</h4>
+                    <p class="text-sm text-slate-500">AI monitors performance to tell you what's working, not just to generate more noise.</p>
+                </div>
+                <div class="p-6 border-l border-slate-800">
+                    <i data-lucide="refresh-cw" class="w-6 h-6 text-slate-500 mb-4"></i>
+                    <h4 class="font-mono text-sm text-white mb-2">Asset Transformation</h4>
+                    <p class="text-sm text-slate-500">Video to text. Thread to newsletter. We automate the heavy lifting of format switching.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-ssm-bg py-16">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12">
+            
+            <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 border border-ssm-accent flex items-center justify-center rounded-sm bg-ssm-accent/10">
+                        <i data-lucide="cpu" class="w-3 h-3 text-ssm-accent"></i>
+                    </div>
+                    <span class="font-mono font-bold text-white tracking-tight">SSM_OS</span>
+                </div>
+                <p class="text-xs text-slate-500 font-mono max-w-xs">
+                    The content orchestration platform for modern content businesses. <br>
+                    Designed for compounding leverage.
+                </p>
+                <div class="text-xs text-slate-600 font-mono mt-4">
+                    &copy; 2024 Social Stream Manager. <br>All Systems Operational.
+                </div>
+            </div>
+
+            <div class="flex gap-16">
+                <div class="flex flex-col gap-4">
+                    <h4 class="font-mono text-xs text-white uppercase tracking-wider">Platform</h4>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-accent transition-colors">Architecture</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-accent transition-colors">Philosophy</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-accent transition-colors">Pricing</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="font-mono text-xs text-white uppercase tracking-wider">Modules</h4>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-kinetics transition-colors">Kinetics</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-post transition-colors">PostStack</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-talk transition-colors">TalkStack</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-asset transition-colors">QuickAsset</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="font-mono text-xs text-white uppercase tracking-wider">Access</h4>
+                    <a href="#" class="text-sm text-slate-500 hover:text-white transition-colors">Login</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-white transition-colors">Documentation</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+```
+Mark (finish input with a blank line):
+ask Leah: make all of the buttons functional
+
+
+Katie → Delegating to Leah...
+→ Leah Task: make all of the buttons functional
+
+Leah → This updated code makes the page fully interactive.
+
+**What has been added:**
+1.  **Mobile Navigation:** Added a working "Hamburger" menu for mobile screens (click the menu icon on small screens to see the dropdown).
+2.  **Smooth Scroll Anchors:** The Hero buttons ("Explore Kinetics", "View All Tools") now smoothly scroll to the specific sections on the page.
+3.  **Interaction Feedback:** Buttons like "Access System", "Login", and specific product links now trigger a clean simulation alert (since we don't have the real backend URLs yet).
+4.  **Scroll Offsets:** Added `scroll-mt-24` to sections so the fixed navigation bar doesn't cover section headers when clicking links.
+
+Copy/paste this into your `index.html`.
+
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Stream Manager | Content Orchestration Platform</title>
+    
+    <!-- Typography: Inter (UI) & JetBrains Mono (Data/Code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons: Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    mono: ['JetBrains Mono', 'monospace'],
+                },
+                extend: {
+                    colors: {
+                        ssm: {
+                            bg: '#0B0F19',      // Deep Space
+                            surface: '#151B2B', // Lighter Surface
+                            border: '#2D3748',  // Border
+                            accent: '#38BDF8',  // Cyan (System Core)
+                            kinetics: '#818CF8', // Indigo
+                            post: '#C084FC',    // Purple
+                            talk: '#FB923C',    // Orange
+                            asset: '#34D399',   // Emerald
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Schematic Grid Background */
+        .bg-schematic {
+            background-color: #0B0F19;
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(45, 55, 72, 0.3) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(45, 55, 72, 0.3) 1px, transparent 1px);
+        }
+        
+        /* Glow Effects */
+        .glow-text { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
+        .glow-border { box-shadow: 0 0 15px rgba(56, 189, 248, 0.15); }
+        .glow-box { box-shadow: 0 0 30px rgba(56, 189, 248, 0.05); }
+        
+        /* Utility */
+        .text-balance { text-wrap: balance; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0B0F19; }
+        ::-webkit-scrollbar-thumb { background: #2D3748; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38BDF8; }
+
+        /* Mobile Menu Transition */
+        #mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="bg-ssm-bg text-slate-300 antialiased font-sans selection:bg-ssm-accent selection:text-ssm-bg">
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full bg-ssm-bg/95 backdrop-blur-md border-b border-ssm-border z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 border border-ssm-accent flex items-center justify-center rounded-sm bg-ssm-accent/10 group-hover:bg-ssm-accent/20 transition-colors">
+                    <i data-lucide="cpu" class="w-5 h-5 text-ssm-accent"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-mono font-bold tracking-tight text-white leading-none">SSM_OS</span>
+                    <span class="text-[10px] text-ssm-accent font-mono leading-none mt-0.5">V2.0 ONLINE</span>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex gap-8 text-xs font-mono text-slate-400">
+                <a href="#platform" class="hover:text-white transition-colors">Platform</a>
+                <a href="#modules" class="hover:text-white transition-colors">Modules</a>
+                <a href="#logic" class="hover:text-white transition-colors">Logic</a>
+            </div>
+
+            <!-- Desktop Action -->
+            <button onclick="simulateLogin()" class="hidden md:block font-mono text-xs border border-slate-600 px-4 py-2 rounded hover:border-ssm-accent hover:text-ssm-accent hover:bg-ssm-accent/5 transition-all">
+                Access System
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-400 hover:text-white">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-ssm-surface border-b border-ssm-border overflow-hidden">
+            <div class="px-6 py-4 flex flex-col gap-4 text-xs font-mono text-slate-400">
+                <a href="#platform" class="hover:text-white py-2 block border-b border-slate-800" onclick="toggleMobileMenu()">Platform</a>
+                <a href="#modules" class="hover:text-white py-2 block border-b border-slate-800" onclick="toggleMobileMenu()">Modules</a>
+                <a href="#logic" class="hover:text-white py-2 block border-b border-slate-800" onclick="toggleMobileMenu()">Logic</a>
+                <button onclick="simulateLogin()" class="text-left hover:text-ssm-accent py-2 font-bold text-white">Access System</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-20 px-6 bg-schematic border-b border-ssm-border relative overflow-hidden">
+        <!-- Decoration: Ambient Glow -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-ssm-accent/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            
+            <!-- Status Indicator -->
+            <div class="inline-flex items-center gap-2 border border-ssm-border bg-ssm-surface/80 backdrop-blur px-3 py-1 rounded-full mb-8">
+                <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">System Architecture</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-4xl md:text-6xl font-medium text-white mb-6 text-balance tracking-tight">
+                Turn fragmented content into a <br>
+                <span class="text-ssm-accent glow-text">compounding engine.</span>
+            </h1>
+            
+            <!-- Subhead -->
+            <p class="text-lg md:text-xl text-slate-400 mb-6 max-w-2xl mx-auto leading-relaxed">
+                Social Stream Manager is the orchestration layer that sits above your tools. 
+                We coordinate how content is <span class="text-white">created, distributed, transformed, and monetized.</span>
+            </p>
+
+            <!-- Hero Anchor -->
+            <p class="text-sm md:text-base text-slate-500 mb-10 max-w-2xl mx-auto font-mono">
+                Start with automated social posting. Expand into newsletters, blogs, and sellable assets — without rebuilding your workflow.
+            </p>
+
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-6">
+                
+                <!-- Primary CTA Group -->
+                <div class="flex flex-col items-center w-full sm:w-auto">
+                    <a href="#module-kinetics" class="w-full sm:w-auto bg-ssm-accent text-ssm-bg px-8 py-3.5 rounded font-mono text-sm font-bold hover:bg-white transition-all shadow-lg shadow-ssm-accent/20 flex items-center justify-center gap-2">
+                        <i data-lucide="power" class="w-4 h-4"></i>
+                        Explore Kinetics
+                    </a>
+                    <span class="text-[10px] font-mono text-slate-500 mt-2 tracking-tight">Auto-generate and post social content</span>
+                </div>
+
+                <!-- Secondary CTA -->
+                <a href="#modules" class="w-full sm:w-auto border border-slate-600 text-slate-300 px-8 py-3.5 rounded font-mono text-sm hover:border-white hover:text-white transition-all flex items-center justify-center gap-2 bg-ssm-surface/50 sm:mb-[22px]"> 
+                    <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                    View All Tools
+                </a>
+            </div>
+            
+            <!-- Reassurance -->
+            <div class="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-12 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                <span class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-ssm-accent"></i> Cancel anytime</span>
+                <span class="hidden md:inline text-slate-700">|</span>
+                <span class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-ssm-accent"></i> No forced bundles</span>
+                <span class="hidden md:inline text-slate-700">|</span>
+                <span class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-ssm-accent"></i> Start with one tool</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SYSTEM OUTPUT PREVIEW -->
+    <section class="bg-ssm-bg border-b border-ssm-border py-8">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-ssm-surface/50 border border-ssm-border rounded-lg p-6 flex flex-col md:flex-row items-center gap-6 md:gap-0">
+                
+                <!-- Input -->
+                <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="font-mono text-[10px] text-slate-500 uppercase mb-2">System Input</div>
+                    <div class="flex items-center gap-3 bg-ssm-bg border border-ssm-border px-4 py-2 rounded text-sm text-white">
+                        <i data-lucide="linkedin" class="w-4 h-4 text-blue-400"></i>
+                        1 LinkedIn Post
+                    </div>
+                </div>
+
+                <!-- Process -->
+                <div class="flex flex-col items-center px-8">
+                    <div class="text-[10px] font-mono text-ssm-accent uppercase mb-1">Processing</div>
+                    <div class="h-px w-24 bg-ssm-accent/30 relative">
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-ssm-accent rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- Output -->
+                <div class="flex-1 flex flex-col items-center md:items-end text-center md:text-right">
+                    <div class="font-mono text-[10px] text-slate-500 uppercase mb-2">Automated Output</div>
+                    <div class="flex flex-wrap justify-center md:justify-end gap-2">
+                        <div class="bg-ssm-bg border border-ssm-border px-3 py-2 rounded text-xs text-slate-300">
+                            5 Social Posts
+                        </div>
+                        <div class="bg-ssm-bg border border-ssm-border px-3 py-2 rounded text-xs text-slate-300">
+                            1 Newsletter
+                        </div>
+                        <div class="bg-ssm-bg border border-ssm-border px-3 py-2 rounded text-xs text-slate-300">
+                            1 Blog Draft
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- THE PROBLEM (Visualization) -->
+    <section id="platform" class="py-24 border-b border-ssm-border bg-ssm-bg relative scroll-mt-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Text -->
+                <div>
+                    <h2 class="text-xs font-mono text-ssm-accent uppercase tracking-widest mb-4">// The Friction</h2>
+                    <h3 class="text-3xl font-medium text-white mb-6">Most content is posted and forgotten.</h3>
+                    <div class="space-y-4 text-slate-400 leading-relaxed">
+                        <p>
+                            Today's workflow is broken: Write a post, hit publish, move on. 
+                            The effort evaporates instantly.
+                        </p>
+                        <p>
+                            SSM is not a scheduler. It is the <strong>operating system</strong> that ensures every piece of content captures signal, transforms into new formats, and eventually compounds into revenue.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-ssm-border grid grid-cols-2 gap-4">
+                        <div>
+                            <div class="text-2xl font-mono text-white mb-1">0%</div>
+                            <div class="text-xs font-mono text-slate-500 uppercase">Compounding without System</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-mono text-white mb-1">4x</div>
+                            <div class="text-xs font-mono text-slate-500 uppercase">Asset Lifespan with SSM</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Visual: Chaos vs Order -->
+                <div class="relative">
+                    <!-- Background Glow -->
+                    <div class="absolute inset-0 bg-ssm-accent/5 blur-3xl rounded-full"></div>
+                    
+                    <!-- The Console -->
+                    <div class="bg-ssm-surface border border-ssm-border rounded-lg p-1 overflow-hidden relative z-10 glow-box">
+                        <div class="bg-ssm-bg rounded border border-ssm-border p-6">
+                            
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-8 pb-4 border-b border-ssm-border">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                    <span class="font-mono text-xs text-slate-300">CORE_LOGIC</span>
+                                </div>
+                                <span class="font-mono text-[10px] text-slate-600">ID: 882-Alpha</span>
+                            </div>
+                            
+                            <!-- Visual Logic -->
+                            <div class="space-y-6">
+                                <!-- Input -->
+                                <div class="flex items-center gap-4 opacity-50 grayscale">
+                                    <div class="w-8 h-8 rounded border border-slate-600 flex items-center justify-center">
+                                        <i data-lucide="file-text" class="w-4 h-4 text-slate-500"></i>
+                                    </div>
+                                    <div class="text-xs font-mono text-slate-500">Isolated Post</div>
+                                    <div class="flex-1 border-b border-dashed border-slate-700"></div>
+                                    <div class="text-xs font-mono text-slate-600">Decay</div>
+                                </div>
+
+                                <!-- SSM Transformation -->
+                                <div class="relative pl-4 border-l-2 border-ssm-accent">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-8 h-8 rounded bg-ssm-accent/10 border border-ssm-accent flex items-center justify-center">
+                                            <i data-lucide="cpu" class="w-4 h-4 text-ssm-accent"></i>
+                                        </div>
+                                        <div class="text-xs font-mono text-white">SSM Ingestion</div>
+                                        <div class="flex-1 h-px bg-ssm-accent/30"></div>
+                                    </div>
+
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <div class="bg-ssm-surface border border-ssm-post/30 rounded p-2 text-center">
+                                            <div class="text-[10px] font-mono text-ssm-post mb-1">SIGNAL</div>
+                                            <div class="h-1 bg-ssm-post/20 rounded overflow-hidden"><div class="w-3/4 h-full bg-ssm-post"></div></div>
+                                        </div>
+                                        <div class="bg-ssm-surface border border-ssm-talk/30 rounded p-2 text-center">
+                                            <div class="text-[10px] font-mono text-ssm-talk mb-1">EXPAND</div>
+                                            <div class="h-1 bg-ssm-talk/20 rounded overflow-hidden"><div class="w-1/2 h-full bg-ssm-talk"></div></div>
+                                        </div>
+                                        <div class="bg-ssm-surface border border-ssm-asset/30 rounded p-2 text-center">
+                                            <div class="text-[10px] font-mono text-ssm-asset mb-1">ASSET</div>
+                                            <div class="h-1 bg-ssm-asset/20 rounded overflow-hidden"><div class="w-full h-full bg-ssm-asset"></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE ARCHITECTURE (The Ecosystem) -->
+    <section id="logic" class="py-20 bg-ssm-bg relative overflow-hidden scroll-mt-24">
+        <!-- Grid overlay -->
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-medium text-white mb-2">The Architecture</h2>
+                <p class="text-slate-500 font-mono text-sm">Data flow: Creation &rarr; Signal &rarr; Expansion &rarr; Revenue</p>
+                <!-- Reassurance -->
+                <p class="text-ssm-accent font-mono text-xs mt-3 bg-ssm-accent/5 inline-block px-3 py-1 rounded">
+                    Most users start with a single module. The system connects automatically as you add more.
+                </p>
+            </div>
+
+            <!-- Flow Chart -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Node 1 -->
+                <div class="relative group cursor-pointer" onclick="scrollToId('module-kinetics')">
+                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-kinetics/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-kinetics transition-colors shadow-lg shadow-black/50">
+                        <i data-lucide="zap" class="w-8 h-8 text-ssm-kinetics mb-3"></i>
+                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">Kinetics</span>
+                    </div>
+                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-kinetics opacity-0 group-hover:opacity-100 transition-opacity">
+                        INPUT
+                    </div>
+                </div>
+
+                <!-- Connector -->
+                <div class="h-12 w-px md:w-24 md:h-px bg-slate-800 relative flex items-center justify-center">
+                    <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                </div>
+
+                <!-- Node 2 -->
+                <div class="relative group cursor-pointer" onclick="scrollToId('module-post')">
+                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-post/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-post transition-colors shadow-lg shadow-black/50">
+                        <i data-lucide="layers" class="w-8 h-8 text-ssm-post mb-3"></i>
+                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">PostStack</span>
+                    </div>
+                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-post opacity-0 group-hover:opacity-100 transition-opacity">
+                        SIGNAL
+                    </div>
+                </div>
+
+                <!-- Connector -->
+                <div class="h-12 w-px md:w-24 md:h-px bg-slate-800 relative flex items-center justify-center">
+                    <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                </div>
+
+                <!-- Node 3 -->
+                <div class="relative group cursor-pointer" onclick="scrollToId('module-talk')">
+                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-talk/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-talk transition-colors shadow-lg shadow-black/50">
+                        <i data-lucide="mic" class="w-8 h-8 text-ssm-talk mb-3"></i>
+                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">TalkStack</span>
+                    </div>
+                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-talk opacity-0 group-hover:opacity-100 transition-opacity">
+                        BRIDGE
+                    </div>
+                </div>
+
+                <!-- Connector -->
+                <div class="h-12 w-px md:w-24 md:h-px bg-slate-800 relative flex items-center justify-center">
+                    <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                </div>
+
+                <!-- Node 4 -->
+                <div class="relative group cursor-pointer" onclick="scrollToId('module-asset')">
+                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-asset/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-asset transition-colors shadow-lg shadow-black/50">
+                        <i data-lucide="banknote" class="w-8 h-8 text-ssm-asset mb-3"></i>
+                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">QuickAsset</span>
+                    </div>
+                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-asset opacity-0 group-hover:opacity-100 transition-opacity">
+                        VALUE
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- THE MODULES (Detailed Grid) -->
+    <section id="modules" class="py-24 bg-ssm-surface border-y border-ssm-border relative scroll-mt-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <h2 class="text-3xl font-medium text-white mb-4">Modular by Design</h2>
+                    <p class="text-slate-400 max-w-xl">
+                        Every tool is fully functional on its own. They can operate independently or together, depending on your workflow. There is no requirement to purchase a bundle.
+                    </p>
+                </div>
+                <div class="text-right hidden md:block">
+                    <div class="font-mono text-xs text-slate-500">MODULE_STATUS:</div>
+                    <div class="font-mono text-sm text-emerald-500">STANDALONE READY</div>
+                </div>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1: Kinetics -->
+                <div id="module-kinetics" class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-kinetics transition-all group relative overflow-hidden flex flex-col scroll-mt-32">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-kinetics opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-10 h-10 bg-ssm-kinetics/10 rounded flex items-center justify-center border border-ssm-kinetics/20">
+                            <i data-lucide="pen-tool" class="w-5 h-5 text-ssm-kinetics"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-kinetics transition-colors"></i>
+                    </div>
+                    <h3 class="font-mono font-bold text-white mb-2">Content Kinetics</h3>
+                    <p class="text-[10px] font-mono text-ssm-kinetics mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Execution Engine</p>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
+                        Automated generation and posting. Keeps you visible without the daily manual grind.
+                    </p>
+                    <button onclick="simulateDemo('Content Kinetics')" class="text-xs font-mono text-white hover:text-ssm-kinetics transition-colors flex items-center gap-2 mt-auto text-left">
+                        Launch Demo <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                    </button>
+                </div>
+
+                <!-- Card 2: PostStack -->
+                <div id="module-post" class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-post transition-all group relative overflow-hidden flex flex-col scroll-mt-32">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-post opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-10 h-10 bg-ssm-post/10 rounded flex items-center justify-center border border-ssm-post/20">
+                            <i data-lucide="filter" class="w-5 h-5 text-ssm-post"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-post transition-colors"></i>
+                    </div>
+                    <h3 class="font-mono font-bold text-white mb-2">PostStack</h3>
+                    <p class="text-[10px] font-mono text-ssm-post mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Signal Capture</p>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
+                        Aggregates feeds, identifies what resonates, and transforms fleeting posts into structured newsletters.
+                    </p>
+                    <button onclick="simulateDemo('PostStack')" class="text-xs font-mono text-white hover:text-ssm-post transition-colors flex items-center gap-2 mt-auto text-left">
+                        Launch Demo <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                    </button>
+                </div>
+
+                <!-- Card 3: TalkStack -->
+                <div id="module-talk" class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-talk transition-all group relative overflow-hidden flex flex-col scroll-mt-32">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-talk opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-10 h-10 bg-ssm-talk/10 rounded flex items-center justify-center border border-ssm-talk/20">
+                            <i data-lucide="expand" class="w-5 h-5 text-ssm-talk"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-talk transition-colors"></i>
+                    </div>
+                    <h3 class="font-mono font-bold text-white mb-2">TalkStack</h3>
+                    <p class="text-[10px] font-mono text-ssm-talk mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Format Bridge</p>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
+                        Ingests video and audio. Outputs coherent, structured long-form text. No hallucinated fluff.
+                    </p>
+                    <button onclick="simulateDemo('TalkStack')" class="text-xs font-mono text-white hover:text-ssm-talk transition-colors flex items-center gap-2 mt-auto text-left">
+                        Launch Demo <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                    </button>
+                </div>
+
+                <!-- Card 4: QuickAsset -->
+                <div id="module-asset" class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-asset transition-all group relative overflow-hidden flex flex-col scroll-mt-32">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-asset opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-10 h-10 bg-ssm-asset/10 rounded flex items-center justify-center border border-ssm-asset/20">
+                            <i data-lucide="dollar-sign" class="w-5 h-5 text-ssm-asset"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-asset transition-colors"></i>
+                    </div>
+                    <h3 class="font-mono font-bold text-white mb-2">QuickAsset</h3>
+                    <p class="text-[10px] font-mono text-ssm-asset mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Monetization</p>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
+                        Packages high-signal content into sellable assets (PDFs, templates). Frictionless commerce.
+                    </p>
+                    <button onclick="simulateDemo('QuickAsset')" class="text-xs font-mono text-white hover:text-ssm-asset transition-colors flex items-center gap-2 mt-auto text-left">
+                        Launch Demo <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PHILOSOPHY / AI -->
+    <section class="py-24 bg-ssm-bg border-b border-ssm-border">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="inline-block border border-slate-700 rounded-full px-4 py-1 mb-6">
+                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">System Philosophy</span>
+            </div>
+            
+            <h2 class="text-3xl font-medium text-white mb-8">AI as infrastructure, not a gimmick.</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="p-6 border-l border-slate-800">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-slate-500 mb-4"></i>
+                    <h4 class="font-mono text-sm text-white mb-2">Responsible Generation</h4>
+                    <p class="text-sm text-slate-500">We don't flood the zone with garbage. We use AI to maintain your voice at scale.</p>
+                </div>
+                <div class="p-6 border-l border-slate-800">
+                    <i data-lucide="radar" class="w-6 h-6 text-slate-500 mb-4"></i>
+                    <h4 class="font-mono text-sm text-white mb-2">Signal Detection</h4>
+                    <p class="text-sm text-slate-500">AI monitors performance to tell you what's working, not just to generate more noise.</p>
+                </div>
+                <div class="p-6 border-l border-slate-800">
+                    <i data-lucide="refresh-cw" class="w-6 h-6 text-slate-500 mb-4"></i>
+                    <h4 class="font-mono text-sm text-white mb-2">Asset Transformation</h4>
+                    <p class="text-sm text-slate-500">Video to text. Thread to newsletter. We automate the heavy lifting of format switching.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-ssm-bg py-16">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12">
+            
+            <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 border border-ssm-accent flex items-center justify-center rounded-sm bg-ssm-accent/10">
+                        <i data-lucide="cpu" class="w-3 h-3 text-ssm-accent"></i>
+                    </div>
+                    <span class="font-mono font-bold text-white tracking-tight">SSM_OS</span>
+                </div>
+                <p class="text-xs text-slate-500 font-mono max-w-xs">
+                    The content orchestration platform for modern content businesses. <br>
+                    Designed for compounding leverage.
+                </p>
+                <div class="text-xs text-slate-600 font-mono mt-4">
+                    &copy; 2024 Social Stream Manager. <br>All Systems Operational.
+                </div>
+            </div>
+
+            <div class="flex gap-16">
+                <div class="flex flex-col gap-4">
+                    <h4 class="font-mono text-xs text-white uppercase tracking-wider">Platform</h4>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-accent transition-colors">Architecture</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-accent transition-colors">Philosophy</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-accent transition-colors">Pricing</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="font-mono text-xs text-white uppercase tracking-wider">Modules</h4>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-kinetics transition-colors">Kinetics</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-post transition-colors">PostStack</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-talk transition-colors">TalkStack</a>
+                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-asset transition-colors">QuickAsset</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="font-mono text-xs text-white uppercase tracking-wider">Access</h4>
+                    <button onclick="simulateLogin()" class="text-left text-sm text-slate-500 hover:text-white transition-colors">Login</button>
+                    <a href="#" class="text-sm text-slate-500 hover:text-white transition-colors">Documentation</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function simulateLogin() {
+            alert('This would redirect to the Auth Portal.');
+        }
+        
+        function simulateDemo(product) {
+             alert('This would open the demo for ' + product);
+        }
+
+        function scrollToId(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
