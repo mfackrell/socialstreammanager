@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Stream Manager | Automated Content System</title>
+    <title>Social Stream Manager | Simplified Content</title>
     
-    <!-- Typography: Inter (UI) & JetBrains Mono (Data/Code) -->
+    <!-- Typography: Crimson Pro (Editorial Serif) & Lato (Friendly Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <!-- Icons: Lucide -->
+    <!-- Icons: Lucide (Softened) -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <!-- Tailwind CSS -->
@@ -19,24 +19,20 @@
         tailwind.config = {
             theme: {
                 fontFamily: {
-                    sans: ['Inter', 'sans-serif'],
-                    mono: ['JetBrains Mono', 'monospace'],
+                    serif: ['Crimson Pro', 'serif'],
+                    sans: ['Lato', 'sans-serif'],
                 },
                 extend: {
                     colors: {
-                        ssm: {
-                            bg: '#0B0F19',      // Deep Space
-                            surface: '#151B2B', // Lighter Surface
-                            border: '#2D3748',  // Border
-                            accent: '#38BDF8',  // Cyan (System Core)
-                            kinetics: '#818CF8', // Indigo
-                            post: '#C084FC',    // Purple
-                            talk: '#FB923C',    // Orange
-                            asset: '#34D399',   // Emerald
+                        brand: {
+                            cream: '#FAF9F6',   // Main Background (Off-white)
+                            sand: '#F2EFE9',    // Secondary Background
+                            text: '#4A4A4A',    // Soft Charcoal
+                            dark: '#2C2C2C',    // Darker Text
+                            accent: '#8FA89B',  // Muted Sage
+                            accentLight: '#E3EBE6',
+                            rose: '#D4A5A5',    // Soft Rose (Secondary Accent)
                         }
-                    },
-                    backgroundImage: {
-                        'grid-pattern': "linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)",
                     }
                 }
             }
@@ -44,172 +40,151 @@
     </script>
 
     <style>
-        /* Schematic Grid Background */
-        .bg-schematic {
-            background-color: #0B0F19;
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(45, 55, 72, 0.3) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(45, 55, 72, 0.3) 1px, transparent 1px);
+        /* Soft, Natural Feel */
+        body { background-color: #FAF9F6; color: #4A4A4A; }
+        
+        /* Typography Tweaks */
+        h1, h2, h3, h4 { letter-spacing: -0.01em; }
+        p { line-height: 1.7; }
+        
+        /* Soft Shadows */
+        .soft-card { 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03); 
+            border: 1px solid rgba(0,0,0,0.02);
         }
         
-        /* Glow Effects */
-        .glow-text { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
-        .glow-border { box-shadow: 0 0 15px rgba(56, 189, 248, 0.15); }
-        .glow-box { box-shadow: 0 0 30px rgba(56, 189, 248, 0.05); }
+        /* Button Styles */
+        .btn-primary {
+            background-color: #8FA89B;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(143, 168, 155, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 15px rgba(143, 168, 155, 0.4); background-color: #7E9689; }
         
-        /* Utility */
-        .text-balance { text-wrap: balance; }
-        
+        .btn-secondary {
+            background-color: transparent;
+            color: #8FA89B;
+            border: 2px solid #8FA89B;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+        .btn-secondary:hover { background-color: #F2F7F5; }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0B0F19; }
-        ::-webkit-scrollbar-thumb { background: #2D3748; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #38BDF8; }
-
-        /* Mobile Menu Transition */
-        #mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        ::-webkit-scrollbar-track { background: #FAF9F6; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
     </style>
 </head>
-<body class="bg-ssm-bg text-slate-300 antialiased font-sans selection:bg-ssm-accent selection:text-ssm-bg">
+<body class="antialiased font-sans">
 
     <!-- NAV -->
-    <nav class="fixed top-0 w-full bg-ssm-bg/95 backdrop-blur-md border-b border-ssm-border z-50">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <nav class="fixed top-0 w-full bg-brand-cream/90 backdrop-blur-md z-50 border-b border-black/5">
+        <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
             
             <!-- Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-8 h-8 border border-ssm-accent flex items-center justify-center rounded-sm bg-ssm-accent/10 group-hover:bg-ssm-accent/20 transition-colors">
-                    <i data-lucide="cpu" class="w-5 h-5 text-ssm-accent"></i>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-mono font-bold tracking-tight text-white leading-none">SSM_OS</span>
-                    <span class="text-[10px] text-ssm-accent font-mono leading-none mt-0.5">V2.0 ONLINE</span>
-                </div>
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="font-serif text-xl font-semibold text-brand-dark italic tracking-wide">SocialStream</span>
             </a>
 
             <!-- Desktop Links -->
-            <div class="hidden md:flex gap-8 text-xs font-mono text-slate-400">
-                <a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a>
-                <a href="#tools" class="hover:text-white transition-colors">The Tools</a>
-                <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-brand-text">
+                <a href="#how-it-works" class="hover:text-brand-accent transition-colors">How It Works</a>
+                <a href="#tools" class="hover:text-brand-accent transition-colors">The Tools</a>
+                <a href="#pricing" class="hover:text-brand-accent transition-colors">Pricing</a>
             </div>
 
-            <!-- Desktop Action -->
-            <button onclick="simulateLogin()" class="hidden md:block font-mono text-xs border border-slate-600 px-4 py-2 rounded hover:border-ssm-accent hover:text-ssm-accent hover:bg-ssm-accent/5 transition-all">
-                Member Login
-            </button>
-
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-slate-400 hover:text-white" onclick="toggleMobileMenu()">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-ssm-surface border-b border-ssm-border overflow-hidden">
-            <div class="px-6 py-4 flex flex-col gap-4 text-xs font-mono text-slate-400">
-                <a href="#how-it-works" class="hover:text-white py-2 block border-b border-slate-800" onclick="toggleMobileMenu()">How It Works</a>
-                <a href="#tools" class="hover:text-white py-2 block border-b border-slate-800" onclick="toggleMobileMenu()">The Tools</a>
-                <button onclick="simulateLogin()" class="text-left hover:text-ssm-accent py-2 font-bold text-white">Member Login</button>
+            <!-- Action -->
+            <div class="flex items-center gap-4">
+                <a href="#" class="hidden md:block text-sm font-bold text-brand-text hover:text-brand-accent transition-colors">Log In</a>
+                <a href="#" class="btn-primary text-xs py-2 px-6 shadow-none">Get Started</a>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="pt-32 pb-20 px-6 bg-schematic border-b border-ssm-border relative overflow-hidden">
-        <!-- Decoration: Ambient Glow -->
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-ssm-accent/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <section class="pt-40 pb-24 px-6 relative overflow-hidden">
+        <!-- Soft Background Blob -->
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-sand rounded-full blur-[100px] opacity-60 pointer-events-none -z-10 translate-x-1/2 -translate-y-1/2"></div>
 
-        <div class="max-w-5xl mx-auto text-center relative z-10">
+        <div class="max-w-3xl mx-auto text-center relative z-10">
             
-            <!-- Status Indicator -->
-            <div class="inline-flex items-center gap-2 border border-ssm-border bg-ssm-surface/80 backdrop-blur px-3 py-1 rounded-full mb-8">
-                <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
-                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">System Architecture</span>
-            </div>
-
-            <!-- Headline: Consumer Outcome Focused -->
-            <h1 class="text-4xl md:text-6xl font-medium text-white mb-6 text-balance tracking-tight">
+            <!-- Headline -->
+            <h1 class="font-serif text-5xl md:text-6xl text-brand-dark mb-6 leading-tight">
                 Turn your content into a <br>
-                <span class="text-ssm-accent glow-text">business asset.</span>
+                <span class="text-brand-accent italic">business asset.</span>
             </h1>
             
-            <!-- Subhead: Clear Benefits -->
-            <p class="text-lg md:text-xl text-slate-400 mb-6 max-w-2xl mx-auto leading-relaxed">
+            <!-- Subhead -->
+            <p class="text-lg md:text-xl text-brand-text mb-10 max-w-xl mx-auto font-light">
                 Stop letting your hard work disappear in the feed. 
-                SSM connects your tools so your content is <span class="text-white">automatically posted, reused, and monetized.</span>
+                We connect your tools so your content is automatically posted, reused, and monetized—without the tech headache.
             </p>
 
             <!-- Hero Anchor -->
-            <p class="text-sm md:text-base text-slate-500 mb-10 max-w-2xl mx-auto font-mono">
-                Start with automated social posting. Expand into newsletters, blogs, and sellable assets — without rebuilding your workflow.
-            </p>
+            <div class="inline-block bg-white/50 backdrop-blur-sm px-6 py-3 rounded-xl border border-brand-accent/20 mb-10 text-sm text-brand-text/80">
+                🌱 Start with automated posting. Grow into newsletters and products.
+            </div>
 
             <!-- CTAs -->
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-6">
-                
-                <!-- Primary CTA Group -->
-                <div class="flex flex-col items-center w-full sm:w-auto">
-                    <a href="#module-kinetics" class="w-full sm:w-auto bg-ssm-accent text-ssm-bg px-8 py-3.5 rounded font-mono text-sm font-bold hover:bg-white transition-all shadow-lg shadow-ssm-accent/20 flex items-center justify-center gap-2">
-                        <i data-lucide="zap" class="w-4 h-4"></i>
-                        Automate Social Content
-                    </a>
-                    <!-- Context Label -->
-                    <span class="text-[10px] font-mono text-slate-500 mt-2 tracking-tight">Powered by Content Kinetics</span>
-                </div>
-
-                <!-- Secondary CTA -->
-                <a href="#tools" class="w-full sm:w-auto border border-slate-600 text-slate-300 px-8 py-3.5 rounded font-mono text-sm hover:border-white hover:text-white transition-all flex items-center justify-center gap-2 bg-ssm-surface/50 sm:mb-[22px]"> 
-                    <i data-lucide="layout-grid" class="w-4 h-4"></i>
-                    See All Tools
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#module-kinetics" class="btn-primary flex items-center gap-2">
+                    Automate Social Content
+                </a>
+                <a href="#tools" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1 transition-all"> 
+                    See all tools <i data-lucide="arrow-down" class="w-4 h-4"></i>
                 </a>
             </div>
             
             <!-- Reassurance -->
-            <div class="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-12 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
-                <span class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-ssm-accent"></i> Cancel anytime</span>
-                <span class="hidden md:inline text-slate-700">|</span>
-                <span class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-ssm-accent"></i> No forced bundles</span>
-                <span class="hidden md:inline text-slate-700">|</span>
-                <span class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3 text-ssm-accent"></i> Start with one tool</span>
+            <div class="mt-12 flex flex-wrap justify-center gap-6 text-sm text-brand-text/60">
+                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Cancel anytime</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> No forced bundles</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Start simple</span>
             </div>
         </div>
     </section>
 
-    <!-- SYSTEM OUTPUT PREVIEW (The "What You Get" Strip) -->
-    <section class="bg-ssm-bg border-b border-ssm-border py-8">
+    <!-- WHAT YOU GET (The Strip) -->
+    <section class="bg-white py-12 border-y border-brand-sand">
         <div class="max-w-4xl mx-auto px-6">
-            <div class="bg-ssm-surface/50 border border-ssm-border rounded-lg p-6 flex flex-col md:flex-row items-center gap-6 md:gap-0">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-center md:text-left">
                 
                 <!-- Input -->
-                <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-                    <div class="font-mono text-[10px] text-slate-500 uppercase mb-2">You provide</div>
-                    <div class="flex items-center gap-3 bg-ssm-bg border border-ssm-border px-4 py-2 rounded text-sm text-white">
-                        <i data-lucide="linkedin" class="w-4 h-4 text-blue-400"></i>
-                        1 LinkedIn Post
+                <div class="flex flex-col items-center md:items-start">
+                    <span class="text-xs font-bold text-brand-accent uppercase tracking-widest mb-3">You Provide</span>
+                    <div class="bg-brand-cream border border-brand-sand px-6 py-4 rounded-xl text-brand-dark font-serif text-lg shadow-sm">
+                        One LinkedIn Post ✍️
                     </div>
                 </div>
 
-                <!-- Process -->
-                <div class="flex flex-col items-center px-8">
-                    <div class="text-[10px] font-mono text-ssm-accent uppercase mb-1">We Generate</div>
-                    <div class="h-px w-24 bg-ssm-accent/30 relative">
-                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-ssm-accent rounded-full animate-pulse"></div>
-                    </div>
-                </div>
+                <!-- Arrow -->
+                <i data-lucide="arrow-right" class="hidden md:block w-6 h-6 text-brand-text/30"></i>
+                <i data-lucide="arrow-down" class="md:hidden w-6 h-6 text-brand-text/30"></i>
 
                 <!-- Output -->
-                <div class="flex-1 flex flex-col items-center md:items-end text-center md:text-right">
-                    <div class="font-mono text-[10px] text-slate-500 uppercase mb-2">Automated Results</div>
-                    <div class="flex flex-wrap justify-center md:justify-end gap-2">
-                        <div class="bg-ssm-bg border border-ssm-border px-3 py-2 rounded text-xs text-slate-300 flex items-center gap-2">
-                            <i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> 5 Posts
+                <div class="flex flex-col items-center md:items-start">
+                    <span class="text-xs font-bold text-brand-accent uppercase tracking-widest mb-3">We Create</span>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <div class="bg-brand-sand/50 px-4 py-3 rounded-lg text-brand-dark font-medium text-sm">
+                            5 Social Posts
                         </div>
-                        <div class="bg-ssm-bg border border-ssm-border px-3 py-2 rounded text-xs text-slate-300 flex items-center gap-2">
-                            <i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Newsletter
+                        <div class="bg-brand-sand/50 px-4 py-3 rounded-lg text-brand-dark font-medium text-sm">
+                            1 Newsletter
                         </div>
-                        <div class="bg-ssm-bg border border-ssm-border px-3 py-2 rounded text-xs text-slate-300 flex items-center gap-2">
-                            <i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Blog
+                        <div class="bg-brand-sand/50 px-4 py-3 rounded-lg text-brand-dark font-medium text-sm">
+                            1 Blog Draft
                         </div>
                     </div>
                 </div>
@@ -218,181 +193,136 @@
         </div>
     </section>
 
-    <!-- THE TOOLS (Revised for Consumer Clarity) -->
-    <section id="tools" class="py-24 bg-ssm-surface border-y border-ssm-border relative scroll-mt-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                <div>
-                    <h2 class="text-3xl font-medium text-white mb-4">Choose Your Tools</h2>
-                    <p class="text-slate-400 max-w-xl">
-                        Every tool works on its own. Use one to fix a specific problem, or combine them to build a full engine. <strong>No bundles required.</strong>
+    <!-- THE PROBLEM (Story) -->
+    <section id="how-it-works" class="py-24 px-6 bg-brand-cream">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            
+            <!-- Text -->
+            <div>
+                <h2 class="font-serif text-4xl text-brand-dark mb-6">Most content is posted and forgotten.</h2>
+                <div class="space-y-6 text-brand-text text-lg font-light">
+                    <p>
+                        You write a post, hit publish, and move on. The effort evaporates instantly. It feels like a treadmill.
+                    </p>
+                    <p>
+                        Social Stream Manager isn't just a scheduler. It’s a <strong>calm system</strong> that ensures every piece of content works harder for you—turning into newsletters, blogs, and products automatically.
                     </p>
                 </div>
-                <div class="text-right hidden md:block">
-                    <div class="font-mono text-xs text-slate-500">SYSTEM_STATUS:</div>
-                    <div class="font-mono text-sm text-emerald-500">READY TO DEPLOY</div>
+            </div>
+            
+            <!-- Soft Visual -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-rose/20 rounded-full blur-3xl transform scale-75"></div>
+                <div class="soft-card p-8 relative z-10">
+                    <div class="flex items-center gap-4 mb-6 pb-6 border-b border-gray-100">
+                        <div class="w-12 h-12 bg-brand-sand rounded-full flex items-center justify-center">
+                            <i data-lucide="pen-tool" class="w-5 h-5 text-brand-text"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-brand-dark">Input</div>
+                            <div class="text-xs text-brand-text/60">Your original idea</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 pl-6 border-l-2 border-brand-accent/30">
+                        <div class="flex items-center gap-3 text-sm text-brand-text">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-accent"></i>
+                            <span>Sent to LinkedIn & X</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-brand-text">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-accent"></i>
+                            <span>Added to Newsletter Draft</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-brand-text">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-accent"></i>
+                            <span>Saved to Product Library</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Bento Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <!-- Card 1: Kinetics -->
-                <div id="module-kinetics" class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-kinetics transition-all group relative overflow-hidden flex flex-col scroll-mt-32">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-kinetics opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="w-10 h-10 bg-ssm-kinetics/10 rounded flex items-center justify-center border border-ssm-kinetics/20">
-                            <i data-lucide="pen-tool" class="w-5 h-5 text-ssm-kinetics"></i>
-                        </div>
-                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-kinetics transition-colors"></i>
-                    </div>
-                    <h3 class="font-mono font-bold text-white mb-2">Content Kinetics</h3>
-                    <p class="text-[10px] font-mono text-ssm-kinetics mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Social Automation</p>
-                    <!-- REWRITE: Consumer Benefit -->
-                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
-                        Writes, schedules, and posts content for you across LinkedIn, X, and more. Keep your accounts active without spending hours writing every day.
-                    </p>
-                    <button onclick="simulateDemo('Content Kinetics')" class="text-xs font-mono text-white hover:text-ssm-kinetics transition-colors flex items-center gap-2 mt-auto text-left">
-                        See It Work <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                    </button>
-                </div>
-
-                <!-- Card 2: PostStack -->
-                <div id="module-post" class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-post transition-all group relative overflow-hidden flex flex-col scroll-mt-32">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-post opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="w-10 h-10 bg-ssm-post/10 rounded flex items-center justify-center border border-ssm-post/20">
-                            <i data-lucide="mail" class="w-5 h-5 text-ssm-post"></i>
-                        </div>
-                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-post transition-colors"></i>
-                    </div>
-                    <h3 class="font-mono font-bold text-white mb-2">PostStack</h3>
-                    <p class="text-[10px] font-mono text-ssm-post mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Newsletter Builder</p>
-                    <!-- REWRITE: Consumer Benefit -->
-                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
-                        Turns your social media posts into a weekly newsletter. It automatically finds your best content and formats it for email, so you don't have to write twice.
-                    </p>
-                    <button onclick="simulateDemo('PostStack')" class="text-xs font-mono text-white hover:text-ssm-post transition-colors flex items-center gap-2 mt-auto text-left">
-                        See It Work <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                    </button>
-                </div>
-
-                <!-- Card 3: TalkStack -->
-                <div id="module-talk" class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-talk transition-all group relative overflow-hidden flex flex-col scroll-mt-32">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-talk opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="w-10 h-10 bg-ssm-talk/10 rounded flex items-center justify-center border border-ssm-talk/20">
-                            <i data-lucide="video" class="w-5 h-5 text-ssm-talk"></i>
-                        </div>
-                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-talk transition-colors"></i>
-                    </div>
-                    <h3 class="font-mono font-bold text-white mb-2">TalkStack</h3>
-                    <p class="text-[10px] font-mono text-ssm-talk mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Video to Blog</p>
-                    <!-- REWRITE: Consumer Benefit -->
-                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
-                        Automatically scans your podcast and generates a clean blog post or article. Turns rambling conversations into structured reading material.
-                    </p>
-                    <button onclick="simulateDemo('TalkStack')" class="text-xs font-mono text-white hover:text-ssm-talk transition-colors flex items-center gap-2 mt-auto text-left">
-                        See It Work <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                    </button>
-                </div>
-
-                <!-- Card 4: QuickAsset -->
-                <div id="module-asset" class="bg-ssm-bg border border-ssm-border p-6 rounded-lg hover:border-ssm-asset transition-all group relative overflow-hidden flex flex-col scroll-mt-32">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-ssm-asset opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="w-10 h-10 bg-ssm-asset/10 rounded flex items-center justify-center border border-ssm-asset/20">
-                            <i data-lucide="dollar-sign" class="w-5 h-5 text-ssm-asset"></i>
-                        </div>
-                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 group-hover:text-ssm-asset transition-colors"></i>
-                    </div>
-                    <h3 class="font-mono font-bold text-white mb-2">QuickAsset</h3>
-                    <p class="text-[10px] font-mono text-ssm-asset mb-4 uppercase tracking-wider border-b border-ssm-border pb-4 inline-block">Instant Products</p>
-                    <!-- REWRITE: Consumer Benefit -->
-                    <p class="text-sm text-slate-400 leading-relaxed mb-6 flex-1">
-                        Turn your best ideas into simple digital products like PDFs or guides. Includes a checkout link so you can start selling immediately.
-                    </p>
-                    <button onclick="simulateDemo('QuickAsset')" class="text-xs font-mono text-white hover:text-ssm-asset transition-colors flex items-center gap-2 mt-auto text-left">
-                        See It Work <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                    </button>
-                </div>
-
-            </div>
         </div>
     </section>
 
-    <!-- HOW IT WORKS (The Ecosystem) -->
-    <section id="how-it-works" class="py-20 bg-ssm-bg relative overflow-hidden scroll-mt-24">
-        <!-- Grid overlay -->
-        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]"></div>
-
-        <div class="max-w-5xl mx-auto px-6 relative z-10">
+    <!-- THE TOOLS (Vertical Flow - Hierarchy Flipped) -->
+    <section id="tools" class="py-24 px-6 bg-white">
+        <div class="max-w-3xl mx-auto">
+            
             <div class="text-center mb-16">
-                <h2 class="text-2xl font-medium text-white mb-2">How It All Connects</h2>
-                <p class="text-slate-500 text-sm">
-                    Most users start with one tool. The system connects automatically as you add more.
+                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-2 block">Modular & Flexible</span>
+                <h2 class="font-serif text-4xl text-brand-dark mb-4">Choose Your Tools</h2>
+                <p class="text-brand-text text-lg font-light">
+                    Every tool works on its own. Use one to fix a specific problem, or combine them. <strong>No bundles required.</strong>
                 </p>
             </div>
 
-            <!-- Flow Chart with Plain English Labels -->
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="space-y-8">
                 
-                <!-- Node 1 -->
-                <div class="relative group cursor-pointer" onclick="scrollToId('module-kinetics')">
-                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-kinetics/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-kinetics transition-colors shadow-lg shadow-black/50">
-                        <i data-lucide="zap" class="w-8 h-8 text-ssm-kinetics mb-3"></i>
-                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">Kinetics</span>
+                <!-- Tool 1: Automatic Social Posting -->
+                <div id="module-kinetics" class="soft-card p-8 md:p-10 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center shrink-0 text-blue-400">
+                        <i data-lucide="zap" class="w-7 h-7"></i>
                     </div>
-                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-kinetics opacity-0 group-hover:opacity-100 transition-opacity">
-                        CREATE
-                    </div>
-                </div>
-
-                <!-- Connector -->
-                <div class="h-12 w-px md:w-24 md:h-px bg-slate-800 relative flex items-center justify-center">
-                    <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
-                </div>
-
-                <!-- Node 2 -->
-                <div class="relative group cursor-pointer" onclick="scrollToId('module-post')">
-                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-post/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-post transition-colors shadow-lg shadow-black/50">
-                        <i data-lucide="mail" class="w-8 h-8 text-ssm-post mb-3"></i>
-                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">PostStack</span>
-                    </div>
-                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-post opacity-0 group-hover:opacity-100 transition-opacity">
-                        FILTER
+                    <div>
+                        <h3 class="font-serif text-2xl text-brand-dark mb-1">Automatic Social Posting</h3>
+                        <div class="text-xs uppercase tracking-wider font-bold text-brand-text/40 mb-4">Powered by Content Kinetics</div>
+                        <p class="text-brand-text mb-6">
+                            Writes, schedules, and posts content for you across LinkedIn, X, and more. Keep your accounts active without spending hours writing every day.
+                        </p>
+                        <button onclick="simulateDemo('Content Kinetics')" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1">
+                            See It Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Connector -->
-                <div class="h-12 w-px md:w-24 md:h-px bg-slate-800 relative flex items-center justify-center">
-                    <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                <!-- Tool 2: Turn Posts into Newsletters -->
+                <div id="module-post" class="soft-card p-8 md:p-10 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center shrink-0 text-purple-400">
+                        <i data-lucide="mail" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-2xl text-brand-dark mb-1">Turn Posts into Newsletters</h3>
+                        <div class="text-xs uppercase tracking-wider font-bold text-brand-text/40 mb-4">Powered by PostStack</div>
+                        <p class="text-brand-text mb-6">
+                            Turns your social media posts into a weekly newsletter. It automatically finds your best content and formats it for email, so you don't have to write twice.
+                        </p>
+                        <button onclick="simulateDemo('PostStack')" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1">
+                            See It Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Node 3 -->
-                <div class="relative group cursor-pointer" onclick="scrollToId('module-talk')">
-                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-talk/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-talk transition-colors shadow-lg shadow-black/50">
-                        <i data-lucide="video" class="w-8 h-8 text-ssm-talk mb-3"></i>
-                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">TalkStack</span>
+                <!-- Tool 3: Turn Video into Articles -->
+                <div id="module-talk" class="soft-card p-8 md:p-10 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center shrink-0 text-orange-400">
+                        <i data-lucide="mic" class="w-7 h-7"></i>
                     </div>
-                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-talk opacity-0 group-hover:opacity-100 transition-opacity">
-                        CONVERT
+                    <div>
+                        <h3 class="font-serif text-2xl text-brand-dark mb-1">Turn Video into Articles</h3>
+                        <div class="text-xs uppercase tracking-wider font-bold text-brand-text/40 mb-4">Powered by TalkStack</div>
+                        <p class="text-brand-text mb-6">
+                            Upload a video or audio recording, get a clean blog post or article back. Turns rambling conversations into structured reading material.
+                        </p>
+                        <button onclick="simulateDemo('TalkStack')" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1">
+                            See It Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Connector -->
-                <div class="h-12 w-px md:w-24 md:h-px bg-slate-800 relative flex items-center justify-center">
-                    <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
-                </div>
-
-                <!-- Node 4 -->
-                <div class="relative group cursor-pointer" onclick="scrollToId('module-asset')">
-                    <div class="w-32 h-32 bg-ssm-surface border border-ssm-asset/30 rounded-xl flex flex-col items-center justify-center relative z-10 group-hover:border-ssm-asset transition-colors shadow-lg shadow-black/50">
-                        <i data-lucide="dollar-sign" class="w-8 h-8 text-ssm-asset mb-3"></i>
-                        <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">QuickAsset</span>
+                <!-- Tool 4: Create Instant Products -->
+                <div id="module-asset" class="soft-card p-8 md:p-10 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center shrink-0 text-emerald-400">
+                        <i data-lucide="sparkles" class="w-7 h-7"></i>
                     </div>
-                    <div class="absolute -bottom-8 left-0 right-0 text-center text-xs font-mono text-ssm-asset opacity-0 group-hover:opacity-100 transition-opacity">
-                        SELL
+                    <div>
+                        <h3 class="font-serif text-2xl text-brand-dark mb-1">Create Instant Products</h3>
+                        <div class="text-xs uppercase tracking-wider font-bold text-brand-text/40 mb-4">Powered by QuickAsset</div>
+                        <p class="text-brand-text mb-6">
+                            Turn your best ideas into simple digital products like PDFs or guides. Includes a checkout link so you can start selling immediately.
+                        </p>
+                        <button onclick="simulateDemo('QuickAsset')" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1">
+                            See It Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -401,37 +331,41 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-ssm-bg py-16 border-t border-ssm-border">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12">
+    <footer class="bg-brand-cream border-t border-brand-sand py-16">
+        <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-4 gap-12 text-sm text-brand-text/80">
             
-            <div class="flex flex-col gap-4">
-                <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 border border-ssm-accent flex items-center justify-center rounded-sm bg-ssm-accent/10">
-                        <i data-lucide="cpu" class="w-3 h-3 text-ssm-accent"></i>
-                    </div>
-                    <span class="font-mono font-bold text-white tracking-tight">SSM_OS</span>
-                </div>
-                <p class="text-xs text-slate-500 font-mono max-w-xs">
-                    The content orchestration platform for modern content businesses.
+            <div class="col-span-1 md:col-span-1">
+                <span class="font-serif text-lg font-bold text-brand-dark italic block mb-4">SocialStream</span>
+                <p class="font-light leading-relaxed">
+                    Designed for compounding leverage. <br>
+                    &copy; 2024
                 </p>
-                <div class="text-xs text-slate-600 font-mono mt-4">
-                    &copy; 2024 Social Stream Manager.
-                </div>
             </div>
 
-            <div class="flex gap-16">
-                <div class="flex flex-col gap-4">
-                    <h4 class="font-mono text-xs text-white uppercase tracking-wider">The Tools</h4>
-                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-kinetics transition-colors">Social Automation</a>
-                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-post transition-colors">Newsletter Builder</a>
-                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-talk transition-colors">Video to Blog</a>
-                    <a href="#" class="text-sm text-slate-500 hover:text-ssm-asset transition-colors">Instant Products</a>
-                </div>
-                <div class="flex flex-col gap-4">
-                    <h4 class="font-mono text-xs text-white uppercase tracking-wider">Access</h4>
-                    <button onclick="simulateLogin()" class="text-left text-sm text-slate-500 hover:text-white transition-colors">Login</button>
-                    <a href="#" class="text-sm text-slate-500 hover:text-white transition-colors">Support</a>
-                </div>
+            <div>
+                <h4 class="font-bold text-brand-dark mb-4 uppercase text-xs tracking-wider">The Tools</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="hover:text-brand-accent">Automatic Posting</a></li>
+                    <li><a href="#" class="hover:text-brand-accent">Newsletter Builder</a></li>
+                    <li><a href="#" class="hover:text-brand-accent">Video to Blog</a></li>
+                    <li><a href="#" class="hover:text-brand-accent">Instant Products</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-brand-dark mb-4 uppercase text-xs tracking-wider">Support</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="hover:text-brand-accent">Help Center</a></li>
+                    <li><a href="#" class="hover:text-brand-accent">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-brand-accent">Pricing</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-brand-dark mb-4 uppercase text-xs tracking-wider">Login</h4>
+                <ul class="space-y-3">
+                    <li><button onclick="simulateLogin()" class="hover:text-brand-accent text-left">Member Access</button></li>
+                </ul>
             </div>
 
         </div>
@@ -440,24 +374,12 @@
     <script>
         lucide.createIcons();
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
         function simulateLogin() {
-            alert('This would redirect to the Auth Portal.');
+            alert('Redirecting to secure login...');
         }
         
         function simulateDemo(product) {
-             alert('This would open the demo page for ' + product);
-        }
-
-        function scrollToId(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
+             alert('Opening demo for ' + product);
         }
     </script>
 </body>
