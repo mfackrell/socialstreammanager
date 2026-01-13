@@ -124,18 +124,6 @@
             z-index: 2;
         }
 
-        .pipeline-connector {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 2px;
-            background: repeating-linear-gradient(90deg, #8FA89B 0, #8FA89B 10px, transparent 10px, transparent 20px);
-            opacity: 0.2;
-            z-index: 1;
-            transform: translateY(-50%);
-        }
-
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #FAF9F6; }
         ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
@@ -191,7 +179,7 @@
             </div>
 
             <h1 class="font-serif text-6xl md:text-8xl text-brand-dark mb-8 leading-[1.1] tracking-tight">
-                Turn your thoughts into <br>
+                Turn your ideas into <br>
                 <span class="text-brand-accent italic font-light underline decoration-brand-accent/20 underline-offset-8">revenue streams.</span>
             </h1>
             
@@ -223,7 +211,7 @@
                         <i data-lucide="mail" class="w-5 h-5"></i>
                     </div>
                     <div class="font-bold text-brand-dark text-sm mb-1">Create Newsletters</div>
-                    <div class="text-xs text-brand-text/60 font-light">PostStack Sync</div>
+                    <div class="text-xs text-brand-text/60 font-light">PostStack Create</div>
                 </button>
 
                 <button onclick="showMessage('TalkStack', 'Voice & video into long-form blogs.')" class="action-card group">
@@ -244,19 +232,74 @@
         </div>
     </section>
 
-    <!-- REDESIGNED TRANSFORMATION PIPELINE -->
+    <!-- HOW IT WORKS SECTION -->
+    <section id="how-it-works" class="py-24 px-6 bg-brand-cream border-y border-brand-sand">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            
+            <!-- Text Content -->
+            <div>
+                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-4 block italic">The Core Philosophy</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark mb-6 leading-tight">Stop letting your best ideas disappear.</h2>
+                <div class="space-y-6 text-brand-text text-lg font-light leading-relaxed">
+                    <p>
+                        Most creators are on a content treadmill. You write a post, hit publish, and watch the engagement fade in hours. Your effort evaporates instantly.
+                    </p>
+                    <p>
+                        <strong>Social Stream Manager</strong> changes the physics of creation. We connect your creative input to an automated compounding system that ensures every thought works harder, lives longer, and builds equity.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Soft Visual Card -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-brand-rose/10 rounded-full blur-3xl transform scale-75 opacity-50"></div>
+                <div class="soft-card p-10 relative z-10 border-brand-sand/50">
+                    <div class="flex items-center gap-4 mb-8 pb-8 border-b border-gray-100">
+                        <div class="w-14 h-14 bg-brand-sand rounded-2xl flex items-center justify-center">
+                            <i data-lucide="pen-tool" class="w-6 h-6 text-brand-dark"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-brand-dark tracking-tight">Your Single Input</div>
+                            <div class="text-xs text-brand-text/50">One voice note or rough sketch</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6 relative">
+                        <!-- Connecting Line -->
+                        <div class="absolute left-[27px] top-2 bottom-2 w-0.5 bg-brand-accent/20"></div>
+                        
+                        <div class="flex items-center gap-4 relative">
+                            <div class="w-6 h-6 rounded-full bg-brand-accentLight border-2 border-white flex items-center justify-center text-[10px] font-bold text-brand-accent z-10">1</div>
+                            <span class="text-sm text-brand-text/80">Multiplexed across social platforms</span>
+                        </div>
+                        <div class="flex items-center gap-4 relative">
+                            <div class="w-6 h-6 rounded-full bg-brand-accentLight border-2 border-white flex items-center justify-center text-[10px] font-bold text-brand-accent z-10">2</div>
+                            <span class="text-sm text-brand-text/80">Archived for your weekly newsletter</span>
+                        </div>
+                        <div class="flex items-center gap-4 relative">
+                            <div class="w-6 h-6 rounded-full bg-brand-accentLight border-2 border-white flex items-center justify-center text-[10px] font-bold text-brand-accent z-10">3</div>
+                            <span class="text-sm text-brand-text/80">Productized into monetizable guides</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TRANSFORMATION PIPELINE -->
     <section class="bg-brand-dark py-24 relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6 relative">
-            <div class="text-center mb-16">
+        <div class="max-w-6xl mx-auto px-6 relative text-center">
+            <div class="mb-16">
                 <h2 class="font-serif text-white text-4xl mb-4">The Magic Transformation</h2>
-                <p class="text-white/40 text-lg font-light">How we turn a single thought into a business ecosystem.</p>
+                <p class="text-white/40 text-lg font-light">A visual look at how we build your business ecosystem.</p>
             </div>
 
             <div class="grid lg:grid-cols-7 items-center gap-4 lg:gap-0">
                 
                 <!-- Input Node -->
                 <div class="lg:col-span-2 pipeline-node">
-                    <div class="bg-white p-8 rounded-3xl shadow-2xl transform lg:-rotate-2">
+                    <div class="bg-white p-8 rounded-3xl shadow-2xl transform lg:-rotate-2 text-left">
                         <span class="text-[10px] font-bold text-brand-accent uppercase tracking-tighter mb-4 block">Origin</span>
                         <div class="flex items-start gap-4 mb-6">
                             <div class="w-12 h-12 shrink-0 bg-brand-accentLight rounded-2xl flex items-center justify-center text-brand-accent">
@@ -298,7 +341,7 @@
 
                 <!-- Output Node -->
                 <div class="lg:col-span-2 pipeline-node">
-                    <div class="space-y-4 transform lg:rotate-2">
+                    <div class="space-y-4 transform lg:rotate-2 text-left">
                         <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 backdrop-blur-sm group hover:bg-white/10 transition-colors">
                             <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
                                 <i data-lucide="share-2" class="w-5 h-5"></i>
@@ -409,7 +452,7 @@
 
     <!-- FOOTER -->
     <footer class="bg-brand-cream border-t border-brand-sand py-24">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-6xl mx-auto px-6 text-center md:text-left">
             <div class="grid md:grid-cols-4 gap-16 mb-16">
                 <div class="col-span-1 md:col-span-1">
                     <span class="font-serif text-3xl font-bold text-brand-dark italic block mb-6">SocialStream</span>
@@ -436,25 +479,21 @@
                 </div>
                 <div>
                     <h4 class="font-bold text-brand-dark mb-6 uppercase text-[10px] tracking-[0.2em]">Connect</h4>
-                    <div class="flex gap-4">
+                    <div class="flex justify-center md:justify-start gap-4">
                         <a href="#" class="w-10 h-10 rounded-full border border-black/5 flex items-center justify-center hover:bg-white transition-all text-brand-text/40 hover:text-brand-accent">
                             <i data-lucide="twitter" class="w-4 h-4"></i>
                         </a>
                         <a href="#" class="w-10 h-10 rounded-full border border-black/5 flex items-center justify-center hover:bg-white transition-all text-brand-text/40 hover:text-brand-accent">
                             <i data-lucide="linkedin" class="w-4 h-4"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full border border-black/5 flex items-center justify-center hover:bg-white transition-all text-brand-text/40 hover:text-brand-accent">
-                            <i data-lucide="instagram" class="w-4 h-4"></i>
-                        </a>
                     </div>
                 </div>
             </div>
             <div class="pt-10 border-t border-black/[0.03] flex flex-col md:flex-row justify-between items-center gap-6">
-                <span class="text-[10px] uppercase font-bold tracking-widest text-brand-text/30">&copy; 2024 SocialStream Manager. Designed for compounding.</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-brand-text/30">&copy; 2024 SocialStream Manager.</span>
                 <div class="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-brand-text/30">
                     <a href="#" class="hover:text-brand-text">Privacy</a>
                     <a href="#" class="hover:text-brand-text">Terms</a>
-                    <a href="#" class="hover:text-brand-text">Cookies</a>
                 </div>
             </div>
         </div>
