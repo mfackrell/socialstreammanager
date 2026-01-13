@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostStack | Automated Social-to-Email Newsletters</title>
+    
+    <!-- Typography: Crimson Pro & Lato -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons: Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    serif: ['Crimson Pro', 'serif'],
+                    sans: ['Lato', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FAF9F6',   
+                            sand: '#F2EFE9',    
+                            text: '#4A4A4A',    
+                            dark: '#2C2C2C',    
+                            accent: '#8FA89B',  
+                            accentLight: '#E3EBE6',
+                            rose: '#D4A5A5',    
+                        }
+                    },
+                    animation: {
+                        'float': 'float 5s ease-in-out infinite',
+                        'pulse-subtle': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FAF9F6; color: #4A4A4A; }
+        .soft-card { 
+            background: white; 
+            border-radius: 24px; 
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #8FA89B;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-primary:hover {
+            background-color: #7E9689;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(143, 168, 155, 0.2);
+        }
+        .connector-line {
+            position: absolute;
+            height: 2px;
+            background: repeating-linear-gradient(to right, #8FA89B 0, #8FA89B 8px, transparent 8px, transparent 16px);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full bg-brand-cream/80 backdrop-blur-xl z-50 border-b border-black/[0.03]">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="font-serif text-2xl font-semibold text-brand-dark italic tracking-tight">SocialStream</span>
+                <span class="bg-brand-accent/10 text-brand-accent px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest mt-1">PostStack</span>
+            </a>
+
+            <div class="hidden md:flex gap-10 text-sm font-medium text-brand-text/80">
+                <a href="#how-it-works" class="hover:text-brand-accent transition-colors">How It Works</a>
+                <a href="#features" class="hover:text-brand-accent transition-colors">Features</a>
+                <a href="#pricing" class="hover:text-brand-accent transition-colors">Pricing</a>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <a href="#" class="hidden md:block text-sm font-bold text-brand-text hover:text-brand-accent transition-colors">Log In</a>
+                <a href="#pricing" class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-brand-text transition-all">Start Free Trial</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="pt-40 pb-24 px-6 relative">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accentLight text-brand-accent text-xs font-bold mb-8">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
+                </span>
+                Autopilot Email Marketing
+            </div>
+            <h1 class="font-serif text-5xl md:text-7xl text-brand-dark mb-8 leading-[1.1]">
+                Your social posts, <br>
+                <span class="text-brand-accent italic font-light">now in their inbox.</span>
+            </h1>
+            <p class="text-xl text-brand-text mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                PostStack turns your Facebook updates and blog feeds into beautiful, branded newsletters automatically. No copy-pasting, no design work, just consistent connection.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#pricing" class="btn-primary text-lg px-10">
+                    Start Your 14-Day Free Trial
+                </a>
+                <a href="#how-it-works" class="text-sm font-bold text-brand-text/60 hover:text-brand-accent flex items-center gap-2">
+                    See How It Works <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Animation/Graphic -->
+        <div class="mt-24 max-w-5xl mx-auto relative px-4 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+            <!-- Source Card -->
+            <div class="soft-card p-6 w-full max-w-xs animate-float">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-brand-text/40">Facebook Feed</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="h-3 w-3/4 bg-brand-sand rounded"></div>
+                    <div class="h-3 w-full bg-brand-sand rounded"></div>
+                    <div class="h-24 w-full bg-brand-sand/50 rounded-xl"></div>
+                </div>
+            </div>
+
+            <!-- Transition -->
+            <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-brand-accent text-white rounded-full flex items-center justify-center shadow-xl z-10">
+                    <i data-lucide="refresh-cw" class="w-6 h-6 animate-spin-slow"></i>
+                </div>
+                <div class="hidden md:block connector-line w-40 -translate-y-6"></div>
+            </div>
+
+            <!-- Email Card -->
+            <div class="soft-card p-6 w-full max-w-xs animate-float shadow-2xl border-brand-accent/20" style="animation-delay: 0.5s;">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 bg-brand-accentLight text-brand-accent rounded-lg flex items-center justify-center">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-brand-accent">Newsletter Ready</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="h-4 w-1/2 bg-brand-accent/10 rounded"></div>
+                    <div class="h-2 w-full bg-brand-sand/30 rounded"></div>
+                    <div class="h-2 w-full bg-brand-sand/30 rounded"></div>
+                    <div class="h-10 w-full bg-brand-dark rounded-lg mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="py-32 bg-brand-sand/20 px-6 border-y border-brand-sand">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-24">
+                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-4 block italic">The Workflow</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark">Set it and forget it.</h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-white rounded-3xl flex items-center justify-center text-brand-accent mx-auto mb-6 shadow-sm border border-brand-sand">
+                        <i data-lucide="link" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-brand-dark mb-2">1. Connect</h4>
+                    <p class="text-sm text-brand-text/70 font-light">Link your Facebook Page, blog, or RSS feed in one click.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-white rounded-3xl flex items-center justify-center text-brand-accent mx-auto mb-6 shadow-sm border border-brand-sand">
+                        <i data-lucide="scissors" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-brand-dark mb-2">2. Extract</h4>
+                    <p class="text-sm text-brand-text/70 font-light">PostStack scrapes new content and filters out the noise automatically.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-brand-dark rounded-3xl flex items-center justify-center text-white mx-auto mb-6 shadow-xl">
+                        <i data-lucide="palette" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-brand-dark mb-2">3. Format</h4>
+                    <p class="text-sm text-brand-text/70 font-light">Your posts are styled into a clean, branded email template.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-white rounded-3xl flex items-center justify-center text-brand-accent mx-auto mb-6 shadow-sm border border-brand-sand">
+                        <i data-lucide="send" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-brand-dark mb-2">4. Deliver</h4>
+                    <p class="text-sm text-brand-text/70 font-light">Review first, or let it send on your weekly schedule.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="py-32 px-6 bg-white">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div>
+                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark mb-8 leading-tight">Built for teams with <br><span class="italic text-brand-accent font-light">too much to do.</span></h2>
+                <div class="space-y-10">
+                    <div class="flex gap-6">
+                        <div class="shrink-0 w-12 h-12 bg-brand-accentLight text-brand-accent rounded-xl flex items-center justify-center">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-brand-dark mb-1">Truly Hands-Off</h5>
+                            <p class="text-brand-text/70 font-light">You keep posting to social media as usual. We handle the translation to email.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="shrink-0 w-12 h-12 bg-brand-accentLight text-brand-accent rounded-xl flex items-center justify-center">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-brand-dark mb-1">Consistency Guaranteed</h5>
+                            <p class="text-brand-text/70 font-light">Never "forget" to send a newsletter again. Your audience stays engaged every week.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="shrink-0 w-12 h-12 bg-brand-accentLight text-brand-accent rounded-xl flex items-center justify-center">
+                            <i data-lucide="layers" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-brand-dark mb-1">Platform Integration</h5>
+                            <p class="text-brand-text/70 font-light">Connects with Mailchimp, ConvertKit, and more to sync with your existing list.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div class="soft-card p-8 bg-brand-cream border-brand-sand aspect-square flex flex-col justify-center text-center">
+                    <i data-lucide="users" class="w-8 h-8 text-brand-accent mx-auto mb-4"></i>
+                    <div class="font-serif text-2xl italic">Nonprofits</div>
+                </div>
+                <div class="soft-card p-8 bg-brand-dark text-white aspect-square flex flex-col justify-center text-center translate-y-8">
+                    <i data-lucide="mic" class="w-8 h-8 text-brand-accent mx-auto mb-4"></i>
+                    <div class="font-serif text-2xl italic">Creators</div>
+                </div>
+                <div class="soft-card p-8 bg-white border-brand-sand aspect-square flex flex-col justify-center text-center">
+                    <i data-lucide="church" class="w-8 h-8 text-brand-accent mx-auto mb-4"></i>
+                    <div class="font-serif text-2xl italic">Communities</div>
+                </div>
+                <div class="soft-card p-8 bg-brand-accentLight border-brand-accent/20 aspect-square flex flex-col justify-center text-center translate-y-8">
+                    <i data-lucide="heart" class="w-8 h-8 text-brand-accent mx-auto mb-4"></i>
+                    <div class="font-serif text-2xl italic">Coaches</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-32 px-6 bg-brand-dark relative">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-serif text-5xl text-white mb-8">One subscription. <br><span class="text-brand-accent italic font-light">Zero headaches.</span></h2>
+            <p class="text-white/40 text-xl font-light mb-16 max-w-2xl mx-auto">
+                Join the SocialStream ecosystem. Choose the plan that matches your audience size.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 items-stretch">
+                <!-- Monthly -->
+                <div class="soft-card p-12 bg-white flex flex-col text-left">
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-brand-accent mb-2">Growth Plan</div>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="text-5xl font-serif italic text-brand-dark">$49</span>
+                        <span class="text-brand-text/40 text-sm">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Up to 2,500 Subscribers</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> 1 Content Source (FB/RSS)</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Weekly Auto-Newsletter</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Standard Branding</li>
+                    </ul>
+                    <a href="#" class="btn-primary w-full justify-center">Start Free Trial</a>
+                </div>
+
+                <!-- Annual -->
+                <div class="soft-card p-12 bg-white flex flex-col text-left relative overflow-hidden border-2 border-brand-accent">
+                    <div class="absolute top-0 right-0 bg-brand-accent text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest rounded-bl-xl">Best Value</div>
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-brand-accent mb-2">Pro Ecosystem</div>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="text-5xl font-serif italic text-brand-dark">$39</span>
+                        <span class="text-brand-text/40 text-sm">/month billed yearly</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Up to 10,000 Subscribers</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> 3 Content Sources</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Advanced Branding & Voice</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Priority Support</li>
+                    </ul>
+                    <a href="#" class="btn-primary w-full justify-center !bg-brand-dark">Go Pro Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-cream border-t border-brand-sand py-24 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
+                    <span class="font-serif text-3xl font-bold text-brand-dark italic">SocialStream</span>
+                    <span class="text-brand-text/30 font-bold uppercase text-[10px] tracking-[0.3em] mt-1">PostStack</span>
+                </div>
+                <p class="text-brand-text/50 text-sm max-w-xs font-light leading-relaxed">Automating consistent connection. Part of the SocialStream family.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-16 text-xs font-bold uppercase tracking-[0.2em] text-brand-text/40">
+                <div class="flex flex-col gap-6">
+                    <span class="text-brand-dark italic">Products</span>
+                    <a href="#" class="hover:text-brand-accent transition-colors">Kinetics AI</a>
+                    <a href="#" class="hover:text-brand-accent transition-colors">QuickAsset</a>
+                    <a href="#" class="text-brand-accent underline decoration-brand-accent/20 underline-offset-8">PostStack</a>
+                </div>
+                <div class="flex flex-col gap-6">
+                    <span class="text-brand-dark italic">Support</span>
+                    <a href="#" class="hover:text-brand-accent transition-colors">Tutorials</a>
+                    <a href="#" class="hover:text-brand-accent transition-colors">Contact</a>
+                </div>
+                <div class="flex flex-col gap-6">
+                    <span class="text-brand-dark italic">Legal</span>
+                    <a href="#" class="hover:text-brand-accent transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-brand-accent transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-24 pt-10 border-t border-black/[0.03] text-[10px] text-center text-brand-text/30 uppercase tracking-[0.4em] font-bold">
+            © 2024 SocialStream Manager. Zero Effort Newsletters.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
