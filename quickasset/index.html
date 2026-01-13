@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickAsset | Sell Digital Products Instantly</title>
     
-    <!-- Typography -->
+    <!-- Typography: Crimson Pro & Lato -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
+    <!-- Icons: Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <!-- Tailwind CSS -->
@@ -20,21 +20,22 @@
             theme: {
                 fontFamily: {
                     serif: ['Crimson Pro', 'serif'],
-                    sans: ['Inter', 'sans-serif'],
+                    sans: ['Lato', 'sans-serif'],
                 },
                 extend: {
                     colors: {
                         brand: {
-                            bg: '#FDFDFD',
-                            dark: '#111827',
-                            primary: '#6366F1',
-                            primaryLight: '#EEF2FF',
-                            text: '#4B5563',
-                            accent: '#F59E0B',
+                            cream: '#FAF9F6',   
+                            sand: '#F2EFE9',    
+                            text: '#4A4A4A',    
+                            dark: '#2C2C2C',    
+                            accent: '#8FA89B',  
+                            accentLight: '#E3EBE6',
+                            rose: '#D4A5A5',    
                         }
                     },
                     animation: {
-                        'subtle-float': 'float 5s ease-in-out infinite',
+                        'float': 'float 4s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
@@ -48,308 +49,313 @@
     </script>
 
     <style>
-        body { background-color: #FDFDFD; color: #111827; }
-        .glass-card { 
+        body { background-color: #FAF9F6; color: #4A4A4A; }
+        .soft-card { 
             background: white; 
-            border-radius: 20px; 
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.04);
+            border-radius: 24px; 
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
         }
-        .btn-main {
-            background-color: #6366F1;
+        .btn-primary {
+            background-color: #8FA89B;
             color: white;
             padding: 14px 32px;
-            border-radius: 12px;
-            font-weight: 600;
+            border-radius: 50px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: 10px;
         }
-        .btn-main:hover {
-            background-color: #4F46E5;
+        .btn-primary:hover {
+            background-color: #7E9689;
             transform: translateY(-1px);
-            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 20px rgba(143, 168, 155, 0.2);
         }
-        .step-number {
+        .step-num {
             font-family: 'Crimson Pro', serif;
             font-style: italic;
-            font-size: 3rem;
+            font-size: 3.5rem;
             line-height: 1;
-            opacity: 0.1;
+            opacity: 0.08;
             position: absolute;
             top: -10px;
             left: -10px;
+            color: #2C2C2C;
         }
     </style>
 </head>
 <body class="antialiased font-sans">
 
-    <!-- NAVIGATION -->
-    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2">
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full bg-brand-cream/80 backdrop-blur-xl z-50 border-b border-black/[0.03]">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
                 <span class="font-serif text-2xl font-semibold text-brand-dark italic tracking-tight">SocialStream</span>
-                <span class="bg-brand-primary text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest mt-1">QuickAsset</span>
+                <span class="bg-brand-accent/10 text-brand-accent px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest mt-1">QuickAsset</span>
+            </a>
+
+            <div class="hidden md:flex gap-10 text-sm font-medium text-brand-text/80">
+                <a href="#how-it-works" class="hover:text-brand-accent transition-colors">How It Works</a>
+                <a href="#whats-included" class="hover:text-brand-accent transition-colors">What to Sell</a>
+                <a href="#pricing" class="hover:text-brand-accent transition-colors">Pricing</a>
             </div>
 
-            <div class="hidden md:flex gap-8 text-sm font-medium text-brand-text">
-                <a href="#how-it-works" class="hover:text-brand-primary transition-colors">How it Works</a>
-                <a href="#whats-included" class="hover:text-brand-primary transition-colors">Features</a>
-                <a href="#pricing" class="hover:text-brand-primary transition-colors">Pricing</a>
-            </div>
-
-            <div class="flex items-center gap-4">
-                <a href="#" class="text-sm font-bold text-brand-dark">Log In</a>
-                <a href="#start" class="bg-brand-dark text-white px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-gray-800 transition-all">Start Selling</a>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hidden md:block text-sm font-bold text-brand-text hover:text-brand-accent transition-colors">Log In</a>
+                <a href="#start" class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-brand-text transition-all">Start Selling</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="pt-40 pb-24 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-primaryLight text-brand-primary text-[11px] font-bold uppercase tracking-widest rounded-full mb-8">
-                <i data-lucide="zap" class="w-3 h-3"></i> No Storefront Required
+    <!-- HERO -->
+    <section class="pt-40 pb-24 px-6 relative">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accentLight text-brand-accent text-xs font-bold mb-8 animate-float">
+                <i data-lucide="zap" class="w-3 h-3"></i> Instant Digital Delivery
             </div>
             <h1 class="font-serif text-5xl md:text-7xl text-brand-dark mb-8 leading-[1.1]">
                 Sell digital products <br>
-                <span class="italic font-light text-brand-primary">in under 60 seconds.</span>
+                <span class="text-brand-accent italic font-light">in under 60 seconds.</span>
             </h1>
-            <p class="text-xl text-brand-text mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                The simplest way to monetize your files. Upload, set your price, and get a shareable link. No subscriptions, no website setup, just instant delivery.
+            <p class="text-xl text-brand-text mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                No storefront. No setup. No monthly subscriptions. Just upload your file, set your price, and get a shareable link that delivers instantly via Stripe.
             </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#start" class="btn-main text-lg">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#start" class="btn-primary text-lg px-10">
                     Start Selling Now
                 </a>
-                <p class="text-sm text-brand-text/60">No credit card required</p>
+                <a href="#how-it-works" class="text-sm font-bold text-brand-text/60 hover:text-brand-accent flex items-center gap-2">
+                    See the Workflow <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </a>
             </div>
         </div>
 
-        <!-- Hero Graphic Mockup -->
-        <div class="mt-20 max-w-3xl mx-auto relative px-4 animate-subtle-float">
-            <div class="glass-card p-6 md:p-8 border-brand-primary/10 bg-gradient-to-br from-white to-brand-primaryLight/30">
-                <div class="flex items-center justify-between mb-10">
-                    <div class="flex gap-1.5">
-                        <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
+        <!-- Preview Mockup -->
+        <div class="mt-24 max-w-3xl mx-auto relative px-4">
+            <div class="soft-card p-6 md:p-10 border-brand-sand bg-white animate-float shadow-2xl">
+                <div class="flex items-center justify-between mb-12 border-b border-brand-sand pb-4">
+                    <div class="flex gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-400/20"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-400/20"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-400/20"></div>
                     </div>
-                    <div class="text-[10px] font-bold text-brand-primary tracking-widest uppercase">QuickAsset Link Preview</div>
+                    <div class="text-[10px] font-bold text-brand-accent tracking-widest uppercase italic">Secure Checkout Link</div>
                 </div>
 
-                <div class="flex flex-col md:flex-row gap-8 items-center">
-                    <div class="w-32 h-40 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center justify-center">
-                        <i data-lucide="file-text" class="w-12 h-12 text-brand-primary/20"></i>
+                <div class="flex flex-col md:flex-row gap-10 items-center">
+                    <div class="w-32 h-44 bg-brand-cream rounded-2xl flex items-center justify-center border border-brand-sand">
+                        <i data-lucide="file-text" class="w-12 h-12 text-brand-accent/30"></i>
                     </div>
                     <div class="flex-1 text-center md:text-left">
-                        <h3 class="font-serif text-2xl mb-1">2024 Social Media Strategy Guide</h3>
-                        <p class="text-brand-text/60 text-sm mb-4">Complete PDF + Notion Template</p>
-                        <div class="text-3xl font-bold text-brand-dark mb-6">$49.00</div>
-                        <div class="w-full h-12 bg-brand-dark rounded-xl flex items-center justify-center text-white font-bold text-sm">
+                        <h3 class="font-serif text-3xl text-brand-dark mb-2">Creator OS: Notion Template</h3>
+                        <p class="text-brand-text/60 font-light mb-6">Automated content planning + CRM for creators.</p>
+                        <div class="text-4xl font-serif italic text-brand-dark mb-8">$29.00</div>
+                        <div class="w-full h-14 bg-brand-dark rounded-full flex items-center justify-center text-white font-bold tracking-tight">
                             Buy Now
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Success Notification Pop -->
-            <div class="absolute -bottom-6 -right-6 md:-right-12 glass-card p-4 flex items-center gap-4 shadow-2xl border-green-100">
-                <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-                    <i data-lucide="check" class="w-5 h-5"></i>
+            <!-- Floating Notification -->
+            <div class="absolute -bottom-10 -right-4 md:-right-10 soft-card p-5 flex items-center gap-4 bg-white border-brand-accent/20 shadow-xl">
+                <div class="w-12 h-12 bg-brand-accentLight text-brand-accent rounded-full flex items-center justify-center">
+                    <i data-lucide="check" class="w-6 h-6"></i>
                 </div>
                 <div>
-                    <div class="text-[10px] font-bold uppercase text-gray-400">New Sale</div>
-                    <div class="font-bold text-brand-dark">+$49.00 via Stripe</div>
+                    <div class="text-[10px] font-bold uppercase text-brand-accent">Sale Confirmed</div>
+                    <div class="font-bold text-brand-dark font-serif">+$29.00 Instant Payout</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PROCESS WORKFLOW -->
-    <section id="how-it-works" class="py-24 bg-brand-primaryLight/30 px-6">
+    <!-- WORKFLOW -->
+    <section id="how-it-works" class="py-32 bg-brand-sand/30 px-6 border-y border-brand-sand/50">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-20">
-                <h2 class="font-serif text-4xl text-brand-dark mb-4">Three steps to your first sale.</h2>
-                <p class="text-brand-text font-light">We handle the tech, you handle the creation.</p>
+            <div class="text-center mb-24">
+                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-4 block italic">The Simple Pipeline</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark">From idea to income.</h2>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-12">
-                <!-- Step 1 -->
-                <div class="relative glass-card p-8 group">
-                    <span class="step-number">01</span>
-                    <div class="w-14 h-14 bg-brand-primary/10 rounded-2xl flex items-center justify-center text-brand-primary mb-6 transition-transform group-hover:scale-110">
-                        <i data-lucide="upload-cloud" class="w-7 h-7"></i>
+            <div class="grid md:grid-cols-3 gap-12 relative">
+                <div class="soft-card p-10 relative group">
+                    <span class="step-num">01</span>
+                    <div class="w-16 h-16 bg-brand-accentLight rounded-2xl flex items-center justify-center text-brand-accent mb-8 group-hover:bg-brand-accent group-hover:text-white transition-all">
+                        <i data-lucide="upload-cloud" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-3">Upload File</h3>
-                    <p class="text-sm text-brand-text leading-relaxed">Drag and drop your PDF, Video, Zip, or Asset. No file size limits or complex formatting.</p>
+                    <h3 class="font-bold text-xl mb-4 text-brand-dark">Upload Your Asset</h3>
+                    <p class="text-brand-text/70 font-light leading-relaxed">Drag and drop any digital file—PDFs, videos, ZIPs, or spreadsheets. No size limits, no headache.</p>
                 </div>
 
-                <!-- Step 2 -->
-                <div class="relative glass-card p-8 group">
-                    <span class="step-number">02</span>
-                    <div class="w-14 h-14 bg-brand-primary text-white rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 shadow-lg shadow-brand-primary/20">
-                        <i data-lucide="credit-card" class="w-7 h-7"></i>
+                <div class="soft-card p-10 relative group bg-brand-dark !border-none">
+                    <span class="step-num !text-white !opacity-10">02</span>
+                    <div class="w-16 h-16 bg-brand-accent rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform shadow-lg shadow-brand-accent/20">
+                        <i data-lucide="dollar-sign" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-3">Set Price</h3>
-                    <p class="text-sm text-brand-text leading-relaxed">Connect your Stripe account in seconds. Name your product and set your price in any currency.</p>
+                    <h3 class="font-bold text-xl mb-4 text-white">Set Your Price</h3>
+                    <p class="text-white/50 font-light leading-relaxed">Connect your Stripe account instantly. Name your product and set the price. We handle the currency conversion.</p>
                 </div>
 
-                <!-- Step 3 -->
-                <div class="relative glass-card p-8 group">
-                    <span class="step-number">03</span>
-                    <div class="w-14 h-14 bg-brand-primary/10 rounded-2xl flex items-center justify-center text-brand-primary mb-6 transition-transform group-hover:scale-110">
-                        <i data-lucide="share-2" class="w-7 h-7"></i>
+                <div class="soft-card p-10 relative group">
+                    <span class="step-num">03</span>
+                    <div class="w-16 h-16 bg-brand-accentLight rounded-2xl flex items-center justify-center text-brand-accent mb-8 group-hover:bg-brand-accent group-hover:text-white transition-all">
+                        <i data-lucide="share-2" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-3">Share & Get Paid</h3>
-                    <p class="text-sm text-brand-text leading-relaxed">Share your link anywhere. We auto-deliver the file to the customer's email immediately after purchase.</p>
+                    <h3 class="font-bold text-xl mb-4 text-brand-dark">Share the Link</h3>
+                    <p class="text-brand-text/70 font-light leading-relaxed">Paste your link in bio, DMs, or emails. When they buy, the file is delivered to their inbox automatically.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTENT TYPES -->
-    <section class="py-24 px-6 bg-white">
+    <!-- WHAT YOU CAN SELL -->
+    <section id="whats-included" class="py-32 px-6 bg-white">
         <div class="max-w-5xl mx-auto">
-            <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
-                <div>
-                    <h2 class="font-serif text-4xl text-brand-dark mb-4">What can you sell?</h2>
-                    <p class="text-brand-text font-light">If you can download it, you can sell it with QuickAsset.</p>
+            <div class="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
+                <div class="max-w-xl">
+                    <h2 class="font-serif text-4xl md:text-5xl text-brand-dark mb-6 leading-tight">If you can download it, you can sell it.</h2>
+                    <p class="text-brand-text font-light text-lg">One tool for every type of digital asset. No restrictive platform categories.</p>
                 </div>
-                <div class="text-brand-primary font-bold text-sm tracking-widest uppercase">Unlimited Formats</div>
+                <div class="text-brand-accent font-bold text-xs tracking-widest uppercase italic">Unlimited Formats</div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col items-center text-center">
-                    <i data-lucide="book-open" class="w-6 h-6 text-brand-primary mb-4"></i>
-                    <span class="font-medium">E-Books</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
+                    <i data-lucide="book" class="w-8 h-8 text-brand-accent mb-4"></i>
+                    <span class="font-bold text-brand-dark">E-Books & Guides</span>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col items-center text-center">
-                    <i data-lucide="layout" class="w-6 h-6 text-brand-primary mb-4"></i>
-                    <span class="font-medium">Templates</span>
+                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
+                    <i data-lucide="layout" class="w-8 h-8 text-brand-accent mb-4"></i>
+                    <span class="font-bold text-brand-dark">Notion Templates</span>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col items-center text-center">
-                    <i data-lucide="video" class="w-6 h-6 text-brand-primary mb-4"></i>
-                    <span class="font-medium">Course Videos</span>
+                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
+                    <i data-lucide="play" class="w-8 h-8 text-brand-accent mb-4"></i>
+                    <span class="font-bold text-brand-dark">Video Training</span>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col items-center text-center">
-                    <i data-lucide="camera" class="w-6 h-6 text-brand-primary mb-4"></i>
-                    <span class="font-medium">Stock Photos</span>
+                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
+                    <i data-lucide="mic" class="w-8 h-8 text-brand-accent mb-4"></i>
+                    <span class="font-bold text-brand-dark">Audio Content</span>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col items-center text-center">
-                    <i data-lucide="music" class="w-6 h-6 text-brand-primary mb-4"></i>
-                    <span class="font-medium">Audio Files</span>
+                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
+                    <i data-lucide="file-spreadsheet" class="w-8 h-8 text-brand-accent mb-4"></i>
+                    <span class="font-medium text-brand-dark">Spreadsheets</span>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col items-center text-center">
-                    <i data-lucide="code" class="w-6 h-6 text-brand-primary mb-4"></i>
-                    <span class="font-medium">Scripts/Code</span>
+                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
+                    <i data-lucide="code" class="w-8 h-8 text-brand-accent mb-4"></i>
+                    <span class="font-medium text-brand-dark">Scripts & Code</span>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col items-center text-center">
-                    <i data-lucide="file-spreadsheet" class="w-6 h-6 text-brand-primary mb-4"></i>
-                    <span class="font-medium">Spreadsheets</span>
+                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
+                    <i data-lucide="camera" class="w-8 h-8 text-brand-accent mb-4"></i>
+                    <span class="font-medium text-brand-dark">Stock Graphics</span>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col items-center text-center">
-                    <i data-lucide="package" class="w-6 h-6 text-brand-primary mb-4"></i>
-                    <span class="font-medium">Anything Else</span>
+                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
+                    <i data-lucide="package" class="w-8 h-8 text-brand-accent mb-4"></i>
+                    <span class="font-medium text-brand-dark">ZIP Bundles</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRICING / COMPARISON -->
-    <section id="pricing" class="py-24 px-6 bg-brand-dark text-white relative overflow-hidden">
-        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <!-- PRICING -->
+    <section id="pricing" class="py-32 px-6 bg-brand-dark relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-accent rounded-full blur-[120px] -translate-y-1/2"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20 items-center relative z-10">
             <div>
-                <h2 class="font-serif text-5xl mb-8">Zero monthly fees. <br><span class="text-brand-primary italic">Pay as you grow.</span></h2>
-                <p class="text-white/60 text-lg mb-12 font-light">
-                    Stop paying for subscriptions when you're just starting out. Unlike Shopify or Gumroad, we only make money when you do.
+                <h2 class="font-serif text-5xl md:text-6xl text-white mb-8">Zero subscriptions. <br><span class="text-brand-accent italic font-light">Pay as you earn.</span></h2>
+                <p class="text-white/50 text-xl font-light mb-12 leading-relaxed">
+                    Don't let platform fees eat your profit before you've even started. QuickAsset is built for the "lean" creator.
                 </p>
                 
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center">
-                            <i data-lucide="check" class="w-4 h-4 text-brand-primary"></i>
+                <div class="space-y-8">
+                    <div class="flex items-center gap-5">
+                        <div class="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent">
+                            <i data-lucide="check" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-white/80">No $29/mo storefront fees</span>
+                        <span class="text-white/80 font-light">No monthly $29 storefront fees</span>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center">
-                            <i data-lucide="check" class="w-4 h-4 text-brand-primary"></i>
+                    <div class="flex items-center gap-5">
+                        <div class="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent">
+                            <i data-lucide="check" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-white/80">No "Plugin Hell" or design headaches</span>
+                        <span class="text-white/80 font-light">No "Plugin Hell" or design bottlenecks</span>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center">
-                            <i data-lucide="check" class="w-4 h-4 text-brand-primary"></i>
+                    <div class="flex items-center gap-5">
+                        <div class="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent">
+                            <i data-lucide="check" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-white/80">Encrypted, expiring download links</span>
+                        <span class="text-white/80 font-light">Automated file delivery via secure email</span>
                     </div>
                 </div>
             </div>
 
             <div class="relative">
-                <div class="glass-card bg-white p-10 text-center relative z-10">
-                    <div class="text-[11px] font-bold uppercase tracking-widest text-brand-primary mb-2">The Simple Model</div>
-                    <div class="text-6xl font-bold text-brand-dark mb-2">5%</div>
-                    <div class="text-brand-text/60 mb-8 uppercase text-xs font-bold">Per Transaction</div>
+                <div class="soft-card bg-white p-12 text-center relative z-10 border-none shadow-2xl">
+                    <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-accent mb-2 italic">The Fair Model</div>
+                    <div class="text-7xl font-serif italic text-brand-dark mb-2">5%</div>
+                    <div class="text-brand-text/40 mb-10 uppercase text-xs font-bold tracking-widest">Flat Fee Per Sale</div>
                     
-                    <ul class="text-left space-y-4 mb-8 text-brand-text">
-                        <li class="flex justify-between border-b border-gray-50 pb-2">
+                    <ul class="text-left space-y-5 mb-10 text-brand-text">
+                        <li class="flex justify-between border-b border-brand-sand pb-3 font-light">
                             <span>Monthly Cost</span>
                             <span class="font-bold text-brand-dark">$0</span>
                         </li>
-                        <li class="flex justify-between border-b border-gray-50 pb-2">
-                            <span>Setup Fee</span>
-                            <span class="font-bold text-brand-dark">$0</span>
+                        <li class="flex justify-between border-b border-brand-sand pb-3 font-light">
+                            <span>Unlimited Products</span>
+                            <span class="font-bold text-brand-accent">Included</span>
                         </li>
-                        <li class="flex justify-between border-b border-gray-50 pb-2">
-                            <span>Product Limit</span>
-                            <span class="font-bold text-brand-dark text-green-500">Unlimited</span>
+                        <li class="flex justify-between border-b border-brand-sand pb-3 font-light">
+                            <span>Instant Payouts</span>
+                            <span class="font-bold text-brand-dark">Via Stripe</span>
                         </li>
                     </ul>
 
-                    <a href="#start" class="btn-main w-full justify-center">Create Your First Link</a>
-                    <p class="mt-4 text-[10px] text-brand-text/40">Standard Stripe processing fees apply.</p>
+                    <a href="#start" class="btn-primary w-full justify-center py-5 text-xl shadow-none">
+                        Create Your First Link
+                    </a>
+                    <p class="mt-6 text-[10px] text-brand-text/30 uppercase font-bold tracking-tighter italic">Standard Stripe fees apply.</p>
                 </div>
-                
-                <!-- Background Decorative Blob -->
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-brand-primary blur-[120px] opacity-30 pointer-events-none"></div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-white border-t border-gray-100 py-20 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+    <footer class="bg-brand-cream border-t border-brand-sand py-24 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
             <div class="text-center md:text-left">
-                <div class="flex items-center justify-center md:justify-start gap-2 mb-4">
-                    <span class="font-serif text-2xl font-semibold text-brand-dark italic">SocialStream</span>
-                    <span class="text-brand-text/40 font-bold uppercase text-[10px] tracking-widest">QuickAsset</span>
+                <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
+                    <span class="font-serif text-3xl font-bold text-brand-dark italic">SocialStream</span>
+                    <span class="text-brand-text/30 font-bold uppercase text-[10px] tracking-[0.3em] mt-1">QuickAsset</span>
                 </div>
-                <p class="text-brand-text/50 text-sm max-w-xs">One-click digital delivery for the modern creator.</p>
+                <p class="text-brand-text/50 text-sm max-w-xs font-light leading-relaxed">Part of the SocialStream ecosystem. Designed to turn expertise into equity.</p>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-12 text-xs font-bold uppercase tracking-[0.2em] text-brand-text/40">
-                <div class="flex flex-col gap-4">
-                    <span class="text-brand-dark">Products</span>
-                    <a href="#" class="hover:text-brand-primary">Kinetics AI</a>
-                    <a href="#" class="hover:text-brand-primary underline decoration-brand-primary">QuickAsset</a>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-16 text-xs font-bold uppercase tracking-[0.2em] text-brand-text/40">
+                <div class="flex flex-col gap-6">
+                    <span class="text-brand-dark italic">The Stack</span>
+                    <a href="#" class="hover:text-brand-accent transition-colors">Kinetics AI</a>
+                    <a href="#" class="text-brand-accent underline decoration-brand-accent/20 underline-offset-8">QuickAsset</a>
                 </div>
-                <div class="flex flex-col gap-4">
-                    <span class="text-brand-dark">Support</span>
-                    <a href="#" class="hover:text-brand-primary">Help Center</a>
-                    <a href="#" class="hover:text-brand-primary">Contact</a>
+                <div class="flex flex-col gap-6">
+                    <span class="text-brand-dark italic">Support</span>
+                    <a href="#" class="hover:text-brand-accent transition-colors">Help Docs</a>
+                    <a href="#" class="hover:text-brand-accent transition-colors">Contact</a>
                 </div>
-                <div class="flex flex-col gap-4">
-                    <span class="text-brand-dark">Legal</span>
-                    <a href="#" class="hover:text-brand-primary">Privacy</a>
-                    <a href="#" class="hover:text-brand-primary">Terms</a>
+                <div class="flex flex-col gap-6">
+                    <span class="text-brand-dark italic">Connect</span>
+                    <a href="#" class="hover:text-brand-accent transition-colors">Twitter</a>
+                    <a href="#" class="hover:text-brand-accent transition-colors">LinkedIn</a>
                 </div>
             </div>
         </div>
-        <div class="max-w-6xl mx-auto mt-20 pt-8 border-t border-gray-50 text-[10px] text-center text-gray-300 uppercase tracking-widest">
-            © 2024 SocialStream Ecosystem. All Rights Reserved.
+        <div class="max-w-6xl mx-auto mt-24 pt-10 border-t border-black/[0.03] text-[10px] text-center text-brand-text/30 uppercase tracking-[0.4em] font-bold">
+            © 2024 SocialStream Ecosystem. Built for Creators.
         </div>
     </footer>
 
