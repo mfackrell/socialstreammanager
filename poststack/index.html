@@ -51,12 +51,14 @@
 
     <style>
         body { background-color: #FAF9F6; color: #4A4A4A; }
+        h1, h2, h3, h4 { letter-spacing: -0.01em; }
+        p { line-height: 1.7; }
         .soft-card { 
             background: white; 
             border-radius: 24px; 
             border: 1px solid rgba(0,0,0,0.04);
             box-shadow: 0 4px 30px rgba(0,0,0,0.02);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .btn-primary {
             background-color: #8FA89B;
@@ -69,6 +71,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            box-shadow: 0 4px 10px rgba(143, 168, 155, 0.2);
         }
         .btn-primary:hover {
             background-color: #7E9689;
@@ -81,6 +84,10 @@
             background: repeating-linear-gradient(to right, #8FA89B 0, #8FA89B 8px, transparent 8px, transparent 16px);
             z-index: 0;
         }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FAF9F6; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
     </style>
 </head>
 <body class="antialiased font-sans">
