@@ -311,25 +311,67 @@
         </div>
     </section>
 
-    <!-- CTA / PRICING SECTION -->
-    <section id="trial" class="py-32 px-6 bg-brand-dark relative overflow-hidden">
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-32 px-6 bg-brand-dark relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 pointer-events-none">
             <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-accent/20 to-transparent"></div>
         </div>
         
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h2 class="font-serif text-5xl md:text-6xl text-white mb-8">Ready to reclaim your time?</h2>
-            <p class="text-white/60 text-xl font-light mb-12 max-w-2xl mx-auto">
-                Join the engine that powers the world's most efficient creators. Start your 7-day free trial today.
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <h2 class="font-serif text-5xl md:text-6xl text-white mb-8">Flexible plans for <br><span class="text-brand-accent italic font-light">every speed of growth.</span></h2>
+            <p class="text-white/40 text-xl font-light mb-20 max-w-2xl mx-auto">
+                Simple, transparent pricing. Choose the engine that fits your goals.
             </p>
-            
-            <div class="flex flex-col items-center gap-6">
-                <button onclick="showTrialModal()" class="btn-primary !bg-brand-accent !text-white px-12 py-5 text-xl shadow-2xl">
-                    Claim Your 7-Day Free Trial
-                </button>
-                <a href="#pricing-full" class="text-white/40 text-xs font-bold uppercase tracking-widest hover:text-brand-accent transition-colors underline underline-offset-8 decoration-brand-accent/40">
-                    View Full Pricing & Packages
-                </a>
+
+            <div class="grid md:grid-cols-3 gap-8 items-stretch">
+                <!-- Starter Tier -->
+                <div class="soft-card p-10 bg-white flex flex-col text-left transition-transform hover:-translate-y-2">
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-brand-text/40 mb-2">Starter Engine</div>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="text-5xl font-serif italic text-brand-dark">$39</span>
+                        <span class="text-brand-text/40 text-sm">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> 1 Social Platform</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> 12 Posts / Month</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Standard AI Synthesis</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Email Support</li>
+                    </ul>
+                    <button onclick="showTrialModal()" class="btn-primary w-full py-4 border-2 border-brand-accent/20 bg-transparent !text-brand-accent hover:bg-brand-accentLight">Start Pilot</button>
+                </div>
+
+                <!-- Professional Tier (Featured) -->
+                <div class="soft-card p-10 bg-white flex flex-col text-left relative overflow-hidden ring-4 ring-brand-accent/20 transition-transform hover:-translate-y-2">
+                    <div class="absolute top-0 right-0 bg-brand-accent text-white px-5 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-bl-xl shadow-sm">Popular</div>
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-brand-accent mb-2">Pro Engine</div>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="text-5xl font-serif italic text-brand-dark">$89</span>
+                        <span class="text-brand-text/40 text-sm">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> All Platforms (IG, FB)</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Unlimited Content Sync</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Custom Brand Voice</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Advanced Visual Gen</li>
+                    </ul>
+                    <button onclick="showTrialModal()" class="btn-primary w-full py-4">Start Free Trial</button>
+                </div>
+
+                <!-- Scale Tier -->
+                <div class="soft-card p-10 bg-white flex flex-col text-left transition-transform hover:-translate-y-2">
+                    <div class="text-[10px] font-bold uppercase tracking-widest text-brand-dark mb-2">Agency Scale</div>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="text-5xl font-serif italic text-brand-dark">$249</span>
+                        <span class="text-brand-text/40 text-sm">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> 5 Independent Brands</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Dedicated Account Manager</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Custom Templates</li>
+                        <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Priority Strategy Support</li>
+                    </ul>
+                    <button onclick="showTrialModal()" class="btn-primary w-full py-4 bg-brand-dark hover:bg-black">Scale Now</button>
+                </div>
             </div>
 
             <div class="mt-20 pt-10 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -352,7 +394,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- FOOTER -->
     <footer class="bg-brand-cream border-t border-brand-sand py-20 px-6">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
