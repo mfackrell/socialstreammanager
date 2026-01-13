@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <!-- Icons: Lucide (Softened) -->
+    <!-- Icons: Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <!-- Tailwind CSS -->
@@ -25,13 +25,23 @@
                 extend: {
                     colors: {
                         brand: {
-                            cream: '#FAF9F6',   // Main Background (Off-white)
-                            sand: '#F2EFE9',    // Secondary Background
-                            text: '#4A4A4A',    // Soft Charcoal
-                            dark: '#2C2C2C',    // Darker Text
-                            accent: '#8FA89B',  // Muted Sage
+                            cream: '#FAF9F6',   
+                            sand: '#F2EFE9',    
+                            text: '#4A4A4A',    
+                            dark: '#2C2C2C',    
+                            accent: '#8FA89B',  
                             accentLight: '#E3EBE6',
-                            rose: '#D4A5A5',    // Soft Rose (Secondary Accent)
+                            rose: '#D4A5A5',    
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
                         }
                     }
                 }
@@ -40,290 +50,357 @@
     </script>
 
     <style>
-        /* Soft, Natural Feel */
         body { background-color: #FAF9F6; color: #4A4A4A; }
-        
-        /* Typography Tweaks */
         h1, h2, h3, h4 { letter-spacing: -0.01em; }
         p { line-height: 1.7; }
         
-        /* Soft Shadows */
         .soft-card { 
             background: white; 
-            border-radius: 16px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03); 
-            border: 1px solid rgba(0,0,0,0.02);
+            border-radius: 20px; 
+            box-shadow: 0 4px 30px rgba(0,0,0,0.02); 
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Button Styles */
+        .action-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-5px);
+            border-color: #8FA89B;
+            box-shadow: 0 10px 25px rgba(143, 168, 155, 0.1);
+        }
+
+        .action-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #8FA89B;
+            transition: width 0.3s ease;
+        }
+        .action-card:hover::after { width: 100%; }
+
         .btn-primary {
             background-color: #8FA89B;
             color: white;
-            padding: 14px 32px;
+            padding: 12px 24px;
             border-radius: 50px;
             font-family: 'Lato', sans-serif;
             font-weight: 700;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(143, 168, 155, 0.3);
+            box-shadow: 0 4px 10px rgba(143, 168, 155, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.875rem;
         }
-        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 15px rgba(143, 168, 155, 0.4); background-color: #7E9689; }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: #8FA89B;
-            border: 2px solid #8FA89B;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-family: 'Lato', sans-serif;
-            font-weight: 700;
-            transition: all 0.2s ease;
-        }
-        .btn-secondary:hover { background-color: #F2F7F5; }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 15px rgba(143, 168, 155, 0.3); background-color: #7E9689; }
 
-        /* Custom Scrollbar */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(44, 44, 44, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pipeline-node {
+            position: relative;
+            z-index: 2;
+        }
+
+        .pipeline-connector {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, #8FA89B 0, #8FA89B 10px, transparent 10px, transparent 20px);
+            opacity: 0.2;
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #FAF9F6; }
         ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
     </style>
 </head>
 <body class="antialiased font-sans">
 
+    <!-- Custom Modal -->
+    <div id="demoModal" class="modal px-6" onclick="closeModal()">
+        <div class="bg-white p-10 rounded-3xl max-w-sm w-full text-center soft-card border-none shadow-2xl" onclick="event.stopPropagation()">
+            <div id="modalIcon" class="w-20 h-20 mx-auto mb-6 bg-brand-accentLight rounded-full flex items-center justify-center text-brand-accent">
+                <i data-lucide="sparkles" class="w-10 h-10"></i>
+            </div>
+            <h3 id="modalTitle" class="font-serif text-3xl text-brand-dark mb-3">Heading</h3>
+            <p id="modalBody" class="text-brand-text mb-8 text-lg font-light">Content goes here.</p>
+            <button onclick="closeModal()" class="btn-primary w-full py-4 text-lg">Activate Tool</button>
+        </div>
+    </div>
+
     <!-- NAV -->
-    <nav class="fixed top-0 w-full bg-brand-cream/90 backdrop-blur-md z-50 border-b border-black/5">
-        <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
-            
-            <!-- Logo -->
+    <nav class="fixed top-0 w-full bg-brand-cream/80 backdrop-blur-xl z-50 border-b border-black/[0.03]">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 group">
-                <span class="font-serif text-xl font-semibold text-brand-dark italic tracking-wide">SocialStream</span>
+                <span class="font-serif text-2xl font-semibold text-brand-dark italic tracking-tight">SocialStream</span>
             </a>
 
-            <!-- Desktop Links -->
-            <div class="hidden md:flex gap-8 text-sm font-medium text-brand-text">
+            <div class="hidden md:flex gap-10 text-sm font-medium text-brand-text/80">
                 <a href="#how-it-works" class="hover:text-brand-accent transition-colors">How It Works</a>
-                <a href="#tools" class="hover:text-brand-accent transition-colors">The Tools</a>
+                <a href="#tools" class="hover:text-brand-accent transition-colors">The Ecosystem</a>
                 <a href="#pricing" class="hover:text-brand-accent transition-colors">Pricing</a>
             </div>
 
-            <!-- Action -->
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-6">
                 <a href="#" class="hidden md:block text-sm font-bold text-brand-text hover:text-brand-accent transition-colors">Log In</a>
-                <a href="#" class="btn-primary text-xs py-2 px-6 shadow-none">Get Started</a>
+                <a href="#tools" class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-brand-text transition-all">Start Free Trial</a>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="pt-40 pb-24 px-6 relative overflow-hidden">
-        <!-- Soft Background Blob -->
-        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-sand rounded-full blur-[100px] opacity-60 pointer-events-none -z-10 translate-x-1/2 -translate-y-1/2"></div>
+    <section class="pt-48 pb-32 px-6 relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-sand rounded-full blur-[120px] opacity-40 -z-10 translate-x-1/3 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-accentLight rounded-full blur-[100px] opacity-30 -z-10 -translate-x-1/2 translate-y-1/2"></div>
 
-        <div class="max-w-3xl mx-auto text-center relative z-10">
-            
-            <!-- Headline -->
-            <h1 class="font-serif text-5xl md:text-6xl text-brand-dark mb-6 leading-tight">
-                Turn your content into a <br>
-                <span class="text-brand-accent italic">business asset.</span>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/10 text-brand-accent text-xs font-bold mb-8 animate-float">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
+                </span>
+                New: AI-Driven Content Compounding
+            </div>
+
+            <h1 class="font-serif text-6xl md:text-8xl text-brand-dark mb-8 leading-[1.1] tracking-tight">
+                Turn your thoughts into <br>
+                <span class="text-brand-accent italic font-light underline decoration-brand-accent/20 underline-offset-8">scalable assets.</span>
             </h1>
             
-            <!-- Subhead -->
-            <p class="text-lg md:text-xl text-brand-text mb-10 max-w-xl mx-auto font-light">
-                Stop letting your hard work disappear in the feed. 
-                We connect your tools so your content is automatically posted, reused, and monetized—without the tech headache.
+            <p class="text-xl md:text-2xl text-brand-text mb-16 max-w-2xl mx-auto font-light leading-relaxed">
+                We automate the "busy work" of creation. One rough idea becomes a month of social posts, newsletters, and products.
             </p>
 
-            <!-- Hero Anchor -->
-            <div class="inline-block bg-white/50 backdrop-blur-sm px-6 py-3 rounded-xl border border-brand-accent/20 mb-10 text-sm text-brand-text/80">
-                🌱 Start with automated posting. Grow into newsletters and products.
-            </div>
-
-            <!-- CTAs -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#module-kinetics" class="btn-primary flex items-center gap-2">
-                    Automate Social Content
-                </a>
-                <a href="#tools" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1 transition-all"> 
-                    See all tools <i data-lucide="arrow-down" class="w-4 h-4"></i>
-                </a>
-            </div>
-            
-            <!-- Reassurance -->
-            <div class="mt-12 flex flex-wrap justify-center gap-6 text-sm text-brand-text/60">
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Cancel anytime</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> No forced bundles</span>
-                <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Start simple</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- WHAT YOU GET (The Strip) -->
-    <section class="bg-white py-12 border-y border-brand-sand">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-center md:text-left">
+            <!-- IMPROVED ACTION GRID -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-20">
                 
-                <!-- Input -->
-                <div class="flex flex-col items-center md:items-start">
-                    <span class="text-xs font-bold text-brand-accent uppercase tracking-widest mb-3">You Provide</span>
-                    <div class="bg-brand-cream border border-brand-sand px-6 py-4 rounded-xl text-brand-dark font-serif text-lg shadow-sm">
-                        One LinkedIn Post ✍️
+                <button onclick="showMessage('Content Kinetics', 'Turns rough notes into 30 days of social content.')" class="action-card group">
+                    <div class="w-10 h-10 bg-brand-accentLight rounded-lg flex items-center justify-center text-brand-accent mb-4 group-hover:bg-brand-accent group-hover:text-white transition-colors">
+                        <i data-lucide="zap" class="w-5 h-5"></i>
                     </div>
-                </div>
+                    <div class="font-bold text-brand-dark text-sm mb-1">Automate Socials</div>
+                    <div class="text-xs text-brand-text/60 font-light">Kinetics AI Engine</div>
+                </button>
 
-                <!-- Arrow -->
-                <i data-lucide="arrow-right" class="hidden md:block w-6 h-6 text-brand-text/30"></i>
-                <i data-lucide="arrow-down" class="md:hidden w-6 h-6 text-brand-text/30"></i>
-
-                <!-- Output -->
-                <div class="flex flex-col items-center md:items-start">
-                    <span class="text-xs font-bold text-brand-accent uppercase tracking-widest mb-3">We Create</span>
-                    <div class="flex flex-wrap justify-center gap-3">
-                        <div class="bg-brand-sand/50 px-4 py-3 rounded-lg text-brand-dark font-medium text-sm">
-                            5 Social Posts
-                        </div>
-                        <div class="bg-brand-sand/50 px-4 py-3 rounded-lg text-brand-dark font-medium text-sm">
-                            1 Newsletter
-                        </div>
-                        <div class="bg-brand-sand/50 px-4 py-3 rounded-lg text-brand-dark font-medium text-sm">
-                            1 Blog Draft
-                        </div>
+                <button onclick="showMessage('QuickAsset', 'Launch a digital store from your expertise.')" class="action-card group bg-brand-dark !border-none">
+                    <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-brand-accent mb-4 group-hover:bg-brand-accent group-hover:text-white transition-colors">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                     </div>
-                </div>
+                    <div class="font-bold text-white text-sm mb-1">Sell Products</div>
+                    <div class="text-xs text-white/40 font-light">QuickAsset Storefront</div>
+                </button>
 
+                <button onclick="showMessage('PostStack', 'Social posts to newsletters, automatically.')" class="action-card group">
+                    <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center text-purple-400 mb-4 group-hover:bg-purple-400 group-hover:text-white transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </div>
+                    <div class="font-bold text-brand-dark text-sm mb-1">Sync Newsletters</div>
+                    <div class="text-xs text-brand-text/60 font-light">PostStack Sync</div>
+                </button>
+
+                <button onclick="showMessage('TalkStack', 'Voice & video into long-form blogs.')" class="action-card group">
+                    <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center text-orange-400 mb-4 group-hover:bg-orange-400 group-hover:text-white transition-colors">
+                        <i data-lucide="mic" class="w-5 h-5"></i>
+                    </div>
+                    <div class="font-bold text-brand-dark text-sm mb-1">Generate Blogs</div>
+                    <div class="text-xs text-brand-text/60 font-light">TalkStack Transcribe</div>
+                </button>
+
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-12 text-xs font-bold uppercase tracking-widest text-brand-text/30">
+                <span class="flex items-center gap-2"><i data-lucide="shield" class="w-4 h-4"></i> Secure</span>
+                <span class="flex items-center gap-2"><i data-lucide="layers" class="w-4 h-4"></i> Modular</span>
+                <span class="flex items-center gap-2"><i data-lucide="cpu" class="w-4 h-4"></i> AI-Powered</span>
             </div>
         </div>
     </section>
 
-    <!-- THE PROBLEM (Story) -->
-    <section id="how-it-works" class="py-24 px-6 bg-brand-cream">
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            
-            <!-- Text -->
-            <div>
-                <h2 class="font-serif text-4xl text-brand-dark mb-6">Most content is posted and forgotten.</h2>
-                <div class="space-y-6 text-brand-text text-lg font-light">
-                    <p>
-                        You write a post, hit publish, and move on. The effort evaporates instantly. It feels like a treadmill.
-                    </p>
-                    <p>
-                        Social Stream Manager isn't just a scheduler. It’s a <strong>calm system</strong> that ensures every piece of content works harder for you—turning into newsletters, blogs, and products automatically.
-                    </p>
-                </div>
-            </div>
-            
-            <!-- Soft Visual -->
-            <div class="relative">
-                <div class="absolute inset-0 bg-brand-rose/20 rounded-full blur-3xl transform scale-75"></div>
-                <div class="soft-card p-8 relative z-10">
-                    <div class="flex items-center gap-4 mb-6 pb-6 border-b border-gray-100">
-                        <div class="w-12 h-12 bg-brand-sand rounded-full flex items-center justify-center">
-                            <i data-lucide="pen-tool" class="w-5 h-5 text-brand-text"></i>
-                        </div>
-                        <div>
-                            <div class="text-sm font-bold text-brand-dark">Input</div>
-                            <div class="text-xs text-brand-text/60">Your original idea</div>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-4 pl-6 border-l-2 border-brand-accent/30">
-                        <div class="flex items-center gap-3 text-sm text-brand-text">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-accent"></i>
-                            <span>Sent to LinkedIn & X</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-brand-text">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-accent"></i>
-                            <span>Added to Newsletter Draft</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-brand-text">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-accent"></i>
-                            <span>Saved to Product Library</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- THE TOOLS (Vertical Flow - Hierarchy Flipped) -->
-    <section id="tools" class="py-24 px-6 bg-white">
-        <div class="max-w-3xl mx-auto">
-            
+    <!-- REDESIGNED TRANSFORMATION PIPELINE -->
+    <section class="bg-brand-dark py-24 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 relative">
             <div class="text-center mb-16">
-                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-2 block">Modular & Flexible</span>
-                <h2 class="font-serif text-4xl text-brand-dark mb-4">Choose Your Tools</h2>
-                <p class="text-brand-text text-lg font-light">
-                    Every tool works on its own. Use one to fix a specific problem, or combine them. <strong>No bundles required.</strong>
+                <h2 class="font-serif text-white text-4xl mb-4">The Magic Transformation</h2>
+                <p class="text-white/40 text-lg font-light">How we turn a single thought into a business ecosystem.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-7 items-center gap-4 lg:gap-0">
+                
+                <!-- Input Node -->
+                <div class="lg:col-span-2 pipeline-node">
+                    <div class="bg-white p-8 rounded-3xl shadow-2xl transform lg:-rotate-2">
+                        <span class="text-[10px] font-bold text-brand-accent uppercase tracking-tighter mb-4 block">Origin</span>
+                        <div class="flex items-start gap-4 mb-6">
+                            <div class="w-12 h-12 shrink-0 bg-brand-accentLight rounded-2xl flex items-center justify-center text-brand-accent">
+                                <i data-lucide="brain-circuit"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-xl text-brand-dark leading-tight">The Rough Idea</h4>
+                                <p class="text-xs text-brand-text/60 mt-1">A voice note or a 2-sentence prompt.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-2 w-full bg-brand-sand rounded-full"></div>
+                            <div class="h-2 w-2/3 bg-brand-sand rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connector -->
+                <div class="hidden lg:block lg:col-span-1 text-center">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-full border border-white/10 text-brand-accent animate-pulse">
+                        <i data-lucide="chevrons-right"></i>
+                    </div>
+                </div>
+
+                <!-- Processor Node -->
+                <div class="lg:col-span-1 pipeline-node py-8 lg:py-0">
+                    <div class="w-20 h-20 mx-auto bg-brand-accent rounded-full flex items-center justify-center text-white shadow-[0_0_40px_rgba(143,168,155,0.4)] relative">
+                        <i data-lucide="sparkles" class="w-8 h-8"></i>
+                        <div class="absolute inset-0 rounded-full border border-brand-accent animate-ping opacity-20"></div>
+                    </div>
+                </div>
+
+                <!-- Connector -->
+                <div class="hidden lg:block lg:col-span-1 text-center">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-full border border-white/10 text-brand-accent">
+                        <i data-lucide="chevrons-right"></i>
+                    </div>
+                </div>
+
+                <!-- Output Node -->
+                <div class="lg:col-span-2 pipeline-node">
+                    <div class="space-y-4 transform lg:rotate-2">
+                        <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 backdrop-blur-sm group hover:bg-white/10 transition-colors">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
+                                <i data-lucide="share-2" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-white text-sm font-bold">30 Social Posts</div>
+                                <div class="text-white/40 text-xs">Formatted for LinkedIn, X, IG</div>
+                            </div>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 backdrop-blur-sm group hover:bg-white/10 transition-colors">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-white text-sm font-bold">1 Weekly Newsletter</div>
+                                <div class="text-white/40 text-xs">Curated and ready to send</div>
+                            </div>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 backdrop-blur-sm group hover:bg-white/10 transition-colors">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                                <i data-lucide="coins" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-white text-sm font-bold">1 Digital Product</div>
+                                <div class="text-white/40 text-xs">Checklist or Mini-Guide</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- THE TOOLS (ECOSYSTEM) -->
+    <section id="tools" class="py-32 px-6 bg-white">
+        <div class="max-w-5xl mx-auto">
+            
+            <div class="text-center mb-24">
+                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-4 block italic">The Architecture</span>
+                <h2 class="font-serif text-5xl md:text-6xl text-brand-dark mb-8">Compound your influence.</h2>
+                <p class="text-brand-text text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                    Pick your entry point. Whether you want to fix your social presence or launch a store, our tools talk to each other so you never repeat yourself.
                 </p>
             </div>
 
-            <div class="space-y-8">
+            <div class="grid md:grid-cols-2 gap-12">
                 
-                <!-- Tool 1: Automatic Social Posting -->
-                <div id="module-kinetics" class="soft-card p-8 md:p-10 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
-                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center shrink-0 text-blue-400">
+                <!-- Tool: Kinetics -->
+                <div class="soft-card p-12 hover:border-brand-accent/40 flex flex-col group">
+                    <div class="w-14 h-14 bg-brand-accentLight rounded-2xl flex items-center justify-center text-brand-accent mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="zap" class="w-7 h-7"></i>
                     </div>
-                    <div>
-                        <h3 class="font-serif text-2xl text-brand-dark mb-1">Automatic Social Posting</h3>
-                        <div class="text-xs uppercase tracking-wider font-bold text-brand-text/40 mb-4">Powered by Content Kinetics</div>
-                        <p class="text-brand-text mb-6">
-                            Writes, schedules, and posts content for you across LinkedIn, X, and more. Keep your accounts active without spending hours writing every day.
-                        </p>
-                        <button onclick="simulateDemo('Content Kinetics')" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1">
-                            See It Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
-                    </div>
+                    <h3 class="font-serif text-3xl text-brand-dark mb-4">Content Kinetics</h3>
+                    <p class="text-brand-text/70 mb-10 text-lg font-light leading-relaxed">
+                        The heartbeat of your operation. It extracts your unique voice from rough inputs and schedules a consistent stream of high-value social content.
+                    </p>
+                    <button onclick="showMessage('Content Kinetics', 'Automated writing and scheduling activated.')" class="btn-outline !py-3 !px-8 !justify-start w-fit group-hover:bg-brand-accent group-hover:text-white group-hover:border-brand-accent transition-all">
+                        Launch Kinetics <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                    </button>
                 </div>
 
-                <!-- Tool 2: Turn Posts into Newsletters -->
-                <div id="module-post" class="soft-card p-8 md:p-10 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
-                    <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center shrink-0 text-purple-400">
+                <!-- Tool: QuickAsset -->
+                <div class="soft-card p-12 bg-brand-dark text-white hover:shadow-2xl transition-all flex flex-col group border-none">
+                    <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-brand-accent mb-8 group-hover:scale-110 transition-transform">
+                        <i data-lucide="shopping-bag" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-serif text-3xl mb-4 text-brand-accent">QuickAsset</h3>
+                    <p class="text-white/60 mb-10 text-lg font-light leading-relaxed">
+                        Stop giving it all away for free. We help you package your workflows and insights into digital products that sell while you sleep.
+                    </p>
+                    <button onclick="showMessage('QuickAsset', 'Storefront setup ready.')" class="btn-primary !bg-brand-accent !py-3 !px-8 w-fit shadow-none">
+                        Sell Your Expertise <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Tool: PostStack -->
+                <div class="soft-card p-12 hover:border-purple-100 flex flex-col group">
+                    <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-400 mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="mail" class="w-7 h-7"></i>
                     </div>
-                    <div>
-                        <h3 class="font-serif text-2xl text-brand-dark mb-1">Turn Posts into Newsletters</h3>
-                        <div class="text-xs uppercase tracking-wider font-bold text-brand-text/40 mb-4">Powered by PostStack</div>
-                        <p class="text-brand-text mb-6">
-                            Turns your social media posts into a weekly newsletter. It automatically finds your best content and formats it for email, so you don't have to write twice.
-                        </p>
-                        <button onclick="simulateDemo('PostStack')" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1">
-                            See It Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
-                    </div>
+                    <h3 class="font-serif text-3xl text-brand-dark mb-4">PostStack</h3>
+                    <p class="text-brand-text/70 mb-10 text-lg font-light leading-relaxed">
+                        Ownership over the algorithm. PostStack automatically turns your trending social content into a high-converting weekly newsletter.
+                    </p>
+                    <button onclick="showMessage('PostStack', 'Newsletter automation enabled.')" class="btn-outline !py-3 !px-8 !justify-start w-fit group-hover:bg-purple-400 group-hover:text-white group-hover:border-purple-400 transition-all">
+                        Sync Newsletter <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                    </button>
                 </div>
 
-                <!-- Tool 3: Turn Video into Articles -->
-                <div id="module-talk" class="soft-card p-8 md:p-10 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
-                    <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center shrink-0 text-orange-400">
+                <!-- Tool: TalkStack -->
+                <div class="soft-card p-12 hover:border-orange-100 flex flex-col group">
+                    <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-400 mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="mic" class="w-7 h-7"></i>
                     </div>
-                    <div>
-                        <h3 class="font-serif text-2xl text-brand-dark mb-1">Turn Video into Articles</h3>
-                        <div class="text-xs uppercase tracking-wider font-bold text-brand-text/40 mb-4">Powered by TalkStack</div>
-                        <p class="text-brand-text mb-6">
-                            Upload a video or audio recording, get a clean blog post or article back. Turns rambling conversations into structured reading material.
-                        </p>
-                        <button onclick="simulateDemo('TalkStack')" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1">
-                            See It Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Tool 4: Create Instant Products -->
-                <div id="module-asset" class="soft-card p-8 md:p-10 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
-                    <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center shrink-0 text-emerald-400">
-                        <i data-lucide="sparkles" class="w-7 h-7"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-serif text-2xl text-brand-dark mb-1">Create Instant Products</h3>
-                        <div class="text-xs uppercase tracking-wider font-bold text-brand-text/40 mb-4">Powered by QuickAsset</div>
-                        <p class="text-brand-text mb-6">
-                            Turn your best ideas into simple digital products like PDFs or guides. Includes a checkout link so you can start selling immediately.
-                        </p>
-                        <button onclick="simulateDemo('QuickAsset')" class="text-brand-accent font-bold hover:underline underline-offset-4 flex items-center gap-1">
-                            See It Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
-                    </div>
+                    <h3 class="font-serif text-3xl text-brand-dark mb-4">TalkStack</h3>
+                    <p class="text-brand-text/70 mb-10 text-lg font-light leading-relaxed">
+                        The transcription bridge. Upload voice memos, podcast clips, or videos to generate SEO-optimized articles and blog posts in minutes.
+                    </p>
+                    <button onclick="showMessage('TalkStack', 'Video-to-Blog conversion ready.')" class="btn-outline !py-3 !px-8 !justify-start w-fit group-hover:bg-orange-400 group-hover:text-white group-hover:border-orange-400 transition-all">
+                        Convert Talk to Text <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                    </button>
                 </div>
 
             </div>
@@ -331,55 +408,86 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-brand-cream border-t border-brand-sand py-16">
-        <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-4 gap-12 text-sm text-brand-text/80">
-            
-            <div class="col-span-1 md:col-span-1">
-                <span class="font-serif text-lg font-bold text-brand-dark italic block mb-4">SocialStream</span>
-                <p class="font-light leading-relaxed">
-                    Designed for compounding leverage. <br>
-                    &copy; 2024
-                </p>
+    <footer class="bg-brand-cream border-t border-brand-sand py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-16 mb-16">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="font-serif text-3xl font-bold text-brand-dark italic block mb-6">SocialStream</span>
+                    <p class="font-light leading-relaxed text-sm text-brand-text/50">
+                        The ecosystem for compounding your knowledge. Designed for creators who value their time.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-brand-dark mb-6 uppercase text-[10px] tracking-[0.2em]">Product</h4>
+                    <ul class="space-y-4 text-sm text-brand-text/60">
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">Kinetics Engine</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">QuickAsset Shop</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">PostStack Mail</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">TalkStack AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-brand-dark mb-6 uppercase text-[10px] tracking-[0.2em]">Resources</h4>
+                    <ul class="space-y-4 text-sm text-brand-text/60">
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">Success Stories</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">API Docs</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">Community</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-brand-dark mb-6 uppercase text-[10px] tracking-[0.2em]">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-black/5 flex items-center justify-center hover:bg-white transition-all text-brand-text/40 hover:text-brand-accent">
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-black/5 flex items-center justify-center hover:bg-white transition-all text-brand-text/40 hover:text-brand-accent">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-black/5 flex items-center justify-center hover:bg-white transition-all text-brand-text/40 hover:text-brand-accent">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-
-            <div>
-                <h4 class="font-bold text-brand-dark mb-4 uppercase text-xs tracking-wider">The Tools</h4>
-                <ul class="space-y-3">
-                    <li><a href="#" class="hover:text-brand-accent">Automatic Posting</a></li>
-                    <li><a href="#" class="hover:text-brand-accent">Newsletter Builder</a></li>
-                    <li><a href="#" class="hover:text-brand-accent">Video to Blog</a></li>
-                    <li><a href="#" class="hover:text-brand-accent">Instant Products</a></li>
-                </ul>
+            <div class="pt-10 border-t border-black/[0.03] flex flex-col md:flex-row justify-between items-center gap-6">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-brand-text/30">&copy; 2024 SocialStream Manager. Designed for compounding.</span>
+                <div class="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-brand-text/30">
+                    <a href="#" class="hover:text-brand-text">Privacy</a>
+                    <a href="#" class="hover:text-brand-text">Terms</a>
+                    <a href="#" class="hover:text-brand-text">Cookies</a>
+                </div>
             </div>
-
-            <div>
-                <h4 class="font-bold text-brand-dark mb-4 uppercase text-xs tracking-wider">Support</h4>
-                <ul class="space-y-3">
-                    <li><a href="#" class="hover:text-brand-accent">Help Center</a></li>
-                    <li><a href="#" class="hover:text-brand-accent">Contact Us</a></li>
-                    <li><a href="#" class="hover:text-brand-accent">Pricing</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-bold text-brand-dark mb-4 uppercase text-xs tracking-wider">Login</h4>
-                <ul class="space-y-3">
-                    <li><button onclick="simulateLogin()" class="hover:text-brand-accent text-left">Member Access</button></li>
-                </ul>
-            </div>
-
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
 
-        function simulateLogin() {
-            alert('Redirecting to secure login...');
+        function showMessage(title, body) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = body;
+            const modal = document.getElementById('demoModal');
+            modal.style.display = 'flex';
+            
+            const iconEl = document.getElementById('modalIcon');
+            if (title === 'QuickAsset') {
+                iconEl.className = "w-20 h-20 mx-auto mb-6 bg-brand-accent text-white rounded-full flex items-center justify-center";
+                iconEl.innerHTML = '<i data-lucide="shopping-bag" class="w-10 h-10"></i>';
+            } else if (title === 'Content Kinetics') {
+                iconEl.className = "w-20 h-20 mx-auto mb-6 bg-brand-accentLight text-brand-accent rounded-full flex items-center justify-center";
+                iconEl.innerHTML = '<i data-lucide="zap" class="w-10 h-10"></i>';
+            } else if (title === 'PostStack') {
+                iconEl.className = "w-20 h-20 mx-auto mb-6 bg-purple-50 text-purple-400 rounded-full flex items-center justify-center";
+                iconEl.innerHTML = '<i data-lucide="mail" class="w-10 h-10"></i>';
+            } else {
+                iconEl.className = "w-20 h-20 mx-auto mb-6 bg-orange-50 text-orange-400 rounded-full flex items-center justify-center";
+                iconEl.innerHTML = '<i data-lucide="mic" class="w-10 h-10"></i>';
+            }
+            lucide.createIcons();
         }
-        
-        function simulateDemo(product) {
-             alert('Opening demo for ' + product);
+
+        function closeModal() {
+            document.getElementById('demoModal').style.display = 'none';
         }
     </script>
 </body>
