@@ -51,12 +51,14 @@
 
     <style>
         body { background-color: #FAF9F6; color: #4A4A4A; }
+        h1, h2, h3, h4 { letter-spacing: -0.01em; }
+        p { line-height: 1.7; }
         .soft-card { 
             background: white; 
             border-radius: 24px; 
             border: 1px solid rgba(0,0,0,0.04);
             box-shadow: 0 4px 30px rgba(0,0,0,0.02);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .btn-primary {
             background-color: #8FA89B;
@@ -69,6 +71,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            box-shadow: 0 4px 10px rgba(143, 168, 155, 0.2);
         }
         .btn-primary:hover {
             background-color: #7E9689;
@@ -81,6 +84,10 @@
             background: repeating-linear-gradient(to right, #8FA89B 0, #8FA89B 8px, transparent 8px, transparent 16px);
             z-index: 0;
         }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FAF9F6; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
     </style>
 </head>
 <body class="antialiased font-sans">
@@ -96,12 +103,12 @@
             <div class="hidden md:flex gap-10 text-sm font-medium text-brand-text/80">
                 <a href="#how-it-works" class="hover:text-brand-accent transition-colors">How It Works</a>
                 <a href="#features" class="hover:text-brand-accent transition-colors">Features</a>
-                <a href="#pricing" class="hover:text-brand-accent transition-colors">Pricing</a>
+                <a href="/pricing.html" class="hover:text-brand-accent transition-colors">Pricing</a>
             </div>
 
             <div class="flex items-center gap-6">
-                <a href="#" class="hidden md:block text-sm font-bold text-brand-text hover:text-brand-accent transition-colors">Log In</a>
-                <a href="#pricing" class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-brand-text transition-all">Start Free Trial</a>
+                <a href="/notify.html" class="hidden md:block text-sm font-bold text-brand-text hover:text-brand-accent transition-colors">Log In</a>
+                <a href="/notify.html" class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-brand-text transition-all">Start Free Trial</a>
             </div>
         </div>
     </nav>
@@ -124,7 +131,7 @@
                 PostStack turns your Facebook updates and blog feeds into beautiful, branded newsletters automatically. No copy-pasting, no design work, just consistent connection.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a href="#pricing" class="btn-primary text-lg px-10">
+                <a href="/notify.html" class="btn-primary text-lg px-10">
                     Start Your 14-Day Free Trial
                 </a>
                 <a href="#how-it-works" class="text-sm font-bold text-brand-text/60 hover:text-brand-accent flex items-center gap-2">
@@ -296,7 +303,7 @@
                         <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Bi-Weekly Newsletter</li>
                         <li class="flex items-center gap-3 text-sm font-light"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Standard Templates</li>
                     </ul>
-                    <a href="#" class="btn-primary w-full py-4 border-2 border-brand-accent/20 bg-transparent !text-brand-accent hover:bg-brand-accentLight">Get Started</a>
+                    <a href="/notify.html" class="btn-primary w-full py-4 border-2 border-brand-accent/20 bg-transparent !text-brand-accent hover:bg-brand-accentLight">Get Started</a>
                 </div>
 
                 <!-- Growth Tier (Featured) -->
