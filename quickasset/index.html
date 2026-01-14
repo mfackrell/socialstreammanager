@@ -50,12 +50,14 @@
 
     <style>
         body { background-color: #FAF9F6; color: #4A4A4A; }
+        h1, h2, h3, h4 { letter-spacing: -0.01em; }
+        p { line-height: 1.7; }
         .soft-card { 
             background: white; 
             border-radius: 24px; 
             border: 1px solid rgba(0,0,0,0.04);
             box-shadow: 0 4px 30px rgba(0,0,0,0.02);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .btn-primary {
             background-color: #8FA89B;
@@ -68,6 +70,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            box-shadow: 0 4px 10px rgba(143, 168, 155, 0.2);
         }
         .btn-primary:hover {
             background-color: #7E9689;
@@ -85,6 +88,10 @@
             left: -10px;
             color: #2C2C2C;
         }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FAF9F6; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
     </style>
 </head>
 <body class="antialiased font-sans">
@@ -100,7 +107,7 @@
             <div class="hidden md:flex gap-10 text-sm font-medium text-brand-text/80">
                 <a href="#how-it-works" class="hover:text-brand-accent transition-colors">How It Works</a>
                 <a href="#whats-included" class="hover:text-brand-accent transition-colors">What to Sell</a>
-                <a href="#pricing" class="hover:text-brand-accent transition-colors">Pricing</a>
+                <a href="/pricing.html" class="hover:text-brand-accent transition-colors">Pricing</a>
             </div>
 
             <div class="flex items-center gap-6">
