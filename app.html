@@ -315,6 +315,12 @@
                                 redirect_uri: REDIRECT_URI // Add this line
                             })
                     });
+                    if (!response.ok) {
+                        const errorText = await response.text(); // Get the HTML error page text
+                        console.error('Server Error:', errorText);
+                        return;
+                    }
+                    
                     const data = await response.json();
 
                     if (data.stripe_user_id) {
