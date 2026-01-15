@@ -1,227 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickAsset | Seller Terminal</title>
+    <title>QuickAsset Terminal | SocialStream</title>
     
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = {
-        theme: {
-          fontFamily: {
-            sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', 'Inter', '"Segoe UI"', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          extend: {
-            colors: {
-              slate: { 750: '#2d3748', 850: '#1a202c', 900: '#0f172a', 950: '#020617' },
-              brand: {
-                orange: '#38bdf8',
-                dark: '#020617',
-                surface: '#0f172a',
-                border: '#1f2937',
-              }
-            },
-            backgroundImage: {
-              'btn-gradient': 'radial-gradient(circle at 0 0, #4ade80 0, #38bdf8 40%, #2563eb 80%)',
-              'brand-gradient': 'conic-gradient(from 210deg, #38bdf8, #4ade80, #a855f7, #38bdf8)',
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    serif: ['Crimson Pro', 'serif'],
+                    sans: ['Lato', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FAF9F6',   
+                            sand: '#F2EFE9',    
+                            text: '#4A4A4A',    
+                            dark: '#2C2C2C',    
+                            accent: '#8FA89B',  
+                            accentLight: '#E3EBE6',
+                            rose: '#D4A5A5',    
+                        }
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     </script>
-    
+
     <style>
-        body {
-          margin: 0;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
-          background: #020617;
-          color: #e5e7eb;
-          line-height: 1.6;
-          -webkit-font-smoothing: antialiased;
+        body { background-color: #FAF9F6; color: #4A4A4A; }
+        h1, h2, h3, h4 { letter-spacing: -0.01em; }
+        p { line-height: 1.7; }
+        .soft-card { 
+            background: white; 
+            border-radius: 32px; 
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .bg-grid {
-          background:
-            radial-gradient(circle at top left, rgba(56,189,248,0.14) 0, transparent 40%),
-            radial-gradient(circle at bottom right, rgba(94,234,212,0.1) 0, transparent 40%),
-            linear-gradient(to bottom, #020617 0, #020617 60%, #020617 100%);
+        .btn-primary {
+            background-color: #8FA89B;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(143, 168, 155, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: #7E9689;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(143, 168, 155, 0.25);
+        }
+        .input-field {
+            background: #FAF9F6;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .input-field:focus {
+            background: white;
+            border-color: #8FA89B;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(143,168,155,0.1);
         }
     </style>
-    <script defer src="https://vercel.com/analytics/script.js"></script>
 </head>
-<body class="bg-grid text-slate-100 min-h-screen flex flex-col">
+<body class="antialiased font-sans min-h-screen flex flex-col">
 
-    <nav class="w-full border-b border-brand-border bg-brand-dark/90 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-brand-orange rounded-sm flex items-center justify-center font-mono font-bold text-brand-dark text-xl">Q</div>
-                <span class="font-bold text-sm tracking-wider uppercase text-slate-300">QuickAsset <span class="text-brand-orange">Terminal</span></span>
-            </div>
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full bg-brand-cream/80 backdrop-blur-xl z-50 border-b border-black/[0.03]">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <span class="font-serif text-2xl font-semibold text-brand-dark italic tracking-tight">SocialStream</span>
+                <span class="bg-brand-accent/10 text-brand-accent px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest mt-1">Terminal</span>
+            </a>
             <div class="flex items-center gap-4">
-                <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded bg-brand-surface border border-brand-border">
-                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <span class="text-xs font-mono text-slate-400">SYSTEM: ONLINE</span>
+                <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accentLight border border-brand-accent/20">
+                    <div class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></div>
+                    <span class="text-[10px] font-bold text-brand-accent uppercase tracking-widest">System Online</span>
                 </div>
-                <div class="w-8 h-8 bg-slate-700 rounded-full border border-slate-600 flex items-center justify-center text-xs font-bold">ME</div>
+                <div class="w-10 h-10 bg-brand-sand rounded-full border border-black/5 flex items-center justify-center text-xs font-bold text-brand-text">ME</div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-1 w-full max-w-4xl mx-auto p-6 md:p-12">
+    <!-- MAIN APP CONTAINER -->
+    <main class="flex-1 pt-32 pb-24 px-6 max-w-5xl mx-auto w-full">
         
+        <!-- Payout Status Banner -->
         <section class="mb-12">
-            <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl backdrop-blur-sm">
-                <div class="flex items-start gap-4">
-                    <div class="p-3 bg-slate-900 rounded border border-slate-700">
-                        <i data-lucide="credit-card" class="w-6 h-6 text-slate-400"></i>
+            <div class="soft-card p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 bg-white">
+                <div class="flex items-start gap-5">
+                    <div class="p-4 bg-brand-accentLight rounded-2xl">
+                        <i data-lucide="credit-card" class="w-6 h-6 text-brand-accent"></i>
                     </div>
                     <div>
-                        <h2 class="text-lg font-bold text-white">Payout Destination</h2>
-                        <p class="text-sm text-slate-400 mt-1" id="stripe-status-text">Link Stripe to enable asset generation.</p>
+                        <h2 class="font-serif text-xl text-brand-dark italic">Payout Destination</h2>
+                        <p class="text-sm text-brand-text/60 mt-0.5 font-light" id="stripe-status-text">Connect Stripe to enable instant asset generation.</p>
                     </div>
                 </div>
                 
-                <button id="btn-connect-stripe" onclick="handleStripeConnect()" class="group relative overflow-hidden bg-slate-900 hover:bg-slate-800 text-white border border-slate-600 hover:border-slate-500 px-6 py-3 rounded font-mono text-sm transition-all">
-                    <span class="relative z-10 flex items-center gap-2">
-                        <i data-lucide="link-2" class="w-4 h-4"></i> Connect Stripe
-                    </span>
+                <button id="btn-connect-stripe" onclick="handleStripeConnect()" class="btn-primary shadow-none bg-brand-dark hover:bg-brand-text">
+                    <i data-lucide="link-2" class="w-4 h-4"></i> Connect Stripe
                 </button>
 
-                <div id="stripe-connected-badge" class="hidden flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/30 px-4 py-2 rounded text-emerald-400 text-xs font-mono uppercase tracking-wider">
+                <div id="stripe-connected-badge" class="hidden flex items-center gap-3 bg-brand-accentLight border border-brand-accent/20 px-5 py-2.5 rounded-full text-brand-accent text-xs font-bold uppercase tracking-widest">
                     <i data-lucide="check-circle" class="w-4 h-4"></i>
                     Account Active
                 </div>
             </div>
         </section>
 
-        <section id="asset-panel" class="opacity-50 pointer-events-none transition-opacity duration-500">
-            <div class="flex items-center justify-between mb-6">
-                <h1 class="text-2xl font-bold tracking-tight">New Asset Configuration</h1>
-                <span class="text-[10px] font-mono text-sky-400 bg-slate-900/80 px-2 py-1 rounded-full border border-slate-600/80">draft_mode</span>
+        <!-- Configuration Panel -->
+        <section id="asset-panel" class="opacity-40 pointer-events-none transition-all duration-700">
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="font-serif text-3xl md:text-4xl text-brand-dark">New Asset Configuration</h1>
+                <span class="text-[10px] font-bold text-brand-accent bg-brand-accentLight px-3 py-1 rounded-full border border-brand-accent/10 uppercase tracking-widest">Draft Mode</span>
             </div>
 
-            <div class="grid md:grid-cols-[1.5fr_1fr] gap-8">
-                <div class="space-y-6">
+            <div class="grid md:grid-cols-[1.6fr_1fr] gap-10">
+                <div class="space-y-8">
+                    <!-- Upload Zone -->
                     <div>
-                        <label class="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2">01 // Asset Payload</label>
-                        <div id="drop-zone" class="h-48 border-2 border-dashed border-slate-700 hover:border-brand-orange/50 bg-slate-900/50 rounded-lg flex flex-col items-center justify-center cursor-pointer transition-all group relative overflow-hidden">
+                        <label class="block text-[10px] font-bold text-brand-text/40 uppercase tracking-[0.2em] mb-3 ml-1">01 // Asset Payload</label>
+                        <div id="drop-zone" class="h-56 border-2 border-dashed border-brand-sand bg-brand-cream/50 rounded-[32px] flex flex-col items-center justify-center cursor-pointer transition-all hover:bg-white hover:border-brand-accent/40 group relative overflow-hidden">
                             <div id="drop-content-default" class="flex flex-col items-center z-10">
-                                <div class="p-3 bg-brand-surface rounded-full mb-3 group-hover:scale-110 transition-transform border border-brand-border">
-                                    <i data-lucide="upload-cloud" class="w-6 h-6 text-slate-400 group-hover:text-brand-orange transition-colors"></i>
+                                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-5 shadow-sm border border-brand-sand group-hover:scale-110 transition-transform">
+                                    <i data-lucide="upload-cloud" class="w-8 h-8 text-brand-accent/40 group-hover:text-brand-accent transition-colors"></i>
                                 </div>
-                                <p class="text-sm font-medium text-slate-300">Drag file or click to browse</p>
-                                <p class="text-xs text-slate-500 mt-1 font-mono">MP4, PDF, ZIP (Max 2GB)</p>
+                                <p class="text-sm font-bold text-brand-dark">Click or drag your asset</p>
+                                <p class="text-xs text-brand-text/40 mt-1 font-light italic">MP4, PDF, ZIP (Max 2GB)</p>
                             </div>
-                            <div id="drop-content-uploaded" class="hidden flex-col items-center z-10 w-full px-8">
-                                <i data-lucide="file-check" class="w-8 h-8 text-emerald-500 mb-2"></i>
-                                <p id="file-name" class="text-sm font-mono text-white truncate w-full text-center">filename.zip</p>
-                                <p class="text-xs text-emerald-500 mt-1">Upload Complete</p>
+                            <div id="drop-content-uploaded" class="hidden flex-col items-center z-10 w-full px-10">
+                                <i data-lucide="file-check" class="w-10 h-10 text-brand-accent mb-3"></i>
+                                <p id="file-name" class="text-sm font-bold text-brand-dark truncate w-full text-center">filename.zip</p>
+                                <p class="text-[10px] text-brand-accent font-bold uppercase tracking-widest mt-1">Upload Complete</p>
                             </div>
-                            <div id="upload-progress" class="absolute bottom-0 left-0 h-1 bg-brand-orange transition-all duration-300 w-0"></div>
+                            <div id="upload-progress" class="absolute bottom-0 left-0 h-1.5 bg-brand-accent transition-all duration-300 w-0"></div>
                         </div>
                         <input type="file" id="file-input" class="hidden">
                     </div>
 
-                    <div class="grid grid-cols-1 gap-6">
+                    <!-- Inputs -->
+                    <div class="grid gap-8">
                         <div>
-                            <label class="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2">02 // Designation</label>
-                            <input type="text" id="input-title" placeholder="e.g. Q3 Marketing Strategy" class="w-full bg-brand-surface border border-brand-border rounded p-4 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition-all">
+                            <label class="block text-[10px] font-bold text-brand-text/40 uppercase tracking-[0.2em] mb-3 ml-1">02 // Designation</label>
+                            <input type="text" id="input-title" placeholder="e.g. Masterclass Template" class="w-full rounded-2xl p-5 text-brand-dark placeholder:text-brand-text/30 input-field font-serif italic text-lg shadow-inner">
                         </div>
-                    </div>
 
-                    <div>
-                         <label class="flex items-center justify-between text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2">
-                            <span>03 // Targeted Delivery</span>
-                            <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">OPTIONAL</span>
-                        </label>
-                        <div class="relative group">
-                            <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-brand-orange transition-colors"></i>
-                            <input type="email" id="input-email" placeholder="client@company.com" class="w-full bg-brand-surface border border-brand-border rounded p-4 pl-11 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition-all font-mono">
+                        <div>
+                            <label class="flex items-center justify-between text-[10px] font-bold text-brand-text/40 uppercase tracking-[0.2em] mb-3 ml-1">
+                                <span>03 // Target Buyer</span>
+                                <span class="text-[9px] bg-brand-sand px-2 py-0.5 rounded-full text-brand-text/60 italic lowercase">Optional</span>
+                            </label>
+                            <div class="relative group">
+                                <i data-lucide="mail" class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-text/30 group-focus-within:text-brand-accent transition-colors"></i>
+                                <input type="email" id="input-email" placeholder="client@company.com" class="w-full pl-12 pr-5 py-4 rounded-2xl input-field text-sm font-light shadow-inner">
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-col h-full">
-                        <div class="bg-slate-900/80 border border-slate-700 rounded-lg p-6 flex-1 flex flex-col">
-                        <label class="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-4">Valuation</label>
-                        <div class="relative mb-8">
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-lg font-light">$</span>
-                            <input type="number" id="input-price" placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded p-4 pl-8 text-3xl font-mono font-bold text-white placeholder:text-slate-700 focus:outline-none focus:border-brand-orange transition-all">
+                <!-- Price/Action Card -->
+                <div class="flex flex-col">
+                    <div class="soft-card p-10 bg-white border-none shadow-xl flex-1 flex flex-col">
+                        <label class="block text-[10px] font-bold text-brand-text/40 uppercase tracking-[0.2em] mb-6 text-center">Valuation</label>
+                        
+                        <div class="relative mb-10 text-center">
+                            <span class="absolute left-2 top-1/2 -translate-y-1/2 text-brand-text/20 text-2xl font-serif italic">$</span>
+                            <input type="number" id="input-price" placeholder="0.00" class="w-full bg-transparent border-b border-brand-sand py-4 text-6xl font-serif italic text-brand-dark placeholder:text-brand-sand focus:outline-none focus:border-brand-accent text-center transition-all">
                         </div>
-                        <div class="mt-auto">
-                            <div class="bg-slate-900/50 rounded p-4 mb-4 border border-slate-800">
-                                <div class="flex justify-between text-xs text-slate-400 mb-2 font-mono">
+
+                        <div class="mt-auto space-y-4">
+                            <div class="bg-brand-cream rounded-2xl p-6 border border-brand-sand">
+                                <div class="flex justify-between text-xs text-brand-text/50 mb-3 font-light">
                                     <span>Platform Fee (5%)</span>
-                                    <span id="fee-calc">$0.00</span>
+                                    <span id="fee-calc" class="font-bold">$0.00</span>
                                 </div>
-                                <div class="flex justify-between text-sm text-emerald-400 font-bold font-mono border-t border-slate-700 pt-2">
-                                    <span>Net Revenue</span>
-                                    <span id="net-calc">$0.00</span>
+                                <div class="flex justify-between text-base text-brand-accent font-bold border-t border-brand-sand/50 pt-3">
+                                    <span class="font-serif italic text-brand-dark">Net Revenue</span>
+                                    <span id="net-calc" class="font-serif text-lg">$0.00</span>
                                 </div>
                             </div>
-                                <button id="btn-generate" onclick="generateAsset()" class="w-full bg-btn-gradient text-[#020617] font-semibold py-4 rounded-full shadow-lg shadow-sky-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2 hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed">
+
+                            <button id="btn-generate" onclick="generateAsset()" class="w-full btn-primary justify-center text-lg py-5 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
                                 <i data-lucide="zap" class="w-5 h-5"></i>
-                                Generate Asset Link
+                                Create Secure Link
                             </button>
                         </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div id="modal-success" class="fixed inset-0 bg-brand-dark/90 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-            <div class="bg-brand-surface border border-slate-600 rounded-lg shadow-2xl max-w-md w-full p-8 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-brand-orange"></div>
-                <div class="text-center mb-6">
-                    <div class="w-16 h-16 bg-brand-orange/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand-orange/20">
-                        <i data-lucide="check" class="w-8 h-8 text-brand-orange"></i>
+        <!-- Success Modal -->
+        <div id="modal-success" class="fixed inset-0 bg-brand-dark/80 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
+            <div class="soft-card bg-white max-w-md w-full p-10 relative overflow-hidden text-center shadow-2xl">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-brand-accent"></div>
+                
+                <div class="w-20 h-20 bg-brand-accentLight rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-accent/20 animate-bounce">
+                    <i data-lucide="check" class="w-10 h-10 text-brand-accent"></i>
+                </div>
+                
+                <h3 class="font-serif text-3xl text-brand-dark italic mb-2">Asset Deployed.</h3>
+                <p class="text-sm text-brand-text/50 font-light mb-8">Your secure link is ready for transaction.</p>
+                
+                <div class="bg-brand-cream border border-brand-sand rounded-2xl p-5 mb-8 text-left">
+                    <p class="text-[9px] text-brand-text/40 uppercase font-bold tracking-widest mb-3">Unique Checkout URL</p>
+                    <div class="flex items-center justify-between gap-4">
+                        <a id="generated-link" href="#" target="_blank" class="text-brand-accent font-bold text-sm truncate hover:underline transition-colors">...</a>                        
+                        <button id="btn-copy" class="text-brand-text/30 hover:text-brand-accent transition-colors flex-shrink-0">
+                            <i data-lucide="copy" class="w-5 h-5"></i>
+                        </button>
                     </div>
-                    <h3 class="text-xl font-bold text-white">Asset Deployed</h3>
-                    <p class="text-sm text-slate-400 mt-1">Ready for transaction.</p>
                 </div>
-                <div class="bg-slate-900 border border-slate-700 rounded p-4 mb-6">
-                    <p class="text-[10px] text-slate-500 uppercase font-mono mb-2">Secure Link</p>
-                    <div class="flex items-center justify-between gap-2">
-                    <a id="generated-link" href="#" target="_blank" class="text-emerald-400 font-mono text-sm truncate hover:underline hover:text-emerald-300 transition-colors">...</a>                        
-                    <button id="btn-copy" class="text-slate-400 hover:text-white transition-colors">
-                        <i data-lucide="copy" class="w-4 h-4"></i>
-                    </button>
+
+                <div id="email-confirm-msg" class="hidden bg-brand-accentLight border border-brand-accent/20 rounded-2xl p-4 mb-8 flex items-start gap-4 text-left">
+                    <i data-lucide="mail-check" class="w-5 h-5 text-brand-accent mt-0.5"></i>
+                    <div class="text-xs text-brand-accent font-medium leading-relaxed">
+                        <span class="font-bold">Sent:</span> Link and confirmation invoice emailed to <span id="confirm-email-addr" class="underline"></span>
                     </div>
                 </div>
-                <div id="email-confirm-msg" class="hidden bg-emerald-900/20 border border-emerald-500/20 rounded p-3 mb-6 flex items-start gap-3">
-                    <i data-lucide="mail-check" class="w-4 h-4 text-emerald-500 mt-0.5"></i>
-                    <div class="text-xs text-emerald-400"><span class="font-bold">Sent:</span> Invoice emailed directly to <span id="confirm-email-addr" class="underline"></span></div>
-                </div>
-                <button onclick="resetForm()" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded transition-colors text-sm">Create New Asset</button>
+
+                <button onclick="resetForm()" class="text-brand-text/40 hover:text-brand-dark text-xs font-bold uppercase tracking-widest border-b border-transparent hover:border-brand-dark pb-1 transition-all">Create Another Link</button>
             </div>
         </div>
     </main>
 
+    <!-- FOOTER -->
+    <footer class="bg-brand-cream border-t border-brand-sand py-12 px-6 mt-auto">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-2">
+                <span class="font-serif text-xl font-bold text-brand-dark italic">SocialStream</span>
+                <span class="text-brand-text/30 font-bold uppercase text-[9px] tracking-[0.3em] mt-1">Ecosystem</span>
+            </div>
+            <div class="text-[10px] text-brand-text/40 uppercase font-bold tracking-widest">
+                © 2024 SocialStream Ecosystem. Built for Creators.
+            </div>
+        </div>
+    </footer>
+
     <script type="module">
-        // --- 0. REQUIRED: IMPORT VERCEL BLOB CLIENT ---
         import { upload } from 'https://esm.sh/@vercel/blob/client';
 
-        // --- 1. CONFIGURATION ---
         const STRIPE_CLIENT_ID = 'ca_TTJhaOfvv4bclxzQigX2cG6X1kUJyjTj'; 
-        const REDIRECT_URI = 'https://quickasset.vercel.app/app.html';
+        const REDIRECT_URI = window.location.origin + window.location.pathname;
 
-        // Initialize Icons
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
+        if (typeof lucide !== 'undefined') lucide.createIcons();
 
-        // State (Only change: Added fileObject)
         let state = { stripeConnected: false, stripeAccountId: null, fileUploaded: false, fileObject: null, price: 0, title: '', email: '' };
 
-        // Elements
         const stripeBtn = document.getElementById('btn-connect-stripe');
         const stripeBadge = document.getElementById('stripe-connected-badge');
         const stripeText = document.getElementById('stripe-status-text');
@@ -232,8 +285,6 @@
         const titleInput = document.getElementById('input-title');
         const emailInput = document.getElementById('input-email');
         
-        // --- STRIPE CONNECT LOGIC ---
-        // REQUIRED CHANGE: Attached to window because Modules have their own scope
         window.handleStripeConnect = function() {
             stripeBtn.disabled = true;
             stripeBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Redirecting...`;
@@ -243,12 +294,8 @@
             window.location.href = stripeUrl;
         }
 
-        // --- HANDLE RETURN & EXCHANGE TOKEN ---
         window.onload = async function() {
             if (typeof lucide !== 'undefined') lucide.createIcons();
-            
-            // NOTE: Reverted to your original "non-persistent" logic per request
-            // No localStorage check here.
             
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('code')) {
@@ -267,16 +314,15 @@
                     const data = await response.json();
 
                     if (data.stripe_user_id) {
-                        console.log("Connected Account ID:", data.stripe_user_id);
                         state.stripeConnected = true;
                         state.stripeAccountId = data.stripe_user_id;
 
-                        // Update UI
                         stripeBadge.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i> Account Active`;
                         if (typeof lucide !== 'undefined') lucide.createIcons();
-                        stripeText.textContent = "Payouts enabled via Stripe Express.";
-                        stripeText.classList.add('text-emerald-500');
-                        assetPanel.classList.remove('opacity-50', 'pointer-events-none');
+                        stripeText.textContent = "Payouts enabled via Stripe Connect.";
+                        stripeText.classList.remove('text-brand-text/60');
+                        stripeText.classList.add('text-brand-accent');
+                        assetPanel.classList.remove('opacity-40', 'pointer-events-none');
                     } else {
                         alert('Connection failed: ' + JSON.stringify(data));
                         stripeBtn.classList.remove('hidden');
@@ -284,36 +330,31 @@
                     }
                 } catch (err) {
                     console.error(err);
-                    alert('Error connecting to backend.');
                     stripeBtn.classList.remove('hidden');
                     stripeBadge.classList.add('hidden');
                 }
             }
         };
 
-        // --- FILE UPLOAD LOGIC ---
         dropZone.addEventListener('click', () => fileInput.click());
-        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-brand-orange', 'bg-slate-800'); });
-        dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('border-brand-orange', 'bg-slate-800'); });
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-brand-accent', 'bg-white'); });
+        dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('border-brand-accent', 'bg-white'); });
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
-            dropZone.classList.remove('border-brand-orange', 'bg-slate-800');
+            dropZone.classList.remove('border-brand-accent', 'bg-white');
             if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
         });
         fileInput.addEventListener('change', (e) => { if (e.target.files.length) handleFile(e.target.files[0]); });
 
         function handleFile(file) {
-            // REQUIRED CHANGE: We must store the file object to upload it later
             state.fileObject = file;
-
             const progressBar = document.getElementById('upload-progress');
             progressBar.style.width = '10%';
             let width = 10;
             const interval = setInterval(() => {
-                // Reverted to your original timing (100ms)
                 if (width >= 100) { clearInterval(interval); finishUpload(file); } 
                 else { width += 10; progressBar.style.width = width + '%'; }
-            }, 100); 
+            }, 80); 
         }
 
         function finishUpload(file) {
@@ -326,7 +367,6 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        // --- CALCULATOR LOGIC ---
         priceInput.addEventListener('input', (e) => {
             const val = parseFloat(e.target.value) || 0;
             state.price = val;
@@ -336,33 +376,24 @@
             document.getElementById('net-calc').textContent = '$' + net.toFixed(2);
         });
 
-        // --- GENERATE LOGIC (NEW: BLOB UPLOAD) ---
-        // REQUIRED CHANGE: Attached to window
         window.generateAsset = async function() {
             state.title = titleInput.value; 
             state.email = emailInput.value;
             
-            // Validation
-            if (!state.fileUploaded || !state.fileObject) { dropZone.classList.add('border-red-500'); setTimeout(() => dropZone.classList.remove('border-red-500'), 500); return; }
-            if (!state.title) { titleInput.classList.add('border-red-500'); titleInput.focus(); return; }
-            if (state.price <= 0) { priceInput.classList.add('border-red-500'); priceInput.focus(); return; }
-            if (!state.stripeAccountId) { alert("Error: No account ID found. Please reconnect Stripe."); return; }
+            if (!state.fileUploaded) { dropZone.classList.add('animate-shake'); setTimeout(() => dropZone.classList.remove('animate-shake'), 500); return; }
+            if (!state.title) { titleInput.focus(); return; }
+            if (state.price <= 0) { priceInput.focus(); return; }
 
             const btn = document.getElementById('btn-generate');
             
             try {
-                // STEP 1: UPLOAD TO VERCEL BLOB (New Functionality)
-                btn.innerHTML = `<i data-lucide="upload-cloud" class="w-5 h-5 animate-spin"></i> Uploading File...`;
+                btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Processing...`;
                 if (typeof lucide !== 'undefined') lucide.createIcons();
 
                 const newBlob = await upload(state.fileObject.name, state.fileObject, {
                     access: 'public',
                     handleUploadUrl: '/api/upload-url',
                 });
-
-                // STEP 2: CREATE PAYMENT LINK (Pass the URL)
-                btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Creating Link...`;
-                if (typeof lucide !== 'undefined') lucide.createIcons();
 
                 const response = await fetch('/api/create-payment-link', {
                     method: 'POST',
@@ -376,26 +407,21 @@
                 });
 
                 const data = await response.json();
-                
-                if (data.url) {
-                    showSuccess(data.url);
-                } else {
-                    alert("Error creating link: " + (data.error || "Unknown error"));
-                }
+                if (data.url) showSuccess(data.url);
+                else alert("Error: " + (data.error || "Unknown"));
+
             } catch (error) {
                 console.error(error);
                 alert("Failed: " + error.message);
             }
             
-            // Reset button
-            btn.innerHTML = `<i data-lucide="zap" class="w-5 h-5"></i> Generate Asset Link`;
+            btn.innerHTML = `<i data-lucide="zap" class="w-5 h-5"></i> Create Secure Link`;
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
         function showSuccess(url) {
             const modal = document.getElementById('modal-success');
             const linkCode = document.getElementById('generated-link');
-            
             linkCode.textContent = url;
             linkCode.href = url;
 
@@ -403,7 +429,6 @@
             if (state.email) { 
                 emailMsg.classList.remove('hidden'); 
                 document.getElementById('confirm-email-addr').textContent = state.email;
-                document.getElementById('email-confirm-msg').classList.remove('hidden');
             } else { 
                 emailMsg.classList.add('hidden'); 
             }
@@ -413,24 +438,19 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
 
             const copyBtn = document.getElementById('btn-copy');
-            // Reverted to your original Logic (removed cloneNode)
-            // Note: This relies on the original behavior where we assume
-            // this function doesn't run multiple times without a page reload
-            // (or that duplicate listeners are acceptable/handled by reload)
-            copyBtn.addEventListener('click', () => {
+            copyBtn.onclick = () => {
                 const link = document.getElementById('generated-link').textContent;
                 navigator.clipboard.writeText(link).then(() => {
-                    copyBtn.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>`;
+                    copyBtn.innerHTML = `<i data-lucide="check" class="w-5 h-5 text-brand-accent"></i>`;
                     if (typeof lucide !== 'undefined') lucide.createIcons();
                     setTimeout(() => {
-                        copyBtn.innerHTML = `<i data-lucide="copy" class="w-4 h-4"></i>`;
+                        copyBtn.innerHTML = `<i data-lucide="copy" class="w-5 h-5"></i>`;
                         if (typeof lucide !== 'undefined') lucide.createIcons();
-                    }, 1200);
+                    }, 2000);
                 });
-            });
+            };
         }
 
-        // REQUIRED CHANGE: Attached to window
         window.resetForm = function() {
             document.getElementById('modal-success').classList.add('hidden');
             document.getElementById('modal-success').classList.remove('flex');
