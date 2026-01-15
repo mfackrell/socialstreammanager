@@ -307,7 +307,7 @@
                 if (typeof lucide !== 'undefined') lucide.createIcons();
 
                 try {
-                    const response = await fetch('/api/exchange-token', {
+                    const response = await fetch('/quickasset/api/exchange-token', {
                         method: 'POST',
                         body: JSON.stringify({ code: tempCode })
                     });
@@ -392,10 +392,10 @@
 
                 const newBlob = await upload(state.fileObject.name, state.fileObject, {
                     access: 'public',
-                    handleUploadUrl: '/api/upload-url',
+                    handleUploadUrl: '/quickasset/api/upload-url',
                 });
 
-                const response = await fetch('/api/create-payment-link', {
+                const response = await fetch('/quickasset/api/create-payment-link', {
                     method: 'POST',
                     body: JSON.stringify({
                         title: state.title,
