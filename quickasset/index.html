@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickAsset | Sell Digital Products Instantly</title>
     
-    <!-- Typography: Crimson Pro & Lato -->
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <!-- Icons: Lucide -->
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <!-- Tailwind CSS -->
@@ -54,10 +54,10 @@
         p { line-height: 1.7; }
         .soft-card { 
             background: white; 
-            border-radius: 24px; 
+            border-radius: 32px; 
             border: 1px solid rgba(0,0,0,0.04);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.02);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .btn-primary {
             background-color: #8FA89B;
@@ -70,12 +70,12 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 4px 10px rgba(143, 168, 155, 0.2);
+            box-shadow: 0 4px 15px rgba(143, 168, 155, 0.2);
         }
         .btn-primary:hover {
             background-color: #7E9689;
             transform: translateY(-1px);
-            box-shadow: 0 10px 20px rgba(143, 168, 155, 0.2);
+            box-shadow: 0 10px 25px rgba(143, 168, 155, 0.25);
         }
         .step-num {
             font-family: 'Crimson Pro', serif;
@@ -89,285 +89,320 @@
             color: #2C2C2C;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #FAF9F6; }
-        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
+        /* Interactive Elements */
+        .tab-active { background-color: #8FA89B; color: white; }
+        .input-field {
+            background: rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .input-field:focus {
+            background: white;
+            border-color: #8FA89B;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(143,168,155,0.1);
+        }
     </style>
 </head>
 <body class="antialiased font-sans">
 
-    <!-- NAV -->
+    <!-- NAVIGATION -->
     <nav class="fixed top-0 w-full bg-brand-cream/80 backdrop-blur-xl z-50 border-b border-black/[0.03]">
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="https://socialstreammanager.com" class="flex items-center gap-2 group">
+            <a href="#" class="flex items-center gap-2 group">
                 <span class="font-serif text-2xl font-semibold text-brand-dark italic tracking-tight">SocialStream</span>
                 <span class="bg-brand-accent/10 text-brand-accent px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest mt-1">QuickAsset</span>
             </a>
 
             <div class="hidden md:flex gap-10 text-sm font-medium text-brand-text/80">
-                <a href="#how-it-works" class="hover:text-brand-accent transition-colors">How It Works</a>
-                <a href="#whats-included" class="hover:text-brand-accent transition-colors">What to Sell</a>
-                <a href="/pricing.html" class="hover:text-brand-accent transition-colors">Pricing</a>
+                <a href="#how-it-works" class="hover:text-brand-accent transition-colors">Workflow</a>
+                <a href="#demo" class="hover:text-brand-accent transition-colors">Live Demo</a>
+                <a href="#pricing" class="hover:text-brand-accent transition-colors">Pricing</a>
             </div>
 
             <div class="flex items-center gap-6">
-                <a href="/notify.html" class="hidden md:block text-sm font-bold text-brand-text hover:text-brand-accent transition-colors">Log In</a>
-                <a href="#start" class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-brand-text transition-all">Start Selling</a>
+                <a href="#" class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-brand-text transition-all">Start Selling</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="pt-40 pb-24 px-6 relative">
-        <div class="max-w-5xl mx-auto text-center">
+    <!-- HERO SECTION -->
+    <section class="pt-40 pb-24 px-6 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accentLight text-brand-accent text-xs font-bold mb-8 animate-float">
-                <i data-lucide="zap" class="w-3 h-3"></i> Instant Digital Delivery
+                <i data-lucide="zap" class="w-3 h-3"></i> Upload → Link → Get Paid
             </div>
             <h1 class="font-serif text-5xl md:text-7xl text-brand-dark mb-8 leading-[1.1]">
-                Sell digital products <br>
-                <span class="text-brand-accent italic font-light">in under 60 seconds.</span>
+                Sell single digital files <br>
+                <span class="text-brand-accent italic font-light">without building a store.</span>
             </h1>
             <p class="text-xl text-brand-text mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-                No storefront. No setup. No monthly subscriptions. Just upload your file, set your price, and get a shareable link that delivers instantly via Stripe.
+                The dead-simple "digital cash register" for consultants and creators. 
+                No storefront, no subscriptions, and no configuration hell. Just your asset and a link.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a href="#start" class="btn-primary text-lg px-10">
-                    Start Selling Now
+                <a href="#demo" class="btn-primary text-lg px-10">
+                    Try the Demo
                 </a>
                 <a href="#how-it-works" class="text-sm font-bold text-brand-text/60 hover:text-brand-accent flex items-center gap-2">
-                    See the Workflow <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    See How It Works <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </a>
             </div>
         </div>
+    </section>
 
-        <!-- Preview Mockup -->
-        <div class="mt-24 max-w-3xl mx-auto relative px-4">
-            <div class="soft-card p-6 md:p-10 border-brand-sand bg-white animate-float shadow-2xl">
-                <div class="flex items-center justify-between mb-12 border-b border-brand-sand pb-4">
-                    <div class="flex gap-2">
-                        <div class="w-3 h-3 rounded-full bg-red-400/20"></div>
-                        <div class="w-3 h-3 rounded-full bg-yellow-400/20"></div>
-                        <div class="w-3 h-3 rounded-full bg-green-400/20"></div>
-                    </div>
-                    <div class="text-[10px] font-bold text-brand-accent tracking-widest uppercase italic">Secure Checkout Link</div>
+    <!-- INTERACTIVE DEMO -->
+    <section id="demo" class="py-24 px-6 bg-brand-sand/20">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-2 block italic">Experience the Flow</span>
+                <h2 class="font-serif text-4xl text-brand-dark">Two sides of the same coin.</h2>
+            </div>
+
+            <div class="flex justify-center mb-10">
+                <div class="bg-white p-1 rounded-full border border-black/5 flex gap-1 shadow-sm">
+                    <button onclick="switchView('creator')" id="tab-creator" class="px-6 py-2 rounded-full text-xs font-bold tab-active transition-all">Creator: Create Link</button>
+                    <button onclick="switchView('buyer')" id="tab-buyer" class="px-6 py-2 rounded-full text-xs font-bold transition-all text-brand-text/60 hover:text-brand-accent">Buyer: Checkout View</button>
                 </div>
+            </div>
 
-                <div class="flex flex-col md:flex-row gap-10 items-center">
-                    <div class="w-32 h-44 bg-brand-cream rounded-2xl flex items-center justify-center border border-brand-sand">
-                        <i data-lucide="file-text" class="w-12 h-12 text-brand-accent/30"></i>
+            <div class="relative min-h-[500px]">
+                <!-- CREATOR VIEW -->
+                <div id="view-creator" class="soft-card p-8 md:p-12 animate-in fade-in duration-500">
+                    <div id="creator-step-1">
+                        <div class="flex justify-between items-center mb-8">
+                            <h3 class="font-serif text-2xl text-brand-dark italic">Upload your asset</h3>
+                            <div class="flex gap-1.5"><div class="w-2 h-2 bg-brand-accent rounded-full"></div><div class="w-2 h-2 bg-brand-sand rounded-full"></div></div>
+                        </div>
+                        <div onclick="nextCreatorStep()" class="group border-2 border-dashed border-brand-accent/20 bg-brand-cream rounded-3xl p-16 text-center cursor-pointer hover:border-brand-accent/50 hover:bg-white transition-all">
+                            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                                <i data-lucide="upload-cloud" class="w-8 h-8 text-brand-accent"></i>
+                            </div>
+                            <p class="font-bold text-brand-dark mb-1">Click or drag a file here</p>
+                            <p class="text-sm text-brand-text/50 font-light">PDF, ZIP, MP4, or Notion Links</p>
+                        </div>
                     </div>
-                    <div class="flex-1 text-center md:text-left">
-                        <h3 class="font-serif text-3xl text-brand-dark mb-2">Creator OS: Notion Template</h3>
-                        <p class="text-brand-text/60 font-light mb-6">Automated content planning + CRM for creators.</p>
-                        <div class="text-4xl font-serif italic text-brand-dark mb-8">$29.00</div>
-                        <div class="w-full h-14 bg-brand-dark rounded-full flex items-center justify-center text-white font-bold tracking-tight">
-                            Buy Now
+
+                    <div id="creator-step-2" class="hidden">
+                        <div class="flex justify-between items-center mb-8">
+                            <h3 class="font-serif text-2xl text-brand-dark italic">Set your price</h3>
+                            <div class="flex gap-1.5"><div class="w-2 h-2 bg-brand-accent/30 rounded-full"></div><div class="w-2 h-2 bg-brand-accent rounded-full"></div></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-brand-cream p-4 rounded-2xl border border-brand-sand mb-8">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
+                                <i data-lucide="file-text" class="w-6 h-6 text-brand-accent/60"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-brand-dark">Expert_Guide_v2.pdf</p>
+                                <p class="text-[10px] text-brand-accent font-bold uppercase tracking-wider">File Ready</p>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-brand-text/40 font-bold">$</span>
+                                <input type="number" placeholder="29.00" class="w-full pl-10 pr-6 py-4 rounded-2xl input-field text-xl font-serif italic text-brand-dark">
+                            </div>
+                            <button onclick="finishCreator()" class="btn-primary w-full justify-center text-lg py-5 shadow-xl">
+                                Create My Secure Link
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="creator-success" class="hidden text-center py-12">
+                        <div class="w-20 h-20 bg-brand-accentLight text-brand-accent rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+                            <i data-lucide="link" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="font-serif text-3xl text-brand-dark mb-2">Link Generated.</h3>
+                        <p class="text-brand-text/60 mb-8 font-light">Your asset is live and ready to sell.</p>
+                        <div class="bg-brand-cream border border-brand-sand rounded-full px-6 py-3 flex items-center justify-between gap-4 max-w-sm mx-auto shadow-inner">
+                            <code class="text-xs font-bold text-brand-accent">quickasset.io/buy/x9z2</code>
+                            <button class="text-[10px] font-bold uppercase text-brand-text/40 hover:text-brand-dark">Copy</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Floating Notification -->
-            <div class="absolute -bottom-10 -right-4 md:-right-10 soft-card p-5 flex items-center gap-4 bg-white border-brand-accent/20 shadow-xl">
-                <div class="w-12 h-12 bg-brand-accentLight text-brand-accent rounded-full flex items-center justify-center">
-                    <i data-lucide="check" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <div class="text-[10px] font-bold uppercase text-brand-accent">Sale Confirmed</div>
-                    <div class="font-bold text-brand-dark font-serif">+$29.00 Instant Payout</div>
+
+                <!-- BUYER VIEW -->
+                <div id="view-buyer" class="hidden soft-card overflow-hidden animate-in fade-in duration-500">
+                    <div class="bg-brand-sand/40 p-10 border-b border-black/[0.03]">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accentLight text-brand-accent text-[10px] font-bold uppercase mb-4 italic">
+                            Secure Delivery
+                        </div>
+                        <h3 class="font-serif text-4xl text-brand-dark mb-2">Expert Guide v2</h3>
+                        <p class="text-brand-text/40 font-light italic">Digital PDF Download • One-time Purchase</p>
+                    </div>
+                    <div class="p-10 grid md:grid-cols-2 gap-12">
+                        <div>
+                            <div class="flex justify-between items-end mb-8">
+                                <span class="text-xs font-bold text-brand-text/30 uppercase tracking-widest">Amount</span>
+                                <span class="text-4xl font-serif italic text-brand-dark">$29.00</span>
+                            </div>
+                            <div class="space-y-3">
+                                <input type="text" placeholder="Email Address" class="w-full px-5 py-3 rounded-xl input-field text-sm">
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="text" placeholder="MM/YY" class="w-full px-5 py-3 rounded-xl input-field text-sm">
+                                    <input type="text" placeholder="CVC" class="w-full px-5 py-3 rounded-xl input-field text-sm">
+                                </div>
+                                <button class="btn-primary w-full justify-center mt-4">
+                                    <i data-lucide="lock" class="w-4 h-4"></i> Pay & Download
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-brand-cream rounded-2xl p-6 flex flex-col justify-center text-center border border-brand-sand">
+                            <i data-lucide="mail" class="w-8 h-8 text-brand-accent/30 mx-auto mb-4"></i>
+                            <p class="text-sm text-brand-dark font-bold mb-2">Instant Inbox Delivery</p>
+                            <p class="text-xs text-brand-text/60 font-light leading-relaxed">Files are delivered immediately to your email after checkout via encrypted link.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- WORKFLOW -->
-    <section id="how-it-works" class="py-32 bg-brand-sand/30 px-6 border-y border-brand-sand/50">
+    <!-- WORKFLOW SECTION -->
+    <section id="how-it-works" class="py-32 px-6">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-24">
                 <span class="text-brand-accent font-bold tracking-widest text-xs uppercase mb-4 block italic">The Simple Pipeline</span>
-                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark">From idea to income.</h2>
+                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark">Upload. Set Price. Share.</h2>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-12 relative">
-                <div class="soft-card p-10 relative group">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="soft-card p-10 relative group hover:bg-brand-cream/50">
                     <span class="step-num">01</span>
-                    <div class="w-16 h-16 bg-brand-accentLight rounded-2xl flex items-center justify-center text-brand-accent mb-8 group-hover:bg-brand-accent group-hover:text-white transition-all">
+                    <div class="w-16 h-16 bg-brand-accentLight rounded-2xl flex items-center justify-center text-brand-accent mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="upload-cloud" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-4 text-brand-dark">Upload Your Asset</h3>
-                    <p class="text-brand-text/70 font-light leading-relaxed">Drag and drop any digital file—PDFs, videos, ZIPs, or spreadsheets. No size limits, no headache.</p>
+                    <h3 class="font-bold text-xl mb-4 text-brand-dark">Upload Asset</h3>
+                    <p class="text-brand-text/60 font-light text-sm">Drop any digital file up to 2GB. We handle the storage and secure encryption automatically.</p>
                 </div>
-
-                <div class="soft-card p-10 relative group bg-brand-dark !border-none">
+                <div class="soft-card p-10 relative group bg-brand-dark !border-none shadow-2xl">
                     <span class="step-num !text-white !opacity-10">02</span>
-                    <div class="w-16 h-16 bg-brand-accent rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform shadow-lg shadow-brand-accent/20">
+                    <div class="w-16 h-16 bg-brand-accent rounded-2xl flex items-center justify-center text-white mb-8 group-hover:rotate-12 transition-transform shadow-lg shadow-brand-accent/20">
                         <i data-lucide="dollar-sign" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-4 text-white">Set Your Price</h3>
-                    <p class="text-white/50 font-light leading-relaxed">Connect your Stripe account instantly. Name your product and set the price. We handle the currency conversion.</p>
+                    <h3 class="font-bold text-xl mb-4 text-white">Stripe Connected</h3>
+                    <p class="text-white/50 font-light text-sm">Connect your own Stripe. You remain the Merchant of Record. Payments land in your account instantly.</p>
                 </div>
-
-                <div class="soft-card p-10 relative group">
+                <div class="soft-card p-10 relative group hover:bg-brand-cream/50">
                     <span class="step-num">03</span>
-                    <div class="w-16 h-16 bg-brand-accentLight rounded-2xl flex items-center justify-center text-brand-accent mb-8 group-hover:bg-brand-accent group-hover:text-white transition-all">
+                    <div class="w-16 h-16 bg-brand-accentLight rounded-2xl flex items-center justify-center text-brand-accent mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="share-2" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-4 text-brand-dark">Share the Link</h3>
-                    <p class="text-brand-text/70 font-light leading-relaxed">Paste your link in bio, DMs, or emails. When they buy, the file is delivered to their inbox automatically.</p>
+                    <h3 class="font-bold text-xl mb-4 text-brand-dark">Paste Link</h3>
+                    <p class="text-brand-text/60 font-light text-sm">Share your checkout link in DMs, newsletters, or bios. No website required to start earning.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- WHAT YOU CAN SELL -->
-    <section id="whats-included" class="py-32 px-6 bg-white">
-        <div class="max-w-5xl mx-auto">
-            <div class="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
-                <div class="max-w-xl">
-                    <h2 class="font-serif text-4xl md:text-5xl text-brand-dark mb-6 leading-tight">If you can download it, you can sell it.</h2>
-                    <p class="text-brand-text font-light text-lg">One tool for every type of digital asset. No restrictive platform categories.</p>
-                </div>
-                <div class="text-brand-accent font-bold text-xs tracking-widest uppercase italic">Unlimited Formats</div>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
-                    <i data-lucide="book" class="w-8 h-8 text-brand-accent mb-4"></i>
-                    <span class="font-bold text-brand-dark">E-Books & Guides</span>
-                </div>
-                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
-                    <i data-lucide="layout" class="w-8 h-8 text-brand-accent mb-4"></i>
-                    <span class="font-bold text-brand-dark">Notion Templates</span>
-                </div>
-                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
-                    <i data-lucide="play" class="w-8 h-8 text-brand-accent mb-4"></i>
-                    <span class="font-bold text-brand-dark">Video Training</span>
-                </div>
-                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
-                    <i data-lucide="mic" class="w-8 h-8 text-brand-accent mb-4"></i>
-                    <span class="font-bold text-brand-dark">Audio Content</span>
-                </div>
-                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
-                    <i data-lucide="file-spreadsheet" class="w-8 h-8 text-brand-accent mb-4"></i>
-                    <span class="font-medium text-brand-dark">Spreadsheets</span>
-                </div>
-                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
-                    <i data-lucide="code" class="w-8 h-8 text-brand-accent mb-4"></i>
-                    <span class="font-medium text-brand-dark">Scripts & Code</span>
-                </div>
-                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
-                    <i data-lucide="camera" class="w-8 h-8 text-brand-accent mb-4"></i>
-                    <span class="font-medium text-brand-dark">Stock Graphics</span>
-                </div>
-                <div class="p-8 bg-brand-cream rounded-3xl border border-brand-sand flex flex-col items-center text-center hover:border-brand-accent/30 transition-colors">
-                    <i data-lucide="package" class="w-8 h-8 text-brand-accent mb-4"></i>
-                    <span class="font-medium text-brand-dark">ZIP Bundles</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRICING -->
+    <!-- PRICING SECTION -->
     <section id="pricing" class="py-32 px-6 bg-brand-dark relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 pointer-events-none">
-            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-accent rounded-full blur-[120px] -translate-y-1/2"></div>
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-accent rounded-full blur-[150px] -translate-y-1/2"></div>
         </div>
-
-        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20 items-center relative z-10">
-            <div>
-                <h2 class="font-serif text-5xl md:text-6xl text-white mb-8">Zero subscriptions. <br><span class="text-brand-accent italic font-light">Pay as you earn.</span></h2>
-                <p class="text-white/50 text-xl font-light mb-12 leading-relaxed">
-                    Don't let platform fees eat your profit before you've even started. QuickAsset is built for the "lean" creator.
-                </p>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="font-serif text-5xl text-white mb-6">Zero subs. <span class="text-brand-accent italic">Pay as you earn.</span></h2>
+            <p class="text-white/40 text-lg mb-16 max-w-xl mx-auto font-light">No $29/mo storefront fees. No plugin hell. Just a flat fee on the money you actually make.</p>
+            
+            <div class="soft-card bg-white p-12 max-w-md mx-auto border-none shadow-2xl relative">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-dark text-brand-accent text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full italic shadow-xl">The Fair Model</div>
+                <div class="text-8xl font-serif italic text-brand-dark mb-2">5%</div>
+                <p class="text-brand-text/40 font-bold uppercase text-[10px] tracking-widest mb-10">Application Fee Per Sale</p>
                 
-                <div class="space-y-8">
-                    <div class="flex items-center gap-5">
-                        <div class="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent">
-                            <i data-lucide="check" class="w-5 h-5"></i>
-                        </div>
-                        <span class="text-white/80 font-light">No monthly $29 storefront fees</span>
-                    </div>
-                    <div class="flex items-center gap-5">
-                        <div class="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent">
-                            <i data-lucide="check" class="w-5 h-5"></i>
-                        </div>
-                        <span class="text-white/80 font-light">No "Plugin Hell" or design bottlenecks</span>
-                    </div>
-                    <div class="flex items-center gap-5">
-                        <div class="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent">
-                            <i data-lucide="check" class="w-5 h-5"></i>
-                        </div>
-                        <span class="text-white/80 font-light">Automated file delivery via secure email</span>
-                    </div>
-                </div>
-            </div>
+                <ul class="text-left space-y-4 mb-10 text-brand-text">
+                    <li class="flex justify-between border-b border-brand-sand pb-3 text-sm">
+                        <span class="font-light">Monthly Subscription</span>
+                        <span class="font-bold text-brand-dark">$0</span>
+                    </li>
+                    <li class="flex justify-between border-b border-brand-sand pb-3 text-sm">
+                        <span class="font-light">Secure Hosting</span>
+                        <span class="font-bold text-brand-accent">Unlimited</span>
+                    </li>
+                    <li class="flex justify-between border-b border-brand-sand pb-3 text-sm">
+                        <span class="font-light">Payouts</span>
+                        <span class="font-bold text-brand-dark italic">Instant</span>
+                    </li>
+                </ul>
 
-            <div class="relative">
-                <div class="soft-card bg-white p-12 text-center relative z-10 border-none shadow-2xl">
-                    <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-accent mb-2 italic">The Fair Model</div>
-                    <div class="text-7xl font-serif italic text-brand-dark mb-2">5%</div>
-                    <div class="text-brand-text/40 mb-10 uppercase text-xs font-bold tracking-widest">Flat Fee Per Sale</div>
-                    
-                    <ul class="text-left space-y-5 mb-10 text-brand-text">
-                        <li class="flex justify-between border-b border-brand-sand pb-3 font-light">
-                            <span>Monthly Cost</span>
-                            <span class="font-bold text-brand-dark">$0</span>
-                        </li>
-                        <li class="flex justify-between border-b border-brand-sand pb-3 font-light">
-                            <span>Unlimited Products</span>
-                            <span class="font-bold text-brand-accent">Included</span>
-                        </li>
-                        <li class="flex justify-between border-b border-brand-sand pb-3 font-light">
-                            <span>Instant Payouts</span>
-                            <span class="font-bold text-brand-dark">Via Stripe</span>
-                        </li>
-                    </ul>
-
-                    <a href="#start" class="btn-primary w-full justify-center py-5 text-xl shadow-none">
-                        Create Your First Link
-                    </a>
-                    <p class="mt-6 text-[10px] text-brand-text/30 uppercase font-bold tracking-tighter italic">Standard Stripe fees apply.</p>
-                </div>
+                <button class="btn-primary w-full justify-center py-4 text-lg">Create First Link</button>
+                <p class="mt-6 text-[10px] text-brand-text/30 font-bold italic uppercase tracking-tighter">Standard Stripe fees apply.</p>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-brand-cream border-t border-brand-sand py-24 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
-            <div class="text-center md:text-left">
-                <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
-                    <span class="font-serif text-3xl font-bold text-brand-dark italic">SocialStream</span>
+    <footer class="bg-brand-cream border-t border-brand-sand py-20 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
+            <div class="max-w-xs">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="font-serif text-2xl font-bold text-brand-dark italic">SocialStream</span>
                     <span class="text-brand-text/30 font-bold uppercase text-[10px] tracking-[0.3em] mt-1">QuickAsset</span>
                 </div>
-                <p class="text-brand-text/50 text-sm max-w-xs font-light leading-relaxed">Part of the SocialStream ecosystem. Designed to turn expertise into equity.</p>
+                <p class="text-brand-text/50 text-sm font-light">Built for the lean creator. Part of the SocialStream ecosystem. Designed to turn expertise into equity.</p>
             </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-16 text-xs font-bold uppercase tracking-[0.2em] text-brand-text/40">
+            <div class="grid grid-cols-2 gap-16 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-text/40">
                 <div class="flex flex-col gap-6">
-                    <span class="text-brand-dark italic">The Stack</span>
-                    <a href="#" class="hover:text-brand-accent transition-colors">Kinetics AI</a>
-                    <a href="#" class="text-brand-accent underline decoration-brand-accent/20 underline-offset-8">QuickAsset</a>
+                    <span class="text-brand-dark italic">Product</span>
+                    <a href="#" class="hover:text-brand-accent">Changelog</a>
+                    <a href="#" class="hover:text-brand-accent">Help Docs</a>
+                    <a href="#" class="hover:text-brand-accent">Privacy</a>
                 </div>
                 <div class="flex flex-col gap-6">
-                    <span class="text-brand-dark italic">Support</span>
-                    <a href="#" class="hover:text-brand-accent transition-colors">Help Docs</a>
-                    <a href="#" class="hover:text-brand-accent transition-colors">Contact</a>
-                </div>
-                <div class="flex flex-col gap-6">
-                    <span class="text-brand-dark italic">Connect</span>
-                    <a href="#" class="hover:text-brand-accent transition-colors">Twitter</a>
-                    <a href="#" class="hover:text-brand-accent transition-colors">LinkedIn</a>
+                    <span class="text-brand-dark italic">Social</span>
+                    <a href="#" class="hover:text-brand-accent">Twitter</a>
+                    <a href="#" class="hover:text-brand-accent">LinkedIn</a>
+                    <a href="#" class="hover:text-brand-accent">Contact</a>
                 </div>
             </div>
         </div>
-        <div class="max-w-6xl mx-auto mt-24 pt-10 border-t border-black/[0.03] text-[10px] text-center text-brand-text/30 uppercase tracking-[0.4em] font-bold">
-            © 2024 SocialStream Ecosystem. Built for Creators.
+        <div class="max-w-6xl mx-auto mt-20 pt-10 border-t border-black/[0.03] text-[10px] text-center text-brand-text/30 uppercase tracking-[0.4em] font-bold">
+            © 2024 SocialStream Ecosystem.
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
+
+        // View Switching Logic
+        function switchView(type) {
+            const vCreator = document.getElementById('view-creator');
+            const vBuyer = document.getElementById('view-buyer');
+            const tCreator = document.getElementById('tab-creator');
+            const tBuyer = document.getElementById('tab-buyer');
+
+            if (type === 'buyer') {
+                vCreator.classList.add('hidden');
+                vBuyer.classList.remove('hidden');
+                tCreator.classList.remove('tab-active');
+                tCreator.classList.add('text-brand-text/60');
+                tBuyer.classList.add('tab-active');
+                tBuyer.classList.remove('text-brand-text/60');
+            } else {
+                vBuyer.classList.add('hidden');
+                vCreator.classList.remove('hidden');
+                tBuyer.classList.remove('tab-active');
+                tBuyer.classList.add('text-brand-text/60');
+                tCreator.classList.add('tab-active');
+                tCreator.classList.remove('text-brand-text/60');
+                resetCreator();
+            }
+        }
+
+        // Creator Flow Steps
+        function nextCreatorStep() {
+            document.getElementById('creator-step-1').classList.add('hidden');
+            document.getElementById('creator-step-2').classList.remove('hidden');
+        }
+
+        function finishCreator() {
+            document.getElementById('creator-step-2').classList.add('hidden');
+            document.getElementById('creator-success').classList.remove('hidden');
+        }
+
+        function resetCreator() {
+            document.getElementById('creator-step-1').classList.remove('hidden');
+            document.getElementById('creator-step-2').classList.add('hidden');
+            document.getElementById('creator-success').classList.add('hidden');
+        }
     </script>
 </body>
 </html>
