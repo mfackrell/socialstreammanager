@@ -270,6 +270,13 @@
 
         const STRIPE_CLIENT_ID = 'ca_TTJhaOfvv4bclxzQigX2cG6X1kUJyjTj'; 
         const REDIRECT_URI =  'https://socialstreammanager.com/app.html';
+        const API_BASE_URL = window.QUICKASSET_API_BASE_URL
+            || window.localStorage?.getItem('quickasset_api_base')
+            || (window.location.hostname === 'socialstreammanager.com'
+                ? 'https://socialstreammanager.vercel.app'
+                : window.location.origin);
+
+        const apiUrl = (path) => new URL(path, API_BASE_URL).toString();
         
         if (typeof lucide !== 'undefined') lucide.createIcons();
 
@@ -307,14 +314,19 @@
                 if (typeof lucide !== 'undefined') lucide.createIcons();
 
                 try {
-                    const response = await fetch('api/exchange-token', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ 
-                                code: tempCode,
-                                redirect_uri: REDIRECT_URI // Add this line
-                            })
+                    const exchangeUrl = new URL('/api/exchange-token', API_BASE_URL);
+                    const payload = { code: tempCode, redirect_uri: REDIRECT_URI };
+                    let response = await fetch(exchangeUrl.toString(), {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
                     });
+
+                    if (response.status === 405) {
+                        exchangeUrl.searchParams.set('code', tempCode);
+                        exchangeUrl.searchParams.set('redirect_uri', REDIRECT_URI);
+                        response = await fetch(exchangeUrl.toString(), { method: 'GET' });
+                    }
                     if (!response.ok) {
                         const errorText = await response.text(); // Get the HTML error page text
                         console.error('Server Error:', errorText);
@@ -402,10 +414,10 @@
 
                 const newBlob = await upload(state.fileObject.name, state.fileObject, {
                     access: 'public',
-                    handleUploadUrl: 'api/upload-url',
+                    handleUploadUrl: apiUrl('/api/upload-url'),
                 });
 
-                const response = await fetch('api/create-payment-link', {
+                const response = await fetch(apiUrl('/api/create-payment-link'), {
                     method: 'POST',
                     body: JSON.stringify({
                         title: state.title,
