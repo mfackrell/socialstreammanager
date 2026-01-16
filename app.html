@@ -314,7 +314,7 @@
                 if (typeof lucide !== 'undefined') lucide.createIcons();
 
                 try {
-                    const exchangeUrl = new URL('/api/exchange-token', API_BASE_URL);
+                    const exchangeUrl = new URL('/api/exchange-token', window.location.origin);
                     const payload = { code: tempCode, redirect_uri: REDIRECT_URI };
                     let response = await fetch(exchangeUrl.toString(), {
                         method: 'POST',
