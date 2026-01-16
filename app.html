@@ -307,14 +307,19 @@
                 if (typeof lucide !== 'undefined') lucide.createIcons();
 
                 try {
-                    const response = await fetch('api/exchange-token', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ 
-                                code: tempCode,
-                                redirect_uri: REDIRECT_URI // Add this line
-                            })
+                    const exchangeUrl = new URL('/api/exchange-token', window.location.origin);
+                    const payload = { code: tempCode, redirect_uri: REDIRECT_URI };
+                    let response = await fetch(exchangeUrl.toString(), {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
                     });
+
+                    if (response.status === 405) {
+                        exchangeUrl.searchParams.set('code', tempCode);
+                        exchangeUrl.searchParams.set('redirect_uri', REDIRECT_URI);
+                        response = await fetch(exchangeUrl.toString(), { method: 'GET' });
+                    }
                     if (!response.ok) {
                         const errorText = await response.text(); // Get the HTML error page text
                         console.error('Server Error:', errorText);
