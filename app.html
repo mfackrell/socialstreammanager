@@ -415,6 +415,7 @@
                 const newBlob = await upload(state.fileObject.name, state.fileObject, {
                     access: 'public',
                     handleUploadUrl: apiUrl('/api/upload-url'),
+                    addRandomSuffix: true // <--- Add this line here
                 });
 
                 const response = await fetch(apiUrl('/api/create-payment-link'), {
