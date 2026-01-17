@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react'; // Add this import
 import { 
   CreditCard, 
   Link2, 
@@ -386,6 +387,13 @@ export default function SellerTerminal() {
           </div>
         </div>
       )}
+    </div>
+  );
+return (
+    <div className="min-h-screen ...">
+      {/* Existing navigation and main content */}
+      
+      <Analytics /> {/* Add this right before the closing div */}
     </div>
   );
 }
